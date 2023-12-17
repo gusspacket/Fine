@@ -1,0 +1,56 @@
+
+* {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+}
+
+.footer__main {
+  background-color: #f7f7f7
+}
+
+.footer__logo {
+  width: 260px;
+  height: 130px;
+  /* border: 1px solid red; */
+}
+
+.footer_img {
+  width: 100%;
+  height: 100%;
+  object-fit:contain;
+  object-position: left;
+}
+.footer__phone__link {
+  text-decoration: none;
+  color: black;
+  font-family: 'Jost', sans-serif;
+  font-size: 20px;
+  font-weight: 520;
+
+}
+
+
+.footer__phone__name {
+  font-family: 'Jost', sans-serif;
+  font-size: 18px;
+  font-weight: 320;
+  /* border: 1px solid green; */
+}
+
+.footer__social {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+
+}
+
+.footer__social__item {
+  display: flex;
+  justify-content: center;
+}
+
+.footer__social__img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}

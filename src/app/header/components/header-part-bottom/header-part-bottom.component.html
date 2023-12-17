@@ -1,0 +1,60 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+<div class="container">
+<div class="row my-2">
+  <div class="col-12 header__bottom">
+
+    <ng-container
+        class="header__bottom__category"
+        *ngFor="let category of categories; let i = index"
+      >
+      <!-- Превратить каждую категорию в кнопку -->
+      <button
+        type="button"
+        class="collections__items"
+        [routerLink]="['/products', category.slug]"
+        [queryParams]="{category: category.slug}"
+        *ngIf="i < visibleCategoriesCount"
+        (click)="categoryClicked(category.slug)"
+      >
+        {{ category.name }}
+      </button>
+    </ng-container>
+
+
+
+    <!-- Дополнительные категории в выпадающем списке -->
+    <div
+      *ngIf="categories.length > visibleCategoriesCount "
+      class="dropdown"
+    >
+      <div
+        class="btn dropdown-toggle dropdownMenuHeader collections__items"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Еще
+      </div>
+      <div
+        class="dropdown-menu dropdown-menu-left"
+        aria-labelledby="dropdownMenuButton">
+        <!-- Превратить каждую дополнительную категорию в кнопку -->
+
+        <button
+          *ngFor="let category of categories.slice(visibleCategoriesCount)"
+          class="dropdown-item"
+          (click)="categoryClicked(category)"
+        >
+          {{ category.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+

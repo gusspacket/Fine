@@ -1,0 +1,143 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="navigate mt-3">
+    <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
+    <ng-container *ngIf="selectedProduct">
+      <p class="navigate__choice" [routerLink]="['/products', selectedProduct.category]"
+        [queryParams]="{category: selectedProduct.category}">
+        &nbsp; {{categoryName}}
+      </p>
+    </ng-container>
+
+  </div>
+  <div class="row mt-2">
+    <ng-container *ngIf="selectedProduct">
+      <div class="product__title">
+        <span>{{selectedProduct.brand}} {{selectedProduct.name}}</span>
+        <ng-container *ngFor="let char of selectedProduct.sku.characteristics">
+          <span> {{char.value}}</span>
+        </ng-container>
+      </div>
+    </ng-container>
+
+
+
+    <div class="productArea mt-3">
+
+      <div class="productRatingList">
+        <p class="material-icons">
+          star
+        </p>
+        <p class="material-icons">
+          star
+        </p>
+        <p class="material-icons">
+          star
+        </p>
+        <p class="material-icons">
+          star
+        </p>
+        <p class="material-icons">
+          star
+        </p>
+        <p class="productReviewsCount">(0)</p>
+      </div>
+
+      <div class="productFavorite">
+        <p class="material-icons">
+          favorite
+        </p>
+        <p>В избранное</p>
+      </div>
+    </div>
+    <hr>
+
+    <div class="col-4 mt-5 product_phone_img">
+      <ng-container *ngIf="selectedProduct">
+        <img [src]="selectedProduct.sku.img_url" alt="product__image">
+      </ng-container>
+
+    </div>
+
+    <div class="col-4 mt-5 option__selector">
+      <p>Объем памяти</p>
+      <ng-container *ngIf="selectedProduct">
+          <div *ngFor="let char of selectedProduct.sku.characteristics">
+            <div class="option__values">
+              <p class="phone__memory" *ngIf="char.name === 'Память'"> {{char.value}}</p>
+            </div>
+          </div>
+
+        <div class="mt-4 product__block__title">
+          <p>Характеристики:</p>
+        </div>
+        <div class="product__properties__items" *ngFor="let char of selectedProduct.sku.characteristics">
+          <p *ngIf="char.name === 'Color'">Цвет: {{char.value}}</p>
+          <p>экран: 6.2"/2400x1080 Пикс</p>
+          <p>оперативная память: 8GB</p>
+          <p>память: 128GB</p>
+          <p>4 камеры: 64/12/18</p>
+          <p>беспроводные интерфейсы: NFC, Wi-Fi, Bluetooth 5.6</p>
+        </div>
+      </ng-container>
+      <div class="product__properties__control">
+        <p>Все характеристики</p>
+      </div>
+
+
+    </div>
+
+    <div class="col-4 mt-5 product_phone_price">
+      <div class="product_price">
+        <ng-container *ngIf="selectedProduct">
+          <p class="product_price_cur">{{selectedProduct.sku.price | productsPriceFormatPipe}} ₽</p>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="!productAddedToCart">
+        <div class="cart__button"
+          (click)="addToCart(selectedProduct)"
+        >
+          <span class="cart__button__item">В корзину</span>
+          <span class="material-symbols-outlined cart__button__icon">
+            shopping_cart
+          </span>
+        </div>
+      </ng-container>
+
+
+      <ng-container *ngIf="productAddedToCart">
+        <div class="cart__button_added">
+          <div class="counter__delete" (click)="minusQuantity(productInCart)">
+            <p class="material-icons">
+              remove
+            </p>
+          </div>
+          <div class="cart__counter"
+            *ngIf="productInCart"
+            routerLink="/cart"
+          >
+            <span class="cart__counter__number">в корзине {{productInCart.quantity}} шт.</span>
+            <span class="cart__link">Перейти</span>
+          </div>
+          <div class="counter__add" (click)="plusQuantity(productInCart)">
+            <p class="material-icons">
+              add
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+</div>
+
+<app-footer>

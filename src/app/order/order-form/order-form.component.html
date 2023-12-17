@@ -1,0 +1,52 @@
+<h1>Оформление заказа</h1>
+<h2>Контактные данные</h2>
+<h3>Контактное лицо (ФИО)</h3>
+<input class="orderContact" type="text">
+<h3>Контактный телефон</h3>
+<input class="orderPhone" type="text">
+<h2>Доставка</h2>
+<h3>Населенный пункт</h3>
+<input class="orderTown" type="text">
+
+
+<div class="orderDelivery mt-4">
+
+  <div class="orderDeliveryItems">
+    <input type="radio" id="individual" name="orderDelivery">
+    <label for="individual">Самовывоз
+    </label>
+    <p class="orderDeliveryHelp">На пункте выдачи</p>
+
+    <input type="radio" id="courier" name="orderDelivery">
+    <label for="courier">Курьером
+    </label>
+    <p class="orderDeliveryHelp">Доставка курьером</p>
+  </div>
+
+  <div class="orderPrice">
+    <h1>+ 0 руб</h1>
+    <h2>+ 350 руб</h2>
+  </div>
+</div>
+
+<h3>Email</h3>
+<input class="orderMail" type="text">
+
+
+<h1 class="mt-2">Способ оплаты</h1>
+
+
+<input type="radio" id="orderChoiceCash" name="orderPay">
+<label for="orderChoice">Наличными
+</label>
+<p class="orderDeliveryHelp">Наличными</p>
+
+<input type="radio" id="orderChoiceOnline" name="orderPay">
+<label for="orderChoices">Оплата на сайте
+</label>
+<p class="orderDeliveryHelp">Оплата на сайте</p>
+
+
+<button
+  (click)="orderPay()"
+  class="orderTotalButton">Подтвердить заказ</button>

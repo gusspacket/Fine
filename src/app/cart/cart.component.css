@@ -1,0 +1,156 @@
+* {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+}
+
+
+
+
+.cart__title {
+  font-style: bold;
+  font-size: 30px;
+  margin-top: 30px;
+}
+
+.cart__empty {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.cart__area__body {
+  display: flex;
+  /* border: 1px solid rebeccapurple; */
+  height: 160px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ababab;
+}
+
+.cart__item__img {
+  width: 220px;
+  height: 150px;
+   /* border: 1px solid blue; */
+
+}
+
+.cart__item__img img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.cart__item__title {
+  margin: 20px 0px;
+  /* border: 1px solid blue; */
+  height: auto;
+  display: flex;
+}
+
+.cart__item__title p {
+  font-size: 18px;
+}
+
+.item__icons {
+  color: #ababab;
+  display: flex;
+  align-items: center;
+}
+
+.item__icons__favorite,
+.item__icons__delete  {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.item__icons__favorite:hover {
+  color: #76BC21
+
+}
+
+.item__icons__delete:hover {
+  color: red;
+}
+
+
+
+.item__total {
+  /* border: 1px solid salmon; */
+  margin: 20px 0px;
+
+
+
+}
+
+.item__total__price {
+  /* border: 1px solid salmon; */
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.item__total__price p {
+  font-size: 23px;
+  font-weight: 450;
+}
+
+.item__counter {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid gray; */
+}
+
+.counter__add,
+.counter__delete  {
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.counter__add:hover {
+ color: #76BC21;
+}
+
+.counter__delete:hover {
+  color: red;
+}
+
+.cart__area {
+  text-align: left;
+  background-color: #f5f5f6;
+
+
+}
+
+.cart__area__inCart {
+  font-size: 20px;
+  font-weight: 500;
+  padding:20px 15px;
+  /* border: 1px solid darkblue; */
+}
+
+.cart__area__count {
+  /* border: 1px solid darksalmon; */
+  font-size: 16px;
+  padding: 15px 15px;
+}
+
+
+
+
+.cart__area__totalPrice {
+  /* border: 1px solid darkviolet; */
+  font-size: 40px;
+  padding: 15px 15px;
+}
+
+
+.cart__button {
+  background-color: #76BC21;
+  color: white;
+  border: none;
+  width: 100%;
+  height: 50px;
+}
+

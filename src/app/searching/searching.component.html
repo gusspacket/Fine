@@ -1,0 +1,90 @@
+<app-header></app-header>
+
+
+
+<div class="container">
+  <div class="navigate mt-3">
+    <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p> -
+    <p>&nbsp;Поиск</p>
+  </div>
+
+  <div *ngIf="noResultsFound">
+    <div class="my-4 header__bottom__input">
+      <div class="input-container">
+        <input
+          type="text"
+          id="fname"
+          name="fname"
+          value=""
+          aria-labelledby="label-fname"
+          [(ngModel)]="searchTerm"
+          (keydown.enter)="letsSearch(searchTerm)"
+        >
+      </div>
+      <button
+        class="search__icon"
+        (click)="letsSearch(searchTerm)"
+      >
+        <span class="material-icons">
+          search
+        </span>
+      </button>
+    </div>
+    <p class="navigate__result">Не найдено. Попробуйте снова</p>
+  </div>
+
+
+  <div class="row mt-2" *ngIf="!noResultsFound">
+    <div *ngFor="let product of filteredPhones" class="col-4">
+      <div class="catalog">
+        <div class="card" style="width: 15rem; height: 25rem;">
+          <div class="link" [routerLink]="['/product']" [queryParams]="{
+          category: product.category,
+          id: product.sku.id
+          }">
+            <img class="card-img-top" alt="phoneImg" [src]="product.sku.img_url">
+            <div class="card__body mt-3">
+              <div class="card__title"> {{product.brand}} {{product.name}}</div>
+
+              <div class="card__title__characteristics mt-2">
+                <p *ngFor="let char of product.sku.characteristics">{{ char.value }} &nbsp;</p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="card__price__product">
+            <h1 class="card__price">{{ product.sku.price  }} &nbsp; ₽
+            </h1>
+            <div class="card__price__icon"
+              (click)="addToCart(product)"
+          >
+              <span class="material-icons">
+                shopping_cart
+              </span>
+            </div>
+          </div>
+
+          <!-- <div class="card__price__product">
+            <h1 class="card__price">{{ product.sku.price   }} &nbsp; ₽
+            </h1>
+            <div class="card__added"
+              routerLink="/cart"
+            >
+              <span class="material-icons">
+                shopping_cart
+              </span>
+            </div>
+          </div> -->
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,80 @@
+<app-header></app-header>
+
+
+<button type="button" class="btn btn-success" (click)="postToCart()">POST</button>
+<button type="button" class="btn btn-success" (click)="postToCart2()">POST2</button>
+
+<button type="button" class="btn btn-dark" (click)="getFromCart()">GET</button>
+
+<!-- <button type="button" class="btn btn-warning" (click)="getCookies()">COOKIE</button> -->
+
+<!-- <div *ngIf="cartData">
+  <h2>Данные корзины {{cartData.quantity}}</h2>
+
+  <div *ngFor="let item of cartData">
+  <p>item.quantity</p></div>
+
+</div> -->
+
+
+
+<div class="container">
+  <div class="navigate mt-3">
+    <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
+    <p class="navigate__choice">&nbsp; {{categoryName}}</p>
+  </div>
+
+  <div class="row mt-2">
+    <h2 class="catalog__page__heading">{{categoryName}}</h2>
+    <div *ngFor="let product of products" class="col-4">
+      <div class="catalog">
+        <div class="card" style="width: 15rem; height: 25rem;">
+          <div class="link" [routerLink]="['/product']" [queryParams]="{
+          category: product.category,
+          id: product.sku.id
+          }">
+            <img class="card-img-top" alt="phoneImg" [src]="product.sku.img_url">
+            <div class="card__body mt-3">
+              <div class="card__title"> {{product.brand}} {{product.name}}</div>
+
+              <div class="card__title__characteristics mt-2">
+                <p *ngFor="let char of product.sku.characteristics">{{ char.value }} &nbsp;</p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="card__price__product" *ngIf="!product.productAddedToCart">
+            <h1 class="card__price">{{ product.sku.price   }} &nbsp; ₽
+            </h1>
+            <div class="card__price__icon"
+              (click)="addToCart(product)"
+          >
+              <span class="material-icons">
+                shopping_cart
+              </span>
+            </div>
+          </div>
+
+          <div class="card__price__product" *ngIf="product.productAddedToCart">
+            <h1 class="card__price">{{ product.sku.price   }} &nbsp; ₽
+            </h1>
+            <div class="card__added"
+              routerLink="/cart"
+            >
+              <span class="material-icons">
+                shopping_cart
+              </span>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

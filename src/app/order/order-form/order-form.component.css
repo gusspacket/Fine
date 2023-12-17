@@ -1,0 +1,83 @@
+
+.orderContact {
+  width: 100%;
+  height: 40px;
+}
+
+.orderPhone {
+  width: 100%;
+  height: 40px;
+}
+
+.orderTown {
+  width: 100%;
+  height: 40px;
+}
+
+.orderDelivery {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+
+
+label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: 0.1s;
+  border: 3px solid #76BC21;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked + label::before {
+  background-color: white;
+  border: 6px solid #76BC21;
+  border-radius: 50%;
+
+}
+
+.orderDeliveryHelp {
+  color: gray;
+}
+
+
+.orderMail {
+  width: 100%;
+  height: 40px;
+}
+
+label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: 0.1s;
+  border: 3px solid #76BC21;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked + label::before {
+  background-color: white;
+  border: 6px solid #76BC21;
+  border-radius: 50%;
+}
+
+.orderTotalButton {
+  background-color: #76BC21;
+  color: #fff;
+  border: none;
+  width: 100%;
+  height: 40px;
+}

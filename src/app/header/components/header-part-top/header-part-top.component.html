@@ -1,0 +1,27 @@
+<div class="dashboard__top">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 offset-6 top__header" >
+        <div class="top__header__item ">Доставка и оплата</div>
+        <div class="top__header__item ">Пункты Выдачи</div>
+        <div class="top__header__item ">Поддержка</div>
+        <div
+          *ngIf="settings"
+          class="top__header__phone"
+        >
+          <div class="material-symbols-outlined">
+            call
+          </div>
+          <a
+            href="tel:{{settings.phone_main}}"
+            class="top__header__link"
+          >
+            <div class="mx-2">{{settings.phone_main}}</div></a>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+

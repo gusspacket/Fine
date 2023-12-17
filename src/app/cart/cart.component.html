@@ -1,0 +1,129 @@
+<app-header></app-header>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <p class="cart__title">Корзина</p>
+
+    <div class="col-9 mt-5">
+      <div *ngIf="productsCart.length > 0; else emptyCart">
+        <div
+          class="cart__area__body row"
+          *ngFor="let product of productsCart "
+        >
+
+          <div class="cart__item__img col-3">
+            <img
+            [src]="product.sku.img_url"
+            alt="itemImg">
+          </div>
+
+
+            <div class=" col-7" >
+              <div class="cart__item__title">
+                <p>
+                  {{ product.brand }} {{product.name}}
+                  <ng-container *ngFor="let characteristic of product.sku.characteristics">
+
+                    <span *ngIf="characteristic.name === 'Color'">
+                      Цвет {{ characteristic.value }},
+                    </span>
+                    <span *ngIf="characteristic.name !== 'Color'">
+                      {{ characteristic.name }} {{ characteristic.value }}
+                    </span>
+                  </ng-container>
+                </p>
+              </div>
+
+              <div class="item__icons">
+
+                <div class="item__icons__favorite">
+                  <p class="material-icons">
+                    favorite
+                  </p>
+                  <p class="mx-2">В Избранное </p>
+                </div>
+
+
+
+                <div
+                  class="item__icons__delete"
+                >
+                  <p class="material-icons">
+                    delete
+                  </p>
+                  <p
+                    class="mx-2"
+                    (click)="deleteFromCart(product)"
+                  >
+                    Удалить
+                  </p>
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+
+
+          <div class="item__total col-2">
+
+            <div class="item__total__price">
+              <p>{{product.sku.price * product.quantity | productsPriceFormatPipe }} ₽ </p>
+            </div>
+
+            <div class="item__counter" >
+              <p class="material-icons counter__delete" (click)="minusQuantity(product)">
+                remove
+              </p>
+
+                <p class="itemNumber">{{ product.quantity }}</p>
+
+
+              <p class="material-icons counter__add " (click)="plusQuantity(product)">
+                add
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #emptyCart>
+        <p class="cart__empty">Ваша корзина пуста</p>
+      </ng-template>
+
+
+
+
+    </div>
+
+    <div class="col-3 mt-5">
+      <div class="cart__area">
+        <p class="cart__area__inCart">В корзине</p>
+        <p class="cart__area__count">Товаров: {{itemCount}}</p>
+        <p class="cart__area__totalPrice">{{productsCart | totalCartPrice | productsPriceFormatPipe  }} ₽</p>
+
+
+        <button
+          routerLink="/order"
+          class="cart__button">Оформить заказ
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+
+
+

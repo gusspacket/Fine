@@ -1,0 +1,17 @@
+<div class="footer__down">
+  <div class="container">
+    <div class="row">
+      <div class="footer__down__elements" *ngIf="settings">
+        <div class="footer__down__copyright col-5"> <p> {{settings.copyright}}</p></div>
+        <div class="footer__down__makers col-3"><p>Это создано Афганом и Афганом</p></div>
+
+        <div class="footer__payment col-3" *ngFor="let pay of settings.pay_system">
+          <div class="footer__payment__img">
+            <img class="footer__payment__img" src="{{ pay.img_url }}" alt="payment">
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
