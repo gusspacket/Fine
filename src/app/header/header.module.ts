@@ -7,26 +7,23 @@ import { HeaderPartTopComponent } from './components/header-part-top/header-part
 import { HeaderPartMainComponent } from './components/header-part-main/header-part-main.component';
 import { HeaderPartBottomComponent } from './components/header-part-bottom/header-part-bottom.component';
 import { HeaderComponent } from './header.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HeaderCountPipe } from './pipes/count-header.pipe';
+import { ProductsComponent } from '../products/products.component';
+
+
 
 
 
 @NgModule({
   declarations: [
+    HeaderComponent,
     HeaderPartTopComponent,
     HeaderPartMainComponent,
     HeaderPartBottomComponent,
-    HeaderComponent,
     HeaderCountPipe
-
-
-
-
-
-
 
   ],
   imports: [
@@ -40,9 +37,7 @@ import { HeaderCountPipe } from './pipes/count-header.pipe';
 
   ],
   exports: [
-    HeaderComponent,
-    HeaderPartTopComponent,
-    HeaderPartMainComponent
+    HeaderComponent
   ]
 })
 export class HeaderModule { }

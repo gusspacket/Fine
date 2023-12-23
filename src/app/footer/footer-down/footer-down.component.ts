@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Settings } from 'src/app/models/settings.model';
 import { SettingsService } from 'src/app/servise/settings.service';
 
@@ -7,17 +7,12 @@ import { SettingsService } from 'src/app/servise/settings.service';
   templateUrl: './footer-down.component.html',
   styleUrls: ['./footer-down.component.css']
 })
-export class FooterDownComponent implements OnInit{
+export class FooterDownComponent {
 
+  @Input()
   settings: Settings;
 
-  constructor(private settingsService: SettingsService) {}
 
-  ngOnInit() {
-    this.settingsService.getAllSettings().subscribe(settings => {
-      this.settings = settings
-    })
 
-  }
 
 }

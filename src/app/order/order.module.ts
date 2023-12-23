@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { OrderComponent } from './order.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { HeaderModule } from '../header/header.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderCartComponent } from './order-cart/order-cart.component';
-import { FooterComponent } from '../footer/footer.component';
 import { RouterLink } from '@angular/router';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import {NgxMaskModule} from 'ngx-mask'
 
 
 
@@ -23,7 +24,15 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     HeaderModule,
-    RouterLink
+    RouterLink,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    NgxMaskModule.forRoot()
+
 
 
 

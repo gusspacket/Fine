@@ -116,32 +116,16 @@ input:focus + .label .text {
 }
 
 .card__title  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 390;
+  font-size: 20px;
+  font-weight: 400;
   /* border: 1px solid darkblue; */
+  text-align: center;
 
 
 }
 
 
 
-.card__title__characteristics  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* border: 1px solid darkblue; */
-
-}
-
-.card__title__characteristics p {
-  font-size: 18px;
-  font-weight: 390;
-
-}
 
 .card__price__product {
   display: flex;

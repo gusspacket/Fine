@@ -23,10 +23,9 @@ import { BannerModule } from './banner/banner.module';
     FooterModule,
     ProductReviewModule,
     BannerModule
-
-
-
-
+  ],
+  exports: [
+    DashboardComponent
   ]
 })
 export class DashboardModule { }

@@ -24,42 +24,30 @@
         ngxSlickItem
         *ngFor="let phone of phones"
         class="slide card product__review col-2"
-        style="width: 13rem;"
+        style="width: 10rem;"
       >
         <div
           class="product__review__card"
           [routerLink]="['/product']"
           [queryParams]="{
             category: phone.category,
-            id: phone.sku.id
+            id: phone.id
           }"
         >
-          <img class="product__review__img" src="{{phone.sku.img_url}}" alt="Product Image">
+          <img class="product__review__img" src="{{phone.img_url}}" alt="Product Image">
         </div>
 
 
         <div class="product__review__title mt-3">
-          <h4 class="product__review__name">{{phone.brand}} {{phone.name}}</h4>
-          <span
-            *ngFor="let char of phone.sku.characteristics; let last1 = last"
-            class="product__review__title__value"
-          >
-             {{char.value}}
-            <ng-container *ngIf="!last1"></ng-container>
-            <ng-template lastItem>-</ng-template>
-          </span>
+          <h4 class="product__review__name">{{phone.title}}</h4>
         </div>
-
-
-
-
 
 
 
 
         <div class="card__review__body mt-3">
 
-            <div class="area__bottom__price "><span>{{phone.sku.price | productsPriceFormatPipe}} ₽ </span></div>
+            <div class="area__bottom__price "><span>{{phone.price | productsPriceFormatPipe}} ₽ </span></div>
             <div class="area__bottom__cart">
               <span class="material-icons">
                 shopping_cart
@@ -95,32 +83,26 @@
           ngxSlickItem
           *ngFor="let laptop of laptops"
           class="slide card product__review "
-          style="width: 13rem;"
+          style="width: 10rem;"
         >
           <div
             class="product__review__card"
             [routerLink]="['/product']"
             [queryParams]="{
             category: laptop.category,
-            id: laptop.sku.id
+            id: laptop.id
           }"
           >
-            <img class="product__review__img" src="{{laptop.sku.img_url}}" alt="Product Image">
+            <img class="product__review__img" src="{{laptop.img_url}}" alt="Product Image">
           </div>
           <div class="product__review__title mt-3">
-            <h4 class="product__review__name">{{laptop.brand}} {{laptop.name}}</h4>
-            <span
-              *ngFor="let char of laptop.sku.characteristics; let last1 = last"
-            class="product__review__title__value"
-            >  {{ char.value }}
-              <ng-container *ngIf="!last1; else lastItem"> </ng-container>
-              <ng-template #lastItem></ng-template>
-            </span>
+            <h4 class="product__review__name">{{laptop.title}} </h4>
+
           </div>
 
           <div class="card__review__body mt-3">
 
-              <div class="area__bottom__price "><span>{{laptop.sku.price | productsPriceFormatPipe}} ₽ </span></div>
+              <div class="area__bottom__price "><span>{{laptop.price | productsPriceFormatPipe}} ₽ </span></div>
               <div class="area__bottom__cart">
                 <span class="material-icons">
                   shopping_cart

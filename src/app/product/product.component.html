@@ -1,143 +1,158 @@
-<app-header></app-header>
 
-<div class="container">
-  <div class="navigate mt-3">
-    <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
-    <ng-container *ngIf="selectedProduct">
-      <p class="navigate__choice" [routerLink]="['/products', selectedProduct.category]"
-        [queryParams]="{category: selectedProduct.category}">
+
+
+
+<div class="container" *ngIf="productById">
+  <div>
+    <div class="navigate mt-3">
+      <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
+      <p class="navigate__choice" [routerLink]="['/products', productById.category.slug]"
+        [queryParams]="{category: productById.category.slug}">
         &nbsp; {{categoryName}}
       </p>
-    </ng-container>
+    </div>
 
-  </div>
-  <div class="row mt-2">
-    <ng-container *ngIf="selectedProduct">
+
+    <div class="row mt-2" >
       <div class="product__title">
-        <span>{{selectedProduct.brand}} {{selectedProduct.name}}</span>
-        <ng-container *ngFor="let char of selectedProduct.sku.characteristics">
-          <span> {{char.value}}</span>
+        <span>{{productById.title}}</span>
+      </div>
+
+      <div class="productArea mt-3">
+        <div class="productRatingList">
+          <p class="material-icons">
+            star
+          </p>
+          <p class="material-icons">
+            star
+          </p>
+          <p class="material-icons">
+            star
+          </p>
+          <p class="material-icons">
+            star
+          </p>
+          <p class="material-icons">
+            star
+          </p>
+          <p class="productReviewsCount">(0)</p>
+        </div>
+
+        <div class="productFavorite">
+          <p class="material-icons">
+            favorite
+          </p>
+          <p>В избранное</p>
+        </div>
+      </div>
+      <hr>
+
+
+
+      <div class="col-4 mt-5 product_phone_img">
+        <img [src]="productById.img_url" alt="product_phone">
+      </div>
+
+
+
+      <div class="col-4 mt-5 option__selector">
+        <p class="characteristics__title">Характеристики</p>
+
+        <div class="product__characteristics" *ngFor="let characteristic of productById.characteristics">
+          <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
+          <p class="product__characteristics__value">{{ characteristic.value }}</p>
+        </div>
+
+        <div class="product__properties__control">
+          <p (click)="scrollTo(tabs)">Все характеристики</p>
+        </div>
+
+        <div class="product__properties__description">
+          <p class="description__title">Описание</p>
+          <p [ngStyle]="{
+            'max-height': showFullDescription ?
+            'none' : '37px',
+            'overflow': 'hidden',
+            'opacity': showFullDescription ?
+            '1' : '0.6'
+          }">
+            {{ productById.description }}
+          </p>
+
+          <!-- Кнопка "Показать полностью" -->
+          <p class="dscription__button" (click)="toggleDescription()">
+            {{ showFullDescription ? 'Свернуть' : 'Показать полностью' }}
+          </p>
+        </div>
+
+      </div>
+
+      <div class="col-4 mt-5 product_phone_price">
+        <div class="product_price">
+          <p class="product_price_cur">{{productById.price | productsPriceFormatPipe}} ₽</p>
+        </div>
+        <ng-container *ngIf="!productAddedToCart">
+          <div class="cart__button" (click)="addToCart(selectedProduct)">
+            <span class="cart__button__item">В корзину</span>
+            <span class="material-symbols-outlined cart__button__icon">
+              shopping_cart
+            </span>
+          </div>
         </ng-container>
-      </div>
-    </ng-container>
 
 
-
-    <div class="productArea mt-3">
-
-      <div class="productRatingList">
-        <p class="material-icons">
-          star
-        </p>
-        <p class="material-icons">
-          star
-        </p>
-        <p class="material-icons">
-          star
-        </p>
-        <p class="material-icons">
-          star
-        </p>
-        <p class="material-icons">
-          star
-        </p>
-        <p class="productReviewsCount">(0)</p>
-      </div>
-
-      <div class="productFavorite">
-        <p class="material-icons">
-          favorite
-        </p>
-        <p>В избранное</p>
-      </div>
-    </div>
-    <hr>
-
-    <div class="col-4 mt-5 product_phone_img">
-      <ng-container *ngIf="selectedProduct">
-        <img [src]="selectedProduct.sku.img_url" alt="product__image">
-      </ng-container>
-
-    </div>
-
-    <div class="col-4 mt-5 option__selector">
-      <p>Объем памяти</p>
-      <ng-container *ngIf="selectedProduct">
-          <div *ngFor="let char of selectedProduct.sku.characteristics">
-            <div class="option__values">
-              <p class="phone__memory" *ngIf="char.name === 'Память'"> {{char.value}}</p>
+        <ng-container *ngIf="productAddedToCart">
+          <div class="cart__button_added">
+            <div class="counter__delete" (click)="minusQuantity(productInCart)">
+              <p class="material-icons">
+                remove
+              </p>
+            </div>
+            <div class="cart__counter" *ngIf="productInCart" routerLink="/cart">
+              <span class="cart__counter__number">в корзине {{productInCart.quantity}} шт.</span>
+              <span class="cart__link">Перейти</span>
+            </div>
+            <div class="counter__add" (click)="plusQuantity(productInCart)">
+              <p class="material-icons">
+                add
+              </p>
             </div>
           </div>
-
-        <div class="mt-4 product__block__title">
-          <p>Характеристики:</p>
-        </div>
-        <div class="product__properties__items" *ngFor="let char of selectedProduct.sku.characteristics">
-          <p *ngIf="char.name === 'Color'">Цвет: {{char.value}}</p>
-          <p>экран: 6.2"/2400x1080 Пикс</p>
-          <p>оперативная память: 8GB</p>
-          <p>память: 128GB</p>
-          <p>4 камеры: 64/12/18</p>
-          <p>беспроводные интерфейсы: NFC, Wi-Fi, Bluetooth 5.6</p>
-        </div>
-      </ng-container>
-      <div class="product__properties__control">
-        <p>Все характеристики</p>
-      </div>
-
-
-    </div>
-
-    <div class="col-4 mt-5 product_phone_price">
-      <div class="product_price">
-        <ng-container *ngIf="selectedProduct">
-          <p class="product_price_cur">{{selectedProduct.sku.price | productsPriceFormatPipe}} ₽</p>
         </ng-container>
       </div>
-      <ng-container *ngIf="!productAddedToCart">
-        <div class="cart__button"
-          (click)="addToCart(selectedProduct)"
-        >
-          <span class="cart__button__item">В корзину</span>
-          <span class="material-symbols-outlined cart__button__icon">
-            shopping_cart
-          </span>
-        </div>
-      </ng-container>
-
-
-      <ng-container *ngIf="productAddedToCart">
-        <div class="cart__button_added">
-          <div class="counter__delete" (click)="minusQuantity(productInCart)">
-            <p class="material-icons">
-              remove
-            </p>
-          </div>
-          <div class="cart__counter"
-            *ngIf="productInCart"
-            routerLink="/cart"
-          >
-            <span class="cart__counter__number">в корзине {{productInCart.quantity}} шт.</span>
-            <span class="cart__link">Перейти</span>
-          </div>
-          <div class="counter__add" (click)="plusQuantity(productInCart)">
-            <p class="material-icons">
-              add
-            </p>
-          </div>
-        </div>
-      </ng-container>
-
-
-
-
-
-
 
     </div>
+
+
+    <div class="product__tabs row" #tabs>
+      <div class="col-2 tabs__description">
+        <span class="material-icons tabs__icons">
+          toc
+        </span>
+        <span>Описание</span>
+
+      </div>
+      <div class="col-2 tabs__characteristics">
+        <span class="material-icons tabs__icons">
+          tune
+        </span>
+        <span>Характеристики</span>
+
+      </div>
+      <div class="col-2 tabs__feedback">
+        <span class="material-icons tabs__icons">
+          question_answer
+        </span>
+        <span>Отзывы</span>
+      </div>
+      <div class="offset-6"></div>
+    </div>
+
+    <div class="table__component row">
+      <app-product-description *ngIf="productById"></app-product-description>
+    </div>
+
 
 
   </div>
 </div>
-
-<app-footer>

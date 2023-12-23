@@ -7,13 +7,11 @@ import { CartModule } from './cart/cart.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from './order/order.module';
-import { ProductsModule } from './products/products.module';
 import { ProductModule } from 'src/app/product/product.module';
-import { HeaderModule } from './header/header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchingModule } from './searching/searching.module';
 import { ApplicationPipesModule } from './pipes/products-price/products-price.module';
-import { CartService } from './cart/cart.service';
+import { MainModule } from './main/main.module';
 
 
 
@@ -21,6 +19,7 @@ import { CartService } from './cart/cart.service';
 @NgModule({
   declarations: [
     AppComponent
+
 
 
   ],
@@ -32,13 +31,12 @@ import { CartService } from './cart/cart.service';
     ReactiveFormsModule,
     HttpClientModule,
     DashboardModule,
-    HeaderModule,
-    ProductsModule,
     ProductModule,
     OrderModule,
     CartModule,
     ApplicationPipesModule,
     SearchingModule,
+    MainModule
   ],
 
 

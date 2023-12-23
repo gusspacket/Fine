@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
+import { Product2 } from 'src/app/models/product2.model';
 import { ProductService } from 'src/app/servise/product.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { ProductService } from 'src/app/servise/product.service';
 export class ProductReviewComponent implements OnInit {
 
 
-  phones: Product[] = [];
-  laptops: Product[] = [];
+  phones: Product2[] = [];
+  laptops: Product2[] = [];
 
   slideConfigPhone = {
     slidesToShow: 5,
@@ -76,11 +76,11 @@ export class ProductReviewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.productService.getAllPhones().subscribe(phones => {
+    this.productService.getAllPhones2().subscribe(phones => {
       this.phones = phones;
     });
 
-    this.productService.getAllLaptops().subscribe(laptops => {
+    this.productService.getAllLaptops2().subscribe(laptops => {
       this.laptops = laptops;
     });
 

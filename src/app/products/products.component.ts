@@ -9,6 +9,7 @@ import { Product } from '../models/product.model';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Product2 } from '../models/product2.model';
 
 
 
@@ -25,12 +26,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ProductsComponent implements OnInit {
 
   category: string;
-  products: Product[];
+  products: Product2[];
   laptops: Product[];
   categoryProduct: Product;
   isLoader = false;
   currentPage = 0
   categoryName: string;
+  categorySlug:string;
   categories$: Observable<Categories[]>
   searchTerm =  '';
 
@@ -53,103 +55,57 @@ export class ProductsComponent implements OnInit {
 
 ngOnInit() {
 
-  this.cartService.updateItemCartCount()
 
-  const yourApiUrl = 'http://89.108.114.139/api/cart/'
-  this.http.get<any>(yourApiUrl, { observe: 'response' }).subscribe(response => {
-    const headers: HttpHeaders = response.headers;
-    const sessionId: string = headers.get('Set-Cookie')
-    console.log(response);
-    console.log('headers', headers);
-    console.log('sessionId', sessionId);
+  this.route.queryParams.subscribe((params) => {
+    this.category = params['category'];
+    this.loadProducts();
   });
 
 
 
-
-
-
-  this.categoryService.getAllCategories().subscribe(() => {
-    this.route.queryParams.subscribe((params) => {
-      // Обновление значения категории
-      this.category = params['category'];
-
-    this.categoryName = this.categoryService.getCategoryNameBySlug(this.category);
-    // Загрузка продуктов в соответствии с новой категорией
-    if (this.category === 'smarfony') {
-      this.productService.getAllPhones().subscribe(phones => {
-        this.products = phones
-        phones.forEach((phone: Product) => {
-          let productAddedToCart: boolean;
-
-          this.cartService.isProductInCart(phone.sku.id).subscribe((isInCart: boolean) => {
-
-            const product:Product = this.products.find(p => p.sku.id === phone.sku.id)
-            product.productAddedToCart = isInCart
-          });
-        });
-      });
-    }
-
-    else if (this.category === 'noutbuki') {
-      this.productService.getAllLaptops().pipe(
-        switchMap((laptops: Product[]) => {
-          const isInCartObservables = laptops.map((laptop: Product) =>
-            this.cartService.isProductInCart(laptop.sku.id).pipe(
-              map((isInCart: boolean) => ({ laptop, isInCart }))
-            )
-          );
-
-          return forkJoin(isInCartObservables);
-        })
-      ).subscribe((results: { laptop: Product, isInCart: boolean }[]) => {
-        this.products = results.map(result => {
-          const product: Product = result.laptop;
-          product.productAddedToCart = result.isInCart;
-          return product;
-        });
-      });
-    } else {
-      this.productService.getAllPhones().subscribe(products => {
-        this.products = products;
-      });
-    }
-  });
-  })
 
 
 }
 
+loadProducts() {
+  this.productService.getProductsByCategory(this.category).subscribe((products) => {
+    this.products = products
+    this.categoryName = this.products[0].category.name
+    this.categorySlug = this.products[0].category.slug
+    console.log(this.products);
+  })
+}
 
 
-  addToCart(product: Product) {
-    const productToAdd: Cart = {
-      quantity: 1,
-      productAddedToCart: true,
-      id: product.sku.id,
-      price: product.sku.price,
-      img: product.sku.img_url,
-      brand: product.brand,
-      name: product.name,
-      sku: product.sku,
-    };
 
-    this.cartService.isProductInCart(productToAdd.id).subscribe((isInCart: boolean) => {
-      if (isInCart) {
-        // Продукт уже в корзине, увеличиваем quantity
-        this.cartService.updateQuantityById(productToAdd.id).subscribe(()=> {
-          this.cartService.updateCart
-          product.productAddedToCart = true
-          this.cartService.updateItemCartCount()
+  // addToCart(product: Product2) {
+  //   const productToAdd: Car = {
+  //     quantity: 1,
+  //     productAddedToCart: true,
+  //     id: product.id,
+  //     price: product.price,
+  //     img: product.img_url,
+  //     brand: product.brand,
+  //     name: product.name,
+  //     sku: product.sku
+  //   };
 
-        });
-      } else {
-        // Продукта нет в корзине, добавляем его
-        this.cartService.add(productToAdd).subscribe();
-        product.productAddedToCart   = true
-      }
-    });
-  }
+  //   this.cartService.isProductInCart(productToAdd.id).subscribe((isInCart: boolean) => {
+  //     if (isInCart) {
+  //       // Продукт уже в корзине, увеличиваем quantity
+  //       this.cartService.updateQuantityById(productToAdd.id).subscribe(()=> {
+  //         this.cartService.updateCart
+  //         product.productAddedToCart = true
+  //         this.cartService.updateItemCartCount()
+
+  //       });
+  //     } else {
+  //       // Продукта нет в корзине, добавляем его
+  //       this.cartService.add(productToAdd).subscribe();
+  //       product.productAddedToCart   = true
+  //     }
+  //   });
+  // }
 
 
 //*********************************************************** */
@@ -184,7 +140,7 @@ ngOnInit() {
     });
   }
 
-  postToCart2() {
+  postToCart2(product:any) {
 
     const productToAdd: Cart2 = {
       product_sku_id: 14  ,
@@ -243,22 +199,61 @@ ngOnInit() {
   }
 
 
-    // getCookies() {
-    //   const url = 'http://89.108.114.139/api/cart/';
 
-    //   this.http.get<any>(url, { observe: 'response' }).subscribe(response => {
-    //     const cookies = response.headers.getAll2('Set-Cookie');
-    //     console.log(cookies);
-    //   });
-    // }
 
 }
 
 
 
+// как я получал категорию и искал по всем телефонам
 
+ // this.categoryService.getAllCategories().subscribe(() => {
+  //   this.route.queryParams.subscribe((params) => {
+  //     // Обновление значения категории
+  //     this.category = params['category'];
 
+  //   this.categoryName = this.categoryService.getCategoryNameBySlug(this.category);
+  //   // Загрузка продуктов в соответствии с новой категорией
+  //   if (this.category === 'smarfony') {
+  //     this.productService.getAllPhones().subscribe(phones => {
+  //       this.products = phones
+  //       phones.forEach((phone: Product) => {
+  //         let productAddedToCart: boolean;
 
+  //         this.cartService.isProductInCart(phone.sku.id).subscribe((isInCart: boolean) => {
+
+  //           const product:Product = this.products.find(p => p.sku.id === phone.sku.id)
+  //           product.productAddedToCart = isInCart
+  //         });
+  //       });
+  //     });
+  //   }
+
+  //   else if (this.category === 'noutbuki') {
+  //     this.productService.getAllLaptops().pipe(
+  //       switchMap((laptops: Product[]) => {
+  //         const isInCartObservables = laptops.map((laptop: Product) =>
+  //           this.cartService.isProductInCart(laptop.sku.id).pipe(
+  //             map((isInCart: boolean) => ({ laptop, isInCart }))
+  //           )
+  //         );
+
+  //         return forkJoin(isInCartObservables);
+  //       })
+  //     ).subscribe((results: { laptop: Product, isInCart: boolean }[]) => {
+  //       this.products = results.map(result => {
+  //         const product: Product = result.laptop;
+  //         product.productAddedToCart = result.isInCart;
+  //         return product;
+  //       });
+  //     });
+  //   } else {
+  //     this.productService.getAllPhones().subscribe(products => {
+  //       this.products = products;
+  //     });
+  //   }
+  // });
+  // })
 
 
 

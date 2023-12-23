@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, delay, map } from 'rxjs';
 import { Product } from '../models/product.model';
 import { Cart } from '../models/cart.model';
+import { Product2 } from '../models/product2.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,31 @@ export class ProductService {
   constructor(private http: HttpClient) { }
   phone: Product[] = [];
   laptop: Product[] = [];
-  id: Product;
+  // id: Product;
 
   private phoneUrl = 'http://89.108.114.139/api/category/smarfony/';
+  private categoryUrl = 'http://89.108.114.139/api/category/';
   private laptopUrl = 'http://89.108.114.139/api/category/noutbuki/';
+  private getProductbyIdUrl = 'http://89.108.114.139/api/product/?id='
 
+  getProductById(id: number):Observable<Product2> {
+    const fullUrl = `${this.getProductbyIdUrl}${id}`;
+    return this.http.get<Product2>(fullUrl)
+  }
+
+
+  getAllPhones2(): Observable<Product2[]> {
+    return this.http.get<Product2[]>(this.phoneUrl)
+  }
+  getAllLaptops2(): Observable<Product2[]> {
+    return this.http.get<Product2[]>(this.laptopUrl)
+  }
+
+  getProductsByCategory(category: string) {
+    const fullUrl = `${this.categoryUrl}${category}`;
+    return this.http.get<Product2[]>(fullUrl)
+
+  }
 
 
 

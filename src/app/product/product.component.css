@@ -58,12 +58,50 @@
   font-size: 16px;
 }
 
-.phone__memory {
-  border: 2px solid #76BC21;;
+
+
+
+.characteristics__title,
+.description__title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.product__characteristics {
+  display: flex;
 
 }
 
-.phone__memory {
+.product__characteristics__name {
+  color:#ababab;
+  font-weight: 400;
+}
+
+.dscription__button {
+  border: none;
+  background-color: transparent;
+  color: #76BC21;
+  cursor: pointer;
+  outline: none;
+}
+
+.product__properties__description {
+  height: 310px;
+}
+
+.product__properties__description p {
+  transition: opacity 0.3s ease; /* Добавим плавный переход */
+}
+
+
+
+
+/* .phone__memory {
+  border: 2px solid #76BC21;;
+
+} */
+
+/* .phone__memory {
   width: 60px;
   height: 30px;
   display: flex;
@@ -72,7 +110,7 @@
   font-size: 15px;
 
 
-}
+} */
 
 
 
@@ -97,7 +135,7 @@
 
 .product_phone_price {
   border: 2px solid #f7f7f7;
-  height: 400px;
+  height: 180px;
   /* height: 150px; */
   width: auto;
   /* display: grid; */
@@ -225,6 +263,24 @@
 
 }
 
+
+.tabs__description,
+.tabs__characteristics,
+.tabs__feedback
+{
+  display: flex;
+  font-size: 24px;
+  justify-content: left;
+  height: 100%;
+  align-items: center;
+  border: 1px solid red;
+}
+
+
+.tabs__icons {
+  /* Ваши стили для иконок, например, font-size, color и т.д. */
+  margin-right: 8px; /* Добавляем небольшой отступ между иконкой и текстом */
+}
 
 
 

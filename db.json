@@ -1,3 +1,32 @@
 {
-  "cart": []
+  "cart": [
+    {
+      "quantity": 1,
+      "productAddedToCart": true,
+      "id": 14,
+      "price": 63990,
+      "img": "http://89.108.114.139/media/images/goods/product/iphone12white.webp",
+      "brand": "Apple",
+      "name": "iphone 12",
+      "sku": {
+        "id": 14,
+        "sku": "ip12-128wh",
+        "description": "iphone 12 white in 128 gb memory",
+        "img_url": "http://89.108.114.139/media/images/goods/product/iphone12white.webp",
+        "price": 63990,
+        "stock": 22,
+        "characteristics": [
+          {
+            "name": "Color",
+            "value": "White"
+          },
+          {
+            "name": "Память",
+            "value": "128 GB"
+          }
+        ],
+        "active": true
+      }
+    }
+  ]
 }

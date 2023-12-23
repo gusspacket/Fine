@@ -18,7 +18,11 @@ export class HeaderPartTopComponent  implements OnInit {
 
   ngOnInit() {
     this.settingsService.getAllSettings().subscribe(settings => {
-      this.settings = settings})
+      this.settings = settings
+    })
+
+
+
   }
 
   postToCart() {

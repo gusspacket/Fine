@@ -12,15 +12,14 @@
       <button
         type="button"
         class="collections__items"
-        [routerLink]="['/products', category.slug]"
-        [queryParams]="{category: category.slug}"
+        [routerLink]="['/products']"
         *ngIf="i < visibleCategoriesCount"
-        (click)="categoryClicked(category.slug)"
+        [queryParams]="{category: category.slug}"
       >
         {{ category.name }}
       </button>
-    </ng-container>
 
+    </ng-container>
 
 
     <!-- Дополнительные категории в выпадающем списке -->
@@ -45,7 +44,9 @@
         <button
           *ngFor="let category of categories.slice(visibleCategoriesCount)"
           class="dropdown-item"
-          (click)="categoryClicked(category)"
+          [routerLink]="['/products']"
+          [queryParams]="{category: category.slug}"
+
         >
           {{ category.name }}
         </button>
@@ -54,7 +55,4 @@
   </div>
 </div>
 </div>
-
-
-
 

@@ -1,9 +1,47 @@
-<h1>Оформление заказа</h1>
-<h2>Контактные данные</h2>
-<h3>Контактное лицо (ФИО)</h3>
-<input class="orderContact" type="text">
-<h3>Контактный телефон</h3>
-<input class="orderPhone" type="text">
+<h1 class="order__form__title">Оформление заказа</h1>
+<p>Контактные данные</p>
+
+
+
+<form>
+  <div class="form-group">
+    <input
+      id="phone"
+      class="form-control"
+      name="phone"
+      type="text"
+      [formControl]="phoneFormControl"
+      mask="+0(000) 000-00-00"
+      [showMaskTyped]="true"
+    >
+
+
+
+
+    <div *ngIf="phoneFormControl.hasError('pattern') " class="text-danger">
+      Введите правильный номер телефона.
+    </div>
+
+
+    <div *ngIf="phoneFormControl.hasError('minlength') && phoneFormControl.touched" class="text-danger">
+      <!-- Минимальная длина - 11 символов. Введено: {{ phoneFormControl.value.length }} символов. -->
+    </div>
+
+    <div *ngIf="phoneFormControl.hasError('maxlength') && phoneFormControl.touched" class="text-danger">
+      Максимальная длина - 11 символов. Введено: {{ phoneFormControl.value.length }} символов.
+    </div>
+
+
+  </div>
+
+
+</form>
+
+
+
+
+
+
 <h2>Доставка</h2>
 <h3>Населенный пункт</h3>
 <input class="orderTown" type="text">

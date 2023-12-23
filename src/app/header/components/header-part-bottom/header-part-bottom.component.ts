@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Categories } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/servise/category.service';
 
@@ -13,7 +14,10 @@ export class HeaderPartBottomComponent implements OnInit {
   visibleCategoriesCount: number;
   isDropdownOpen = false;
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private router: Router,
+    private categoryService: CategoryService
+    ) {}
 
 
 
@@ -27,8 +31,7 @@ export class HeaderPartBottomComponent implements OnInit {
    this.visibleCategoriesCount = 10
   }
 
-  categoryClicked(slug) {
-  }
+
 
 
 }

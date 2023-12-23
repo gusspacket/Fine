@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/servise/category.service';
 import { ProductService } from 'src/app/servise/product.service';
 import { CartService } from '../cart/cart.service';
 import { Cart } from '../models/cart.model';
+import { Product2 } from '../models/product2.model';
 
 @Component({
   selector: 'app-product',
@@ -19,12 +20,16 @@ export class ProductComponent implements OnInit {
   price: string;
   slug: string;
   category: string;
-  categoryName: string = '';
-  product: Product
+  product: Product2
   productInCart: Cart;
   productAddedToCart: boolean = false;
   productToAdd: Cart
   selectedProduct: Product
+
+  showFullDescription:boolean = false
+  productById: Product2
+  categoryName: string;
+  categorySlug:string;
 
 
 
@@ -42,53 +47,80 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    this.route.queryParams.subscribe((params) => {
+     this.route.queryParams.subscribe((params) => {
       this.id = +params['id'];
-    })
-    this.loadCategory()
-    this.checkProductInCart()
+      this.loadProduct();
+    });
+
+
+
+    // this.loadCategory()
+
+    // this.checkProductInCart()
 
   }
 
-  loadCategory() {
-    this.categoryService.getAllCategories().subscribe(() => {
-      this.route.queryParams.subscribe((params) => {
-        this.category = params['category'];
-        this.id = +params['id'];
-        this.categoryName = this.categoryService.getCategoryNameBySlug(this.category);
+  loadProduct() {
+    this.productService.getProductById(this.id).subscribe(
+      (product) => {
+        this.productById = product
+        console.log(this.productById);
+        this.categoryName = this.productById.category.name
+        console.log(this.categoryName);
 
-        if (this.category === 'smarfony') {
-          this.productService.getPhoneById(this.id).subscribe(product => {
-            if (product?.sku?.id === this.id) {
-              this.selectedProduct = product;
-            }
-          });
-        } else if (this.category === 'noutbuki') {
-          this.productService.getLaptopById(this.id).subscribe(product => {
-            if (product?.sku?.id === this.id) {
-              this.selectedProduct = product;
-            }
-          });
-        }
-      });
-    })
+        this.categorySlug = this.productById.category.slug
 
-  }
 
-  checkProductInCart() {
-    this.cartService.isProductInCart(this.id).subscribe((isInCart: boolean) => {
-      if (isInCart) {
-        this.productAddedToCart = true
-        this.cartService.getProductFromCartById(this.id)
-        .subscribe(
-        (product: any) => {
-          this.productInCart = product;
-        });
-      } else  {
-        this.productAddedToCart = false
+
       }
-    })
+    );
   }
+
+  toggleDescription() {
+    this.showFullDescription = !this.showFullDescription;
+  }
+
+
+
+  // loadCategory() {
+  //   this.categoryService.getAllCategories().subscribe(() => {
+  //     this.route.queryParams.subscribe((params) => {
+  //       this.category = params['category'];
+  //       this.id = +params['id'];
+  //       this.categoryName = this.categoryService.getCategoryNameBySlug(this.category);
+
+  //       if (this.category === 'smarfony') {
+  //         this.productService.getPhoneById(this.id).subscribe(product => {
+  //           if (product?.sku?.id === this.id) {
+  //             this.selectedProduct = product;
+  //           }
+  //         });
+  //       } else if (this.category === 'noutbuki') {
+  //         this.productService.getLaptopById(this.id).subscribe(product => {
+  //           if (product?.sku?.id === this.id) {
+  //             this.selectedProduct = product;
+  //           }
+  //         });
+  //       }
+  //     });
+  //   })
+
+  // }
+
+  // checkProductInCart() {
+  //   this.cartService.isProductInCart(this.id).subscribe((isInCart: boolean) => {
+  //     if (isInCart) {
+  //       this.productAddedToCart = true
+  //       this.cartService.getProductFromCartById(this.id)
+  //       .subscribe(
+  //       (product: any) => {
+  //         this.productInCart = product;
+  //       });
+  //     } else  {
+  //       this.productAddedToCart = false
+  //     }
+  //   })
+  // }
 
 
 
@@ -143,6 +175,10 @@ export class ProductComponent implements OnInit {
   goBack() {
     this.router.navigate(['/products/:category']);
   }
+
+  scrollTo(target: HTMLElement) {
+    target.scrollIntoView({ behavior: "smooth" })
+  };
 
 
 }

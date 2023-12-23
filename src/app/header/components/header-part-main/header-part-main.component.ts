@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { CartService } from 'src/app/cart/cart.service';
@@ -15,7 +15,10 @@ import { SettingsService } from 'src/app/servise/settings.service';
 
 export class HeaderPartMainComponent implements OnInit {
 
+
+  @Input()
   settings: Settings;
+
   searchTerm = '';
   products$: Observable<Product[]>
   productsCart:Product[] = [];
@@ -37,11 +40,6 @@ export class HeaderPartMainComponent implements OnInit {
 
     this.itemCountSubscription = this.cartService.itemCount$.subscribe(itemCount => {
       this.itemCount = itemCount;
-    });
-
-
-    this.settingsService.getAllSettings().subscribe(settings => {
-      this.settings = settings
     })
 
   }
