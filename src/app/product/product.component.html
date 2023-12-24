@@ -1,13 +1,11 @@
 
 
-
-
-<div class="container" *ngIf="productById">
-  <div>
+<div class="container" >
+  <div *ngIf="product">
     <div class="navigate mt-3">
       <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
-      <p class="navigate__choice" [routerLink]="['/products', productById.category.slug]"
-        [queryParams]="{category: productById.category.slug}">
+      <p class="navigate__choice" [routerLink]="['/products', product.category.slug]"
+        [queryParams]="{category: product.category.slug}">
         &nbsp; {{categoryName}}
       </p>
     </div>
@@ -15,7 +13,7 @@
 
     <div class="row mt-2" >
       <div class="product__title">
-        <span>{{productById.title}}</span>
+        <span>{{product.title}}</span>
       </div>
 
       <div class="productArea mt-3">
@@ -50,7 +48,7 @@
 
 
       <div class="col-4 mt-5 product_phone_img">
-        <img [src]="productById.img_url" alt="product_phone">
+        <img [src]="product.img_url" alt="product_phone">
       </div>
 
 
@@ -58,7 +56,7 @@
       <div class="col-4 mt-5 option__selector">
         <p class="characteristics__title">Характеристики</p>
 
-        <div class="product__characteristics" *ngFor="let characteristic of productById.characteristics">
+        <div class="product__characteristics" *ngFor="let characteristic of product.characteristics">
           <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
           <p class="product__characteristics__value">{{ characteristic.value }}</p>
         </div>
@@ -76,7 +74,7 @@
             'opacity': showFullDescription ?
             '1' : '0.6'
           }">
-            {{ productById.description }}
+            {{ product.description }}
           </p>
 
           <!-- Кнопка "Показать полностью" -->
@@ -89,7 +87,7 @@
 
       <div class="col-4 mt-5 product_phone_price">
         <div class="product_price">
-          <p class="product_price_cur">{{productById.price | productsPriceFormatPipe}} ₽</p>
+          <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
         </div>
         <ng-container *ngIf="!productAddedToCart">
           <div class="cart__button" (click)="addToCart(selectedProduct)">
@@ -149,7 +147,7 @@
     </div>
 
     <div class="table__component row">
-      <app-product-description *ngIf="productById"></app-product-description>
+
     </div>
 
 

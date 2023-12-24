@@ -1,9 +1,9 @@
-import { Product } from 'src/app/models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
 import { Cart } from '../models/cart.model';
 import { ProductService } from '../servise/product.service';
 import { Subject, Subscription } from 'rxjs';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-cart',
@@ -59,30 +59,30 @@ export class CartComponent implements OnInit {
   }
 
   minusQuantity(product: Product) {
-    if (product.quantity > 1) {
-      product.quantity--;
-      product.price = product.quantity * product.sku.price;
-      this.cartService.updateCart(product).subscribe();
-      this.loadCart();
-      this.cartService.updateItemCartCount()
-    } else if (product.quantity === 1) {
-      this.deleteFromCart(product);
-    }
+    // if (product.quantity > 1) {
+    //   product.quantity--;
+    //   product.price = product.quantity * product.sku.price;
+    //   this.cartService.updateCart(product).subscribe();
+    //   this.loadCart();
+    //   this.cartService.updateItemCartCount()
+    // } else if (product.quantity === 1) {
+    //   this.deleteFromCart(product);
+    // }
   }
 
 
 
   plusQuantity(product: Product) {
-    product.quantity++
-    product.price = product.quantity * product.sku.price;
-    this.cartService.updateCart(product).subscribe()
+    // product.quantity++
+    // product.price = product.quantity * product.sku.price;
+    // this.cartService.updateCart(product).subscribe()
 
-    this.cartService.getTotalCartItem().subscribe(total => {
-      this.cartService.updateItemCount(total); // Обновляем значение в стриме
-      this.cartService.updateItemCartCount()
-    });
+    // this.cartService.getTotalCartItem().subscribe(total => {
+    //   this.cartService.updateItemCount(total); // Обновляем значение в стриме
+    //   this.cartService.updateItemCartCount()
+    // });
 
-    this.loadCart();
+    // this.loadCart();
   }
 
 

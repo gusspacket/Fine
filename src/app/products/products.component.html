@@ -15,10 +15,11 @@
     <div *ngFor="let product of products" class="col-4">
       <div class="catalog">
         <div class="card" style="width: 15rem; height: 25rem;">
-          <div class="link" [routerLink]="['/product']" [queryParams]="{
-          category: product.category,
-          id: product.id
-          }">
+          <div
+            class="link"
+            [routerLink]="['/product']"
+            [queryParams]="{id: product.id}"
+          >
             <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
             <div class="card__body mt-3">
               <div class="card__title"> {{product.title}} </div>
@@ -41,7 +42,7 @@
           </div>
 
           <div class="card__price__product" *ngIf="product.productAddedToCart">
-            <h1 class="card__price">{{ product.price   }} &nbsp; ₽
+            <h1 class="card__price">{{ product.price  | productsPriceFormatPipe  }} &nbsp; ₽
             </h1>
             <div class="card__added"
               routerLink="/cart"

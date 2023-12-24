@@ -9,7 +9,7 @@ import { Settings } from '../models/settings.model';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() settings: Settings;
+  settings: Settings;
 
   constructor(private settingsService: SettingsService) {}
 

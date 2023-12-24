@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { CartService } from 'src/app/cart/cart.service';
 import { Product } from 'src/app/models/product.model';
 import { Settings } from 'src/app/models/settings.model';
-import { SearchService } from 'src/app/servise/search.service';
 import { SettingsService } from 'src/app/servise/settings.service';
 
 @Component({

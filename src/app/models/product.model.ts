@@ -1,33 +1,41 @@
 export interface Product  {
   id: number;
   name: string;
-  price: number;
-  img_url: string;
-  description: string;
-  brand: string;
+  category: Category;
+  title: string;
   slug: string;
-  category: number;
-  sku: Sku;
-  skus: Sku[];
+  brand: string;
+  sku: string;
+  description: string;
+  img_url: string;
+  price: number;
+  stock: number;
+  characteristics: Characteristics[]
+  active: boolean;
+
+
+
   quantity: number;
   productAddedToCart?: boolean;
 
 
 
+
+
 }
 
-export interface Characteristic {
+
+export interface Characteristics {
   name: string;
   value: string;
 }
 
-export interface Sku {
-  id:number;
-  description: string;
-  img_url: string;
-  price: number;
-  value: string;
+export interface Category {
+  id: number;
   name: string;
-  characteristics: Characteristic[];
+  slug: string;
 }
+
+
+
 

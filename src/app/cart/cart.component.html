@@ -11,7 +11,7 @@
 
           <div class="cart__item__img col-3">
             <img
-            [src]="product.sku.img_url"
+            [src]="product.img_url"
             alt="itemImg">
           </div>
 
@@ -20,7 +20,7 @@
               <div class="cart__item__title">
                 <p>
                   {{ product.brand }} {{product.name}}
-                  <ng-container *ngFor="let characteristic of product.sku.characteristics">
+                  <ng-container *ngFor="let characteristic of product.characteristics">
 
                     <span *ngIf="characteristic.name === 'Color'">
                       Цвет {{ characteristic.value }},
@@ -68,7 +68,7 @@
           <div class="item__total col-2">
 
             <div class="item__total__price">
-              <p>{{product.sku.price * product.quantity | productsPriceFormatPipe }} ₽ </p>
+              <p>{{product.price * product.quantity | productsPriceFormatPipe }} ₽ </p>
             </div>
 
             <div class="item__counter" >

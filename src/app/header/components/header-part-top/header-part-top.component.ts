@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart/cart.service';
 import { Settings } from 'src/app/models/settings.model';
 import { SettingsService } from 'src/app/servise/settings.service';
@@ -11,6 +11,7 @@ import { SettingsService } from 'src/app/servise/settings.service';
 })
 export class HeaderPartTopComponent  implements OnInit {
 
+  @Input()
   settings: Settings;
 
   constructor(private settingsService: SettingsService,

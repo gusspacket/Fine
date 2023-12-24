@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../servise/product.service';
-import { Product } from '../models/product.model';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Product2 } from '../models/product2.model';
+import { HttpClient } from '@angular/common/http';
+import { Product } from '../models/product.model';
 
 
 
@@ -26,7 +25,7 @@ import { Product2 } from '../models/product2.model';
 export class ProductsComponent implements OnInit {
 
   category: string;
-  products: Product2[];
+  products: Product[];
   laptops: Product[];
   categoryProduct: Product;
   isLoader = false;
@@ -72,7 +71,6 @@ loadProducts() {
     this.products = products
     this.categoryName = this.products[0].category.name
     this.categorySlug = this.products[0].category.slug
-    console.log(this.products);
   })
 }
 

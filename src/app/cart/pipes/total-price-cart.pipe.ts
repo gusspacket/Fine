@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product, Sku } from 'src/app/models/product.model';
 
 @Pipe({
   name: 'totalCartPrice'

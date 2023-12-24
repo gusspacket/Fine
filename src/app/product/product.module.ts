@@ -5,18 +5,15 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { HeaderModule } from 'src/app/header/header.module';
 import { FooterModule } from 'src/app/footer/footer.module';
 import { ApplicationPipesModule } from '../pipes/products-price/products-price.module';
-import { ProductDescriptionComponent } from './product-description/product-description.component';
 import { ProductCharacteristicsComponent } from './product-characteristics/product-characteristics.component';
-import { ProductFeedbackComponent } from './product-feedback/product-feedback.component';
 
 
 
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductDescriptionComponent,
     ProductCharacteristicsComponent,
-    ProductFeedbackComponent
+
 
   ],
   imports: [

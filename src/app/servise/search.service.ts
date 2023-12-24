@@ -1,11 +1,9 @@
-// search.service.ts
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { Product } from '../models/product.model';
+import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product2 } from '../models/product2.model';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +17,9 @@ export class SearchService {
   searchUrl = 'http://89.108.114.139/api/product/?search='
 
 
-  getAllProducts(searchTerm: string):Observable<Product2[]> {
+  getAllProducts(searchTerm: string):Observable<Product[]> {
     const fullUrl = `${this.searchUrl}${searchTerm}`;
-    return this.http.get<Product2[]>(fullUrl);
+    return this.http.get<Product[]>(fullUrl);
   }
 
 
