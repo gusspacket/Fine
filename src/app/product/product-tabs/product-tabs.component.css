@@ -1,0 +1,98 @@
+.tabs__description,
+.tabs__characteristics,
+.tabs__feedback
+{
+  display: flex;
+  font-size: 24px;
+  justify-content: left ;
+  height: 100%;
+  align-items: center;
+  cursor: pointer;
+  color:#ababab;
+  width: auto;
+}
+
+.active {
+  color: black;
+}
+
+
+
+.tabs__icons {
+  /* Ваши стили для иконок, например, font-size, color и т.д. */
+  margin-right: 8px; /* Добавляем небольшой отступ между иконкой и текстом */
+}
+
+.product__description {
+  font-size: 20px;
+  font-weight: 390;
+  line-height: 1.5;
+  width: 100%;
+
+}
+
+.product__characteristics {
+  font-size: 17px;
+  width: 50%;
+}
+
+
+
+.tabs__characteristics__value {
+  display: flex;
+  flex-wrap: nowrap;
+
+}
+
+
+
+
+.product__tabs__item {
+  display: flex;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  /* border: 1px solid darkblue; */
+
+
+}
+
+.product__characteristics__name {
+  width: auto;
+  margin-right: 5px;
+
+}
+
+.container__delimiter {
+   overflow: hidden;
+}
+
+.product__characteristics__value {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.product__characteristics__button {
+  border: none;
+  cursor: pointer;
+  color: #76BC21;
+  background-color: transparent;
+  font-size: 15px;
+  text-align: left;
+}
+
+.feedback__empty {
+  font-size: 20px;
+}
+
+
+.feedback__button {
+  cursor: pointer;
+  background-color: #76BC21;
+  color: white;
+  border: none;
+  height: 50px;
+}
+
+

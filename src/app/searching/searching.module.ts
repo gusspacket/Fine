@@ -7,6 +7,7 @@ import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ApplicationPipesModule } from '../pipes/products-price/products-price.module';
 
 
 
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     HeaderModule,
     FooterModule,
-    FormsModule
+    FormsModule,
+    ApplicationPipesModule
 
   ],
   exports: [

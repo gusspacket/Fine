@@ -1,7 +1,7 @@
 <div class="container">
   <div class="navigate mt-3">
-    <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p> -
-    <p>&nbsp;Поиск</p>
+    <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a> &#8212; &nbsp;
+    <p class="navigate__choice">Поиск</p>
   </div>
 
   <div *ngIf="noResultsFound">
@@ -26,51 +26,33 @@
         </span>
       </button>
     </div>
-    <p class="navigate__result">Не найдено. Попробуйте снова</p>
+    <span class="navigate__result ">Не найдено. Попробуйте снова</span>
+    <span class="material-icons navigate__result__smile">
+      sentiment_satisfied_alt
+      </span>
   </div>
 
-    <div class="my-4 header__bottom__input">
-      <div class="input-container">
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          value=""
-          aria-labelledby="label-fname"
-          [(ngModel)]="searchTerm"
-          (keydown.enter)="letsSearch(searchTerm)"
-        >
-      </div>
-      <button
-        class="search__icon"
-        (click)="letsSearch(searchTerm)"
-      >
-        <span class="material-icons">
-          search
-        </span>
-      </button>
-    </div>
-    <p class="navigate__result">Слишком короткий запрос </p>
+
 
 
 
   <div class="row mt-2" *ngIf="!noResultsFound">
     <div *ngFor="let product of searchProducts" class="col-3">
       <div class="catalog">
-        <div class="card" style="width: 13rem; height: 23rem;">
-          <div class="link" [routerLink]="['/product']" [queryParams]="{
+        <div class="card" style="width: 15rem; height: 25rem;">
+          <a class="link" [routerLink]="['/product']" [queryParams]="{
           id: product.id
           }">
             <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
             <div class="card__body">
               <div class="card__title"> {{product.title}}</div>
             </div>
-          </div>
+          </a>
 
 
 
           <div class="card__price__product">
-            <h1 class="card__price">{{ product.price  }} &nbsp; ₽
+            <h1 class="card__price">{{ product.price | productsPriceFormatPipe  }} &nbsp; ₽
             </h1>
             <div class="card__price__icon"
               (click)="addToCart(product)"
@@ -102,4 +84,3 @@
   </div>
 </div>
 
-<app-footer></app-footer>

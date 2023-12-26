@@ -3,9 +3,17 @@
   font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navigate {
-  cursor: pointer;
   display: flex;
+}
+
+.navigate__dashboard {
+  color: black;
+  cursor: pointer;
 }
 
 .navigate__dashboard:hover {
@@ -14,6 +22,7 @@
 
 .navigate__choice {
   color: #76BC21;
+
 }
 
 .catalog__page__heading {
@@ -25,6 +34,11 @@
 .catalog {
   display: flex;
   justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
 }
 
 .card {

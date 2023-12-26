@@ -5,14 +5,16 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { HeaderModule } from 'src/app/header/header.module';
 import { FooterModule } from 'src/app/footer/footer.module';
 import { ApplicationPipesModule } from '../pipes/products-price/products-price.module';
-import { ProductCharacteristicsComponent } from './product-characteristics/product-characteristics.component';
+import { ProductTabsComponent } from './product-tabs/product-tabs.component';
+
 
 
 
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductCharacteristicsComponent,
+    ProductTabsComponent,
+
 
 
   ],

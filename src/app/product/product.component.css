@@ -1,10 +1,17 @@
 * {
   font-family: 'Jost', sans-serif;
 }
+a  {
+  text-decoration: none;
+}
 
 .navigate {
   cursor: pointer;
   display: flex;
+}
+
+.navigate__dashboard {
+  color: black;
 }
 
 .navigate__dashboard:hover {
@@ -128,6 +135,10 @@
 .phone__memory {
   justify-content: center;
 
+}
+
+.product__all__characteristics {
+  cursor: pointer;
 }
 
 /* TOTAL PRICE AND CART */
@@ -264,23 +275,7 @@
 }
 
 
-.tabs__description,
-.tabs__characteristics,
-.tabs__feedback
-{
-  display: flex;
-  font-size: 24px;
-  justify-content: left;
-  height: 100%;
-  align-items: center;
-  border: 1px solid red;
-}
 
-
-.tabs__icons {
-  /* Ваши стили для иконок, например, font-size, color и т.д. */
-  margin-right: 8px; /* Добавляем небольшой отступ между иконкой и текстом */
-}
 
 
 

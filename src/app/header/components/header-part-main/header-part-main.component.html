@@ -6,7 +6,7 @@
 <div class="row">
   <div class="header__main">
     <!-- LOGO -->
-    <div
+    <a
       class="col-1 main__logo"
       routerLink="/"
       *ngIf="settings"
@@ -16,7 +16,7 @@
         alt="MainLogo"
         class="main__img"
       >
-    </div>
+    </a>
     <!-- BURGER -->
     <!-- <div class="col-2 d-flex justify-content-center mx-auto">
       <button class="main__button">
@@ -72,7 +72,7 @@
         <div class="icon__text">Избранное</div>
       </div>
 
-      <div
+      <a
         class="iconCart"
         [routerLink]="['/cart']"
       >
@@ -86,7 +86,7 @@
         <div class="cartItemNumber">
           <span>{{itemCount}}</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>

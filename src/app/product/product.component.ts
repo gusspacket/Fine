@@ -62,6 +62,8 @@ export class ProductComponent implements OnInit {
     this.productService.getProductById(this.id).subscribe(
       (products) => {
         this.product = products[0];
+        console.log(this.product);
+
         this.categoryName = this.product.category.name
       }
     );

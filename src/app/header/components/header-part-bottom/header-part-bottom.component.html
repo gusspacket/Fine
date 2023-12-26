@@ -9,15 +9,15 @@
         *ngFor="let category of categories; let i = index"
       >
       <!-- Превратить каждую категорию в кнопку -->
-      <button
+      <a
         type="button"
         class="collections__items"
-        [routerLink]="['/products']"
+        [routerLink]="['/products', category.slug]"
         *ngIf="i < visibleCategoriesCount"
         [queryParams]="{category: category.slug}"
       >
         {{ category.name }}
-      </button>
+      </a>
 
     </ng-container>
 
@@ -41,7 +41,7 @@
         aria-labelledby="dropdownMenuButton">
         <!-- Превратить каждую дополнительную категорию в кнопку -->
 
-        <button
+        <a
           *ngFor="let category of categories.slice(visibleCategoriesCount)"
           class="dropdown-item"
           [routerLink]="['/products']"
@@ -49,7 +49,7 @@
 
         >
           {{ category.name }}
-        </button>
+        </a>
       </div>
     </div>
   </div>

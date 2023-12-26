@@ -3,15 +3,15 @@
 <div class="container" >
   <div *ngIf="product">
     <div class="navigate mt-3">
-      <p class="navigate__dashboard" routerLink="">Главная &nbsp;</p>/
-      <p class="navigate__choice" [routerLink]="['/products', product.category.slug]"
+      <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a>/
+      <a class="navigate__choice" [routerLink]="['/products', product.category.slug]"
         [queryParams]="{category: product.category.slug}">
         &nbsp; {{categoryName}}
-      </p>
+      </a>
     </div>
 
 
-    <div class="row mt-2" >
+    <div class="row mt-4" >
       <div class="product__title">
         <span>{{product.title}}</span>
       </div>
@@ -47,7 +47,7 @@
 
 
 
-      <div class="col-4 mt-5 product_phone_img">
+      <div class="col-4 mt-4 product_phone_img">
         <img [src]="product.img_url" alt="product_phone">
       </div>
 
@@ -56,13 +56,19 @@
       <div class="col-4 mt-5 option__selector">
         <p class="characteristics__title">Характеристики</p>
 
-        <div class="product__characteristics" *ngFor="let characteristic of product.characteristics">
-          <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
-          <p class="product__characteristics__value">{{ characteristic.value }}</p>
+        <div
+          class="product__characteristics"
+          *ngFor="let characteristic of product.characteristics; let i = index"
+        >
+          <ng-container *ngIf="i < 5">
+            <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
+            <p class="product__characteristics__value">{{ characteristic.value }}</p>
+          </ng-container>
         </div>
 
+
         <div class="product__properties__control">
-          <p (click)="scrollTo(tabs)">Все характеристики</p>
+          <p class="product__all__characteristics" (click)="scrollTo(tabs)">Все характеристики</p>
         </div>
 
         <div class="product__properties__description">
@@ -122,33 +128,10 @@
     </div>
 
 
-    <div class="product__tabs row" #tabs>
-      <div class="col-2 tabs__description">
-        <span class="material-icons tabs__icons">
-          toc
-        </span>
-        <span>Описание</span>
 
-      </div>
-      <div class="col-2 tabs__characteristics">
-        <span class="material-icons tabs__icons">
-          tune
-        </span>
-        <span>Характеристики</span>
 
-      </div>
-      <div class="col-2 tabs__feedback">
-        <span class="material-icons tabs__icons">
-          question_answer
-        </span>
-        <span>Отзывы</span>
-      </div>
-      <div class="offset-6"></div>
-    </div>
-
-    <div class="table__component row">
-
-    </div>
+    <div class="table__component row" #tabs>
+      <app-product-tabs [product]="product"></app-product-tabs>
 
 
 

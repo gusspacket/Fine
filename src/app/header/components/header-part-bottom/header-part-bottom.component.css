@@ -20,6 +20,8 @@
   color: #333333;
   border: none;
   font-size: 16px;
+  text-decoration: none;
+
 }
 
 .collections__items:hover {

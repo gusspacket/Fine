@@ -29,6 +29,7 @@ import { ApplicationPipesModule } from '../pipes/products-price/products-price.m
     ApplicationPipesModule
 
 
+
   ],
   exports: [
 

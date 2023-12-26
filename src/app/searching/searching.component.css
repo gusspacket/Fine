@@ -4,22 +4,36 @@
   font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navigate {
   display: flex;
 }
 
 .navigate__dashboard {
   cursor: pointer;
+  color: black;
 }
 
 .navigate__dashboard:hover {
   color: #76BC21;
 }
 
+.navigate__choice {
+  color: #76BC21;
+
+}
+
 .navigate__result {
   font-size: 25px;
   font-weight: 500;
   margin-top: 5px;
+}
+
+.navigate__result__smile {
+  border: 1px silid red;
 }
 
 .header__bottom__input {
@@ -93,6 +107,10 @@ input:focus + .label .text {
   justify-content: center;
 }
 
+
+.link {
+  color: black;
+}
 
 .card {
   margin: 10px;

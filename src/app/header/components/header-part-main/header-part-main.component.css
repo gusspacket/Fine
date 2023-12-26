@@ -164,6 +164,7 @@ input:focus + .label .text {
   align-items: center;
   cursor: pointer;
   position: relative;
+  text-decoration: none;
 }
 
 .cartItemNumber {

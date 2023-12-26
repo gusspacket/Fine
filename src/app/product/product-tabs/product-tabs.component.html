@@ -1,0 +1,198 @@
+<div class="product__tabs row">
+
+  <div
+    class="col-2 tabs__description"
+    (click)="productShowDescription()"
+    [ngClass]="{'active': isDescriptionActive}"
+  >
+
+  <span class="material-icons tabs__icons">
+    format_list_bulleted
+    </span>
+    <span>Описание</span>
+
+
+
+  </div>
+  <div
+    class="col-2 tabs__characteristics"
+    (click)="productShowCharacteristics()"
+    [ngClass]="{'active': isCharacteristicsActive}"
+  >
+    <span class="material-icons tabs__icons">
+      tune
+    </span>
+    <span>Характеристики</span>
+
+  </div>
+  <div
+    class="col-2 tabs__feedback"
+    (click)="productShowFeedback()"
+    [ngClass]="{'active': isDFeedbackActive}"
+  >
+    <span class="material-icons tabs__icons">
+      question_answer
+    </span>
+    <span>Отзывы</span>
+  </div>
+  <div class="offset-6"></div>
+</div>
+
+
+<div class="row mt-4" *ngIf="showDescription">
+  <span class="product__description ">{{product.description}}</span>
+</div>
+
+
+<div class="mt-4 row" *ngIf="showCharacteristics">
+  <ng-container *ngFor="let characteristic of product.characteristics; let i = index;">
+    <ng-container *ngIf="i <= 5">
+      <div class=" product__tabs__item ">
+        <p class="col-2 product__characteristics__name">{{ characteristic.name }}</p>
+        <div class="container__delimiter">
+          <p class="col-8 product__delimiter" [innerHTML]="delimiter"></p>
+        </div>
+
+        <p class="col-2 product__characteristics__value">{{ characteristic.value }}</p>
+
+    </div>
+    </ng-container>
+
+    <div *ngIf="showAllCharacteristics">
+      <ng-container *ngIf="i > 6">
+        <div class=" product__tabs__item ">
+          <p class="col-2 product__characteristics__name">{{ characteristic.name }}</p>
+          <div class="container__delimiter">
+            <p class="col-8 product__delimiter" [innerHTML]="delimiter"></p>
+          </div>
+
+          <p class="col-2 product__characteristics__value">{{ characteristic.value }}</p>
+
+      </div>
+
+
+      </ng-container>
+    </div>
+
+
+</ng-container>
+
+<div class="row mt-3">
+  <button
+  *ngIf="product.characteristics.length > 6"
+  (click)="showAllCharacteristics = !showAllCharacteristics"
+  class="col-3 product__characteristics__button"
+>
+  {{ showAllCharacteristics ? 'Свернуть все характеристики' : 'Развернуть все характеристики' }}
+</button>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- <div class="mt-4" *ngIf="showCharacteristics">
+  <div class="product__tabs__item">
+
+    <div class="row tabs__first ">
+      <ng-container *ngFor="let characteristic of product.characteristics; let i = index;">
+        <ng-container *ngIf="i < 7">
+          <div class="col-12">
+            <ul class="row list-group list-group-horizontal ">
+              <li class="col-4 product__characteristics__name list-group-item ">{{ characteristic.name }}</li>
+              <li class="col-5 product__delimiter list-group-item " [innerHTML]="delimiter"></li>
+              <li class="col-3 product__characteristics__value list-group-item ">{{ characteristic.value }}</li>
+            </ul>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </div>
+
+
+    <div class="row tabs__second ">
+      <ng-container *ngFor="let characteristic of product.characteristics; let i = index;">
+        <ng-container *ngIf="i >= 7">
+          <div class="col-12">
+            <ul class="row list-group two list-group-horizontal ">
+              <li class="col-4 product__characteristics__name list-group-item ">{{ characteristic.name }}</li>
+              <li class="col-5 product__delimiter list-group-item " [innerHTML]="delimiter"></li>
+              <li class="col-3 product__characteristics__value list-group-item ">{{ characteristic.value }}</li>
+            </ul>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </div>
+
+  </div>
+
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+<div  *ngIf="showFeedback">
+  <div class="row">
+    <p class="mt-4 feedback__empty">Отзывов еще никто не оставлял</p>
+  </div>
+
+  <button
+    class=" col-2 mt-1 feedback__button"
+    (click)="showFeedbackForm()"
+  >Написать Отзыв</button>
+</div>
+
+
+<div *ngIf="isFunny">
+  <h1>ПОГОДИ БРАТИШКА В РАЗРАБОТКЕ</h1>
+</div>
+
+
+
+
+
+<!--
+<div class="mt-3" *ngIf="showCharacteristics">
+
+      <div class="tabs__characteristics__value">
+
+        <div class="row tabs__one" >
+          <ng-container *ngFor="let characteristic of product.characteristics; let i = index;">
+            <ng-container *ngIf="i < 5">
+              <p class="col-4 product__characteristics__name">{{ characteristic.name }}</p>
+              <p class="col-5 product__delimiter" [innerHTML]="delimiter"></p>
+              <p class="col-3 product__characteristics__value">{{ characteristic.value }}</p>
+            </ng-container>
+          </ng-container>
+
+        </div>
+
+        </div>
+
+        <div class="row tabs__two">
+          <ng-container *ngFor="let characteristic of product.characteristics; let i = index;">
+            <ng-container *ngIf="i >= 5">
+              <p class="col-4 product__characteristics__name">{{ characteristic.name }}</p>
+              <p class="col-5 product__delimiter" [innerHTML]="delimiter"></p>
+              <p class="col-3 product__characteristics__value">{{ characteristic.value }}</p>
+            </ng-container>
+          </ng-container>
+
+        </div>
+
+  </div>
+</div>
+-->
