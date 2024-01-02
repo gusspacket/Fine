@@ -53,14 +53,14 @@
 
 
 
-      <div class="col-4 mt-5 option__selector">
+      <div class="col-5 mt-4 option__selector">
         <p class="characteristics__title">Характеристики</p>
 
         <div
           class="product__characteristics"
           *ngFor="let characteristic of product.characteristics; let i = index"
         >
-          <ng-container *ngIf="i < 5">
+          <ng-container *ngIf="i < 6">
             <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
             <p class="product__characteristics__value">{{ characteristic.value }}</p>
           </ng-container>
@@ -68,7 +68,10 @@
 
 
         <div class="product__properties__control">
-          <p class="product__all__characteristics" (click)="scrollTo(tabs)">Все характеристики</p>
+          <p class="product__all__characteristics"
+            (click)="scrollTo(tabs)"
+            (click)="activateCharacteristics()"
+          >Все характеристики</p>
         </div>
 
         <div class="product__properties__description">
@@ -91,7 +94,7 @@
 
       </div>
 
-      <div class="col-4 mt-5 product_phone_price">
+      <div class="col-3 mt-4 product_phone_price">
         <div class="product_price">
           <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
         </div>
@@ -132,8 +135,5 @@
 
     <div class="table__component row" #tabs>
       <app-product-tabs [product]="product"></app-product-tabs>
-
-
-
-  </div>
+    </div>
 </div>

@@ -4,7 +4,7 @@ import { ProductComponent } from './product.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import { HeaderModule } from 'src/app/header/header.module';
 import { FooterModule } from 'src/app/footer/footer.module';
-import { ApplicationPipesModule } from '../pipes/products-price/products-price.module';
+import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
 import { ProductTabsComponent } from './product-tabs/product-tabs.component';
 
 

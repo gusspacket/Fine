@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from 'src/app/cart/cart.service';
 import { Settings } from 'src/app/models/settings.model';
-import { SettingsService } from 'src/app/servise/settings.service';
 
 @Component({
   selector: 'app-header-part-top',
@@ -14,13 +13,10 @@ export class HeaderPartTopComponent  implements OnInit {
   @Input()
   settings: Settings;
 
-  constructor(private settingsService: SettingsService,
+  constructor(
     private cartService: CartService){}
 
   ngOnInit() {
-    this.settingsService.getAllSettings().subscribe(settings => {
-      this.settings = settings
-    })
 
 
 

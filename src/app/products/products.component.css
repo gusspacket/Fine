@@ -119,3 +119,57 @@ a {
   display: flex;
   justify-content: center;
 }
+
+
+.products__filter{
+  width: 100%;
+  height: auto;
+  border: 1px solid #aaa;
+
+}
+
+
+.filter{
+  width: 100%;
+}
+
+.checkbox__title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.price__filter {
+  display: flex;
+}
+
+.price__control {
+  width: 80px;
+}
+
+.price__symbol {
+  display: flex;
+  align-items: center;
+}
+
+.clear__button {
+  width: 100%;
+  border: 1px solid #76BC21;
+  color: #76BC21;
+  background-color: transparent;
+  bottom: 10px;
+}
+
+.clear__button:hover {
+  color: red
+}
+
+
+.paginator {
+
+  display: flex;
+  justify-content: center;
+}
+
+.paginator__material {
+  font-size: 20px;
+}

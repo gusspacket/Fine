@@ -1,14 +1,15 @@
-import { Cart } from './../models/cart.model';
+import { Characteristic } from './../models/search.model';
 import { Categories } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/servise/category.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../servise/product.service';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product.model';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 
 
@@ -29,7 +30,6 @@ export class ProductsComponent implements OnInit {
   laptops: Product[];
   categoryProduct: Product;
   isLoader = false;
-  currentPage = 0
   categoryName: string;
   categorySlug:string;
   categories$: Observable<Categories[]>
@@ -38,42 +38,197 @@ export class ProductsComponent implements OnInit {
   cartData: any
   expiresDate: Date;
 
+  searchString = '';
+  isSamsungSelected: boolean = false;
+  isAppleSelected: boolean = false;
+  filteredProducts: Product[] = [];
 
 
+
+  selectAll = false;
+
+
+
+  tempArray:any= []
+  newArray:any = []
+  arrays:any = []
+  originalProducts = []
+  brands = []
+
+
+  // FILTER
+  selectedBrands: { [key: string]: boolean } = {};
+  uniquePhoneBrands: { id: number; name: string }[] = [];
+  minPrice: number;
+  maxPrice: number;
+  uniqueProductsColors: { id: number; name: string }[] = [];
+  foundCharacteristic: {}[] = []
+
+
+
+  // PAGINATOR
+  pageSize = 6; // Количество товаров на странице
+  pageSizeOptions: number[] = [6, 12, 50]; // Варианты количества товаров на странице
+  currentPage = 0; // Текущая страница
+  dataSource: Product[]
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor
   ( private productService: ProductService,
     private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoryService,
     private http: HttpClient
 
-  ) {}
+   ) {}
 
 
 ngOnInit() {
 
-
   this.route.queryParams.subscribe((params) => {
     this.category = params['category'];
     this.loadProducts();
+
+
+
   });
-
-
-
-
-
 }
+
 
 loadProducts() {
   this.productService.getProductsByCategory(this.category).subscribe((products) => {
     this.products = products
+
+    this.originalProducts = [... products]
     this.categoryName = this.products[0].category.name
     this.categorySlug = this.products[0].category.slug
+    this.itemsProductsBrands()
+    this.minPrice = this.getMinPrice();
+    this.maxPrice = this.getMaxPrice();
+
+
+
   })
+
 }
 
+
+// PAGINATOR
+
+
+
+
+
+
+
+// FILTER
+
+searchColor() {
+
+}
+
+
+
+itemsProductsBrands() {
+  const uniqueBrandsMap: { [key: string]: any } = {};
+
+  // Проходим по товарам и добавляем уникальные бренды в объект
+  this.products.forEach(product => {
+    const brandId = product.brand.id;
+    const brandName = product.brand.name;
+
+    // Если бренда еще нет в объекте, добавляем его
+    if (!uniqueBrandsMap[brandName]) {
+      uniqueBrandsMap[brandName] = { id: brandId, name: brandName };
+    }
+  });
+  // Преобразуем объект в массив уникальных брендов
+  this.uniquePhoneBrands = Object.values(uniqueBrandsMap);
+
+}
+
+
+
+
+
+
+
+onChangeBrand(event: any, brandName: string) {
+  if (event.target.checked) {
+    this.tempArray = this.products.filter((e: any) => e.brand.id == event.target.value);
+    this.newArray.push(...this.tempArray);
+  } else {
+    // Если флажок снят, фильтруем только те элементы, которые не соответствуют снятому флажку
+    this.newArray = this.newArray.filter((e: any) => e.brand.id != event.target.value);
+  }
+
+  // Если есть выбранные бренды, применяем фильтр, иначе возвращаем весь исходный массив
+  this.products = this.newArray.length > 0 ? [...this.newArray] : [...this.originalProducts];
+}
+
+onChangeColor(event: any) {
+  if (event.target.checked) {
+    console.log(event.target.checked);
+
+    this.tempArray = this.products.filter((e: any) => e.characteristic.value == event.target.checked);
+    this.newArray.push(...this.tempArray);
+  } else {
+    // Если флажок снят, фильтруем только те элементы, которые не соответствуют снятому флажку
+    this.newArray = this.newArray.filter((e: any) => e.characteristic.value != event.target.value);
+  }
+
+  // Если есть выбранные бренды, применяем фильтр, иначе возвращаем весь исходный массив
+  this.products = this.newArray.length > 0 ? [...this.newArray] : [...this.originalProducts];
+}
+
+
+
+
+
+filterProductsPrice() {
+  this.products = this.originalProducts.filter(product => {
+    const price = product.price;
+
+    if ((this.minPrice === null || price >= this.minPrice) &&
+        (this.maxPrice === null || price <= this.maxPrice)) {
+      return true;
+    }
+
+    return false;
+  });
+}
+
+getMinPrice(): number {
+  if (this.products.length === 0) {
+    return null;
+  }
+  return Math.min(...this.originalProducts.map(product => product.price));
+}
+
+
+
+getMaxPrice(): number {
+  if (this.originalProducts.length === 0) {
+    return null;
+  }
+  return Math.max(...this.originalProducts.map(product => product.price));
+}
+
+
+onEnter(event: KeyboardEvent): void {
+  if (event.key === 'Enter' && this.minPrice !== null && this.maxPrice !== null) {
+    this.filterProductsPrice();
+  }
+}
+
+
+resetFilters() {
+  window.scrollTo(0, 0);
+  this.selectedBrands = {};
+  this.products = [...this.originalProducts];
+}
 
 
   // addToCart(product: Product2) {

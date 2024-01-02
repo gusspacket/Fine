@@ -29,6 +29,7 @@
     "jquery": "^3.7.1",
     "json-server": "^0.17.4",
     "material-icons": "^1.13.12",
+    "ng-bootstrap": "^1.6.3",
     "ngx-mask": "^14.3.3",
     "ngx-slick-carousel": "^15.0.0",
     "paginator": "^1.0.0",

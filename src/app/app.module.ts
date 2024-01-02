@@ -10,8 +10,9 @@ import { OrderModule } from './order/order.module';
 import { ProductModule } from 'src/app/product/product.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchingModule } from './searching/searching.module';
-import { ApplicationPipesModule } from './pipes/products-price/products-price.module';
+import { ApplicationPipesModule } from './pipes/products-price/application-pipes.module';
 import { MainModule } from './main/main.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -19,6 +20,7 @@ import { MainModule } from './main/main.module';
 @NgModule({
   declarations: [
     AppComponent
+
 
 
 
@@ -36,7 +38,8 @@ import { MainModule } from './main/main.module';
     CartModule,
     ApplicationPipesModule,
     SearchingModule,
-    MainModule
+    MainModule,
+    MatTooltipModule
   ],
 
 

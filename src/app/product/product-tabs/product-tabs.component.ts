@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
@@ -8,8 +8,11 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductTabsComponent implements OnInit {
 
+
   @Input()
   product: Product
+
+  @Input() activateCharacteristics: Function;
 
   showDescription:boolean = false;
   showCharacteristics:boolean = true;
@@ -21,7 +24,7 @@ export class ProductTabsComponent implements OnInit {
 
   delimiter: string = Array(300).fill('&#183;').join('');
 
-  isFunny: boolean = false;
+
 
 
   ngOnInit(){
@@ -59,8 +62,9 @@ export class ProductTabsComponent implements OnInit {
     this.isCharacteristicsActive = false
   }
 
+
   showFeedbackForm() {
-    this.isFunny = true;
+
   }
 
 

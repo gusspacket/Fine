@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/servise/product.service';
 import { CartService } from '../cart/cart.service';
 import { Cart } from '../models/cart.model';
 import { Product } from '../models/product.model';
 import { Cart2 } from '../models/cart2.model';
+import { ProductTabsComponent } from './product-tabs/product-tabs.component';
 
 @Component({
   selector: 'app-product',
@@ -12,6 +13,9 @@ import { Cart2 } from '../models/cart2.model';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+
+  @ViewChild(ProductTabsComponent) productTabsComponent: ProductTabsComponent;
+
 
   id: number;
   name: string;
@@ -62,13 +66,27 @@ export class ProductComponent implements OnInit {
     this.productService.getProductById(this.id).subscribe(
       (products) => {
         this.product = products[0];
-        console.log(this.product);
-
         this.categoryName = this.product.category.name
       }
     );
 
+
+
   }
+
+  // делаем характеристики активными
+  activateCharacteristics() {
+    this.productTabsComponent.productShowCharacteristics()
+  }
+
+
+
+
+
+
+
+
+
 
   // categoryProduct() {
   //   if (this.productById) {

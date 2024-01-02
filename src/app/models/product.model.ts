@@ -4,7 +4,7 @@ export interface Product  {
   category: Category;
   title: string;
   slug: string;
-  brand: string;
+  brand: Brand;
   sku: string;
   description: string;
   img_url: string;
@@ -22,6 +22,11 @@ export interface Product  {
 
 
 
+}
+
+export interface Brand {
+  id: number;
+  name: string;
 }
 
 

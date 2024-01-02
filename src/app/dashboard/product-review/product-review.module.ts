@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductReviewComponent } from './product-review.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { RouterLink } from '@angular/router';
-import { ApplicationPipesModule } from 'src/app/pipes/products-price/products-price.module';
+import { ApplicationPipesModule } from 'src/app/pipes/products-price/application-pipes.module';
 
 
 
