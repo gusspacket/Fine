@@ -84,6 +84,7 @@ a {
 
 .card__price {
   margin: auto 0;
+  font-size: 30px;
 }
 
 .card__price__icon {

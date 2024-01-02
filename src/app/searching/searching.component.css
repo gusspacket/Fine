@@ -155,6 +155,7 @@ input:focus + .label .text {
 
 .card__price {
 margin: auto 0;
+font-size: 30px;
 /* border: 1px solid greenyellow */
 }
 

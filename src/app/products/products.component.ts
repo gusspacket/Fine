@@ -1,6 +1,4 @@
-import { Characteristic } from './../models/search.model';
 import { Categories } from 'src/app/models/category.model';
-import { CategoryService } from 'src/app/servise/category.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +7,7 @@ import { Observable } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product.model';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -71,6 +69,7 @@ export class ProductsComponent implements OnInit {
   pageSizeOptions: number[] = [6, 12, 50]; // Варианты количества товаров на странице
   currentPage = 0; // Текущая страница
   dataSource: Product[]
+  lengthProducts: number
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -100,7 +99,7 @@ ngOnInit() {
 loadProducts() {
   this.productService.getProductsByCategory(this.category).subscribe((products) => {
     this.products = products
-
+    this.lengthProducts = this.products.length
     this.originalProducts = [... products]
     this.categoryName = this.products[0].category.name
     this.categorySlug = this.products[0].category.slug

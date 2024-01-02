@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "FINE_store:build:production"
+              "buildTarget": "FINE_store:build:production"
             },
             "development": {
-              "browserTarget": "FINE_store:build:development"
+              "buildTarget": "FINE_store:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FINE_store:build"
+            "buildTarget": "FINE_store:build"
           }
         },
         "test": {
