@@ -12,6 +12,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HeaderCountPipe } from './pipes/count-header.pipe';
 import { ProductsComponent } from '../products/products.component';
+import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 
 
 
@@ -33,7 +34,13 @@ import { ProductsComponent } from '../products/products.component';
     MatFormFieldModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
 
   ],
   exports: [

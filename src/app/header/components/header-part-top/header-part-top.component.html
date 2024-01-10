@@ -1,7 +1,7 @@
-<div class="dashboard__top">
+<!-- <div class="dashboard__top">
   <div class="container">
     <div class="row">
-      <div class="col-6 offset-6 top__header" >
+      <div class="col-6 col-lg-6 offset-6 top__header" >
         <div class="top__header__item ">Доставка и оплата</div>
         <div class="top__header__item ">Пункты Выдачи</div>
         <div class="top__header__item ">Поддержка</div>
@@ -18,6 +18,31 @@
           >
             <div class="mx-2">{{settings.phone_main}}</div></a>
         </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div class="dashboard__top">
+  <div class="container">
+    <div class="row">
+      <div class="top__header">
+        <div class="offset-6 offset-sm-5"></div>
+        <div class="top__header__item col-2">Доставка и оплата</div>
+        <div class="top__header__item col-2">Пункты Выдачи</div>
+        <div class="top__header__item col-2">Поддержка</div>
+        @if (settings) {
+          <div class="material-symbols-outlined ">
+            call
+          </div>
+          <a
+          href="tel:{{settings.phone_main}}"
+          class="top__header__link"
+        >
+          <div>{{settings.phone_main}}</div></a>
+        }
+      </div>
+
 
     </div>
   </div>

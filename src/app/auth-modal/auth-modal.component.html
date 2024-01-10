@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+
+    @if (phoneInput) {
+      <div class="modal__title">
+        <p>Войти или зарегистрироваться</p>
+        <p
+          class="material-icons modal__close mx-2"
+          (click)="closeModal()"
+        >
+          close
+          </p>
+      </div>
+
+      <div class="modal__input">
+        <div class="input-container">
+          <input
+            [(ngModel)]="userName"
+            (keydown.enter)="getCode()"
+            type="text"
+            id="fname"
+            name="fname"
+            value=""
+            aria-labelledby="label-fname"
+            autocomplete="off"
+          >
+          <label class="label" for="fname" id="label-fname">
+            <div class="text">Введите телефон</div>
+          </label>
+        </div>
+      </div>
+
+        <button
+        class="modal__code__button mt-3"
+        (click)="getCode()"
+
+      >
+       Получить код
+      </button>
+
+      <span class="modal__info mt-3">Нажимая кнопку "Получить код", Вы соглашаетесь
+        c условиями политики конфиденциальности</span>
+
+
+
+    }
+    @else {
+
+      @if (codeInput) {
+        <div class="modal__title">
+          <p class="material-symbols-outlined modal__arrow" (click)="backToCodeItputFalse()">
+            arrow_back
+            </p>
+          <p class="account__title mx-3">Введите SMS код</p>
+
+        </div>
+
+        <div class="account__number">
+          <p class="">Ваш номер: {{userName}}</p>
+        </div>
+
+        <div class="modal__input">
+          <div class="input-container">
+            <input
+              type="number"
+              id="password"
+              name="password"
+              value=""
+              aria-labelledby="abel-password"
+              autocomplete="off"
+              pattern="[0-9]*"
+              minlength="4"
+              maxlength="4"
+              autoFocus
+              required
+              [(ngModel)]="userPassword"
+              (keydown.enter)="letsAuth()"
+              [disabled]="isInputDisabled"
+              [ngClass]="{'disabled__input': isInputDisabled}"
+
+            >
+            <label class="label" for="fname" id="label-fname">
+              <div class="text">Код из СМС</div>
+            </label>
+          </div>
+        </div>
+
+        @if (!isInputDisabled) {
+          <div class="repeat__timer mt-1">
+            <p>Отправить повторно через: {{ timeInSeconds }} сек.</p>
+          </div>
+        }
+
+
+        @if (isInputDisabled) {
+          <p class="error__message mt-1">{{errorMessage}}</p>
+          <button
+          class="modal__code__button mt-2"
+          (click)="onTryAgainClick()"
+          [disabled]="!isInputDisabled"
+        >
+          Попробуйте снова
+        </button>
+        }
+
+      }
+
+    }
+
+
+
+  </div>
+</div>
+
+

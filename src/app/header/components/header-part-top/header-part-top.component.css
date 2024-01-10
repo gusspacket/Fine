@@ -17,6 +17,7 @@
 
 .top__header__item {
   cursor: pointer;
+  width: auto;
 }
 
 .top__header__item:hover {

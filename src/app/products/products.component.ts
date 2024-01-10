@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product.model';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 
 
@@ -65,14 +65,13 @@ export class ProductsComponent implements OnInit {
 
 
   // PAGINATOR
-  pageSize = 6; // Количество товаров на странице
-  pageSizeOptions: number[] = [6, 12, 50]; // Варианты количества товаров на странице
-  currentPage = 0; // Текущая страница
-  dataSource: Product[]
+  pageSlice: Product[]
   lengthProducts: number
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
 
   constructor
   ( private productService: ProductService,
@@ -99,16 +98,13 @@ ngOnInit() {
 loadProducts() {
   this.productService.getProductsByCategory(this.category).subscribe((products) => {
     this.products = products
-    this.lengthProducts = this.products.length
     this.originalProducts = [... products]
     this.categoryName = this.products[0].category.name
     this.categorySlug = this.products[0].category.slug
     this.itemsProductsBrands()
     this.minPrice = this.getMinPrice();
     this.maxPrice = this.getMaxPrice();
-
-
-
+    this.lengthProducts = this.products.length;
   })
 
 }
@@ -116,7 +112,26 @@ loadProducts() {
 
 // PAGINATOR
 
+// onPageChange(event: PageEvent) {
+//   console.log(event);
 
+//   const startIndex = event.pageIndex * event.pageSize;
+//   let endIndex = startIndex + event.pageSize;
+//   if (endIndex > this.originalProducts.length) {
+//     endIndex = this.originalProducts.length;
+//   }
+
+//   // Обновление this.pageSlice для использования в шаблоне
+//   this.pageSlice = this.originalProducts.slice(startIndex, endIndex);
+
+//   // Обновление this.products на основе this.pageSlice
+//   this.products = this.pageSlice;
+
+//   console.log(this.products);
+
+//   // Обновление значения lengthProducts после изменения this.products
+//   this.lengthProducts = this.originalProducts.length;
+// }
 
 
 

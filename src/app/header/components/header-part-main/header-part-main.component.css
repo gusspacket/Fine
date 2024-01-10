@@ -46,8 +46,8 @@
   position: relative;
 }
 
-input-container {
-  height: auto;
+.input-container {
+  height: 100%;
 }
 
 input {
@@ -58,6 +58,8 @@ input {
   box-sizing: border-box;
   padding: 16px;
 }
+
+
 
 .label {
   position: absolute;
@@ -149,6 +151,7 @@ input:focus + .label .text {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .iconFavorite {

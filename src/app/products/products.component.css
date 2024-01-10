@@ -60,8 +60,10 @@ a {
 
 .card__title {
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 390;
+  height: 60px;
+  overflow: hidden;
 }
 
 .card__title__characteristics {

@@ -20,7 +20,11 @@
               <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}">
                 <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
                 <div class="card__body mt-3">
-                  <div class="card__title"> {{product.title}} </div>
+                  @if (product.title.length > 55 ) {
+                    <div class="card__title"> {{product.title.slice(0, 55)}}... </div>
+                  } @else  {
+                    <div class="card__title"> {{product.title}} </div>
+                  }
                 </div>
               </a>
 
@@ -50,15 +54,18 @@
           </div>
         </div>
       </div>
-      <!-- PAGINATOR  -->
+      <!-- PAGINATOR
 
       <div class="paginator">
-        <mat-paginator [length]="lengthProducts"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        aria-label="Select page">
-      </mat-paginator>
-      </div>
+        <mat-paginator
+          [length]="lengthProducts"
+          [pageSize]="6"
+          aria-label="Select page"
+          (page)="onPageChange($event)"
+
+        >
+        </mat-paginator>
+      </div> -->
 
 
 

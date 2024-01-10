@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { CartModule } from './cart/cart.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from './order/order.module';
@@ -35,7 +34,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DashboardModule,
     ProductModule,
     OrderModule,
-    CartModule,
     ApplicationPipesModule,
     SearchingModule,
     MainModule,

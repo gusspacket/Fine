@@ -7,7 +7,7 @@
   <div class="header__main">
     <!-- LOGO -->
     <a
-      class="col-1 main__logo"
+      class="col-md-2 col-xxl-1  main__logo"
       routerLink="/"
       *ngIf="settings"
     >
@@ -17,18 +17,10 @@
         class="main__img"
       >
     </a>
-    <!-- BURGER -->
-    <!-- <div class="col-2 d-flex justify-content-center mx-auto">
-      <button class="main__button">
-        <div class="material-icons">
-          menu
-          </div>
-        <div class="mx-2">Каталог</div>
-      </button>
-    </div> -->
+
     <!-- INPUT -->
 
-    <div class="col-9 mx-2 header__bottom__input">
+    <div class="col-md-6 col-xxl-9 mx-2 header__bottom__input">
       <div class="input-container">
         <input
           [(ngModel)]="searchTerm"
@@ -55,10 +47,15 @@
     </div>
 
     <!-- BUTTONS -->
-    <div class="col-2 controls">
+    <div class="col-md-4 col-xxl-2 controls">
 
-      <div class="iconIndentity ">
+      <div
+        class="iconIndentity"
+        mat-raised-button (click)="openDialog('500ms', '100ms')"
 
+      >
+      <!-- [routerLink]="['/order']" -->
+      <!-- mat-raised-button (click)="openDialog('500ms', '100ms')" -->
         <span class="material-symbols-outlined" style="font-size: 30px;">
           account_circle
         </span>
