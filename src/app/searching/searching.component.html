@@ -40,9 +40,8 @@
     <div *ngFor="let product of searchProducts" class="col-3">
       <div class="catalog">
         <div class="card" style="width: 15rem; height: 25rem;">
-          <a class="link" [routerLink]="['/product']" [queryParams]="{
-          id: product.id
-          }">
+          <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}"
+          >
             <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
             <div class="card__body">
               <div class="card__title"> {{product.title}}</div>

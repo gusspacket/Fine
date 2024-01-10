@@ -49,18 +49,35 @@
     <!-- BUTTONS -->
     <div class="col-md-4 col-xxl-2 controls">
 
-      <div
-        class="iconIndentity"
-        mat-raised-button (click)="openDialog('500ms', '100ms')"
 
-      >
-      <!-- [routerLink]="['/order']" -->
-      <!-- mat-raised-button (click)="openDialog('500ms', '100ms')" -->
-        <span class="material-symbols-outlined" style="font-size: 30px;">
-          account_circle
-        </span>
-        <div class="icon__text">Профиль</div>
-      </div>
+        <ng-container *ngIf="!isLogging">
+          <div
+          class="iconIndentity"
+          mat-raised-button (click)="openDialog('500ms', '100ms')"
+
+        >
+          <span class="material-symbols-outlined" style="font-size: 30px;">
+            account_circle
+          </span>
+          <div class="icon__text">Войти</div>
+        </div>
+        </ng-container>
+        <ng-container *ngIf="isLogging">
+          <div
+          class="iconIndentity"
+          mat-raised-button
+          [routerLink]="['/user']"
+        >
+          <span class="material-symbols-outlined" style="font-size: 30px;">
+            account_circle
+          </span>
+          <div class="icon__text">Профиль</div>
+          </div>
+        </ng-container>
+
+
+
+
 
       <div class="iconFavorite">
         <span class="material-symbols-outlined" style="font-size: 30px;">

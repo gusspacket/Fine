@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class=" col-5 name mt-5">
+      @if (user) {
+      <p>Имя: <b>{{user.last_name}}</b></p>
+      <p>Фамилия: <b>{{user.first_name}}</b></p>
+      <p>Почта: <b>{{user.email}}</b></p>
+      <p>номер тедефона: <b>{{user.username}}</b></p>
+      <button class="modal__code__button mt-2"
+        (click)="logOut()"
+        [routerLink]="['/']"
+      >
+        Выйти
+      </button>
+      }
+    </div>
+
+
+  </div>
+</div>

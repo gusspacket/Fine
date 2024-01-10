@@ -1,3 +1,4 @@
+import { UserService } from './../../../servise/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,7 +6,10 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthModalComponent } from 'src/app/auth-modal/auth-modal.component';
 import { Product } from 'src/app/models/product.model';
 import { Settings } from 'src/app/models/settings.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/servise/auth.service';
 import { SettingsService } from 'src/app/servise/settings.service';
+import { TokenService } from 'src/app/servise/token.service';
 
 @Component({
   selector: 'app-header-part-main',
@@ -24,6 +28,10 @@ export class HeaderPartMainComponent implements OnInit {
   productsCart:Product[] = [];
   itemCount: number;
   itemCountSubscription: Subscription;
+  isLogging:boolean = false
+  isLoggedInSubscription: Subscription
+  user:User
+
 
 
   enterAnimationDuration:string
@@ -32,15 +40,18 @@ export class HeaderPartMainComponent implements OnInit {
 
   constructor
   (
-    private settingsService: SettingsService,
     private router: Router,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private tokenService: TokenService
   ){}
 
 
   ngOnInit() {
-    this.openDialog(this.enterAnimationDuration, this.exitAnimationDuration)
+
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLogging = isLoggedIn;})
+
     // this.cartService.updateItemCartCount()
 
     // this.itemCountSubscription = this.cartService.itemCount$.subscribe(itemCount => {
@@ -69,6 +80,8 @@ export class HeaderPartMainComponent implements OnInit {
       exitAnimationDuration,
     });
   }
+
+
 
 
 

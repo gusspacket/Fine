@@ -15,7 +15,6 @@ export class HeaderPartBottomComponent implements OnInit {
   isDropdownOpen = false;
 
   constructor(
-    private router: Router,
     private categoryService: CategoryService
     ) {}
 
@@ -26,6 +25,7 @@ export class HeaderPartBottomComponent implements OnInit {
   ngOnInit() {
    this.categoryService.getAllCategories().subscribe(categories => {
     this.categories = categories
+
    })
 
    this.visibleCategoriesCount = 10

@@ -11,6 +11,7 @@ import { UserTokenModel } from '../models/user-token.model';
 import { catchError, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../servise/token.service';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,8 @@ import { TokenService } from '../servise/token.service';
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   standalone: true,
   templateUrl: './auth-modal.component.html',
@@ -28,13 +30,15 @@ import { TokenService } from '../servise/token.service';
 })
 export class AuthModalComponent {
 
+
   constructor(
     public dialogRef: MatDialogRef<AuthModalComponent>,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ) { }
 
-  isLoggin:boolean = false;
+
   isInputDisabled:boolean = false;
   // phoneFormControl = new FormControl('value', Validators.minLength(2))
   codeInput:boolean = false
@@ -130,15 +134,17 @@ export class AuthModalComponent {
 
             // Возвращаем ваше собственное сообщение в виде Observable
             return of('ОШИБКА');
+
           })
         )
         .subscribe((response: UserTokenModel) => {
           const token = response.token
           console.log(token);
-          this.isLoggin= true;
+          this.authService.setLoggedInStatus(true)
           this.tokenService.setAuthToken(token);
           this.stopTimer();
           this.closeModal();
+          this.router.navigate(['/user'])
 
         });
 

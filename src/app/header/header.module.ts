@@ -11,7 +11,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HeaderCountPipe } from './pipes/count-header.pipe';
-import { ProductsComponent } from '../products/products.component';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 
 

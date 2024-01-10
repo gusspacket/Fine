@@ -1,27 +1,24 @@
-import { Categories } from 'src/app/models/category.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CartService } from '../cart/cart.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ApplicationModule, Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../servise/product.service';
+import { CartService } from '../cart/cart.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { Product } from '../models/product.model';
+import { Categories } from '../models/category.model';
 import { Observable } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
-import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product.model';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-
-
-
-
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
+  standalone: true,
+  imports: [FormsModule,CommonModule, RouterModule,ApplicationModule],
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrl: './products.component.css'
 })
-
-
-
 export class ProductsComponent implements OnInit {
+
 
   category: string;
   products: Product[];
@@ -57,8 +54,8 @@ export class ProductsComponent implements OnInit {
   // FILTER
   selectedBrands: { [key: string]: boolean } = {};
   uniquePhoneBrands: { id: number; name: string }[] = [];
-  minPrice: number;
-  maxPrice: number;
+  minPrice: any;
+  maxPrice: any;
   uniqueProductsColors: { id: number; name: string }[] = [];
   foundCharacteristic: {}[] = []
 
@@ -76,9 +73,7 @@ export class ProductsComponent implements OnInit {
   constructor
   ( private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient
+    private route: ActivatedRoute
 
    ) {}
 
@@ -87,6 +82,8 @@ ngOnInit() {
 
   this.route.queryParams.subscribe((params) => {
     this.category = params['category'];
+    console.log(this.category);
+
     this.loadProducts();
 
 
@@ -108,6 +105,8 @@ loadProducts() {
   })
 
 }
+
+
 
 
 // PAGINATOR
@@ -421,6 +420,10 @@ resetFilters() {
   //   }
   // });
   // })
+
+
+
+
 
 
 
