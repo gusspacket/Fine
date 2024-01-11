@@ -53,7 +53,8 @@
         <ng-container *ngIf="!isLogging">
           <div
           class="iconIndentity"
-          mat-raised-button (click)="openDialog('500ms', '100ms')"
+          mat-raised-button
+          (click)="authOrUser()"
 
         >
           <span class="material-symbols-outlined" style="font-size: 30px;">
@@ -66,8 +67,10 @@
           <div
           class="iconIndentity"
           mat-raised-button
-          [routerLink]="['/user']"
+          (click)="authOrUser()"
+
         >
+        <!-- [routerLink]="['/user']" -->
           <span class="material-symbols-outlined" style="font-size: 30px;">
             account_circle
           </span>

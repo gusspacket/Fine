@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthLogin } from '../models/auth-login.model.';
 import { AuthSmsService } from '../models/auth-sms.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +13,58 @@ export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient,
+    private tokenService: TokenService) { }
 
-  private authUrl = 'http://89.108.114.139/api/user/login/'
+  private logInUrl = 'http://89.108.114.139/api/user/login/'
+  private logOutUrl = 'http://89.108.114.139/api/user/logout/'
   private sendSmsUrl = 'http://89.108.114.139/api/sendsms/'
 
-  checkTokenInLocalStorage(): void {
+
+
+  // checkTokenInLocalStorage(): void {
+  //   const token = localStorage.getItem('token');
+  //   const isLoggedIn = !!token;
+  //   this.setLoggedInStatus(isLoggedIn);
+  //   console.log("isLoggedIn?", isLoggedIn);
+
+  // }
+
+
+  checkTokenInLocalStorage(): boolean {
     const token = localStorage.getItem('token');
     const isLoggedIn = !!token;
     this.setLoggedInStatus(isLoggedIn);
     console.log("isLoggedIn?", isLoggedIn);
+    return isLoggedIn;
+}
 
-  }
 
   setLoggedInStatus(isLoggedIn: boolean): void {
     this.isLoggedInSubject.next(isLoggedIn);
   }
+
+  checkBrowserTokenWithServer() {
+    const isLoggedIn = this.checkTokenInLocalStorage();
+
+    if (isLoggedIn) {
+        return this.tokenService.postUserDataWithToken()
+            .pipe(
+                catchError((error: any) => {
+                    if (error) {
+                        console.log('Токен не совпадает с сервером');
+                        this.tokenService.clearAuthToken();
+                        this.setLoggedInStatus(false);
+                    }
+                    return of(false); // Возвращаем Observable с значением false в случае ошибки.
+                })
+            );
+    } else {
+        return of(false); // Возвращаем Observable с значением false, если токен отсутствует.
+    }
+}
+
+
 
 
   getLoggedInStatus(): boolean {
@@ -42,7 +79,20 @@ export class AuthService {
   }
 
   postUserData(authData: AuthLogin) {
-    return this.http.post(this.authUrl, authData)
+    return this.http.post(this.logInUrl, authData)
+  }
+
+  deleteTokenFromServer() {
+    const token = localStorage.getItem('token')
+    console.log(token);
+
+    const headers = new HttpHeaders({
+      Authorization: `token ${token}`
+    });
+    const options = { headers: headers };
+    console.log(options);
+
+    return this.http.post(this.logOutUrl, options);
   }
 
 

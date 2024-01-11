@@ -1,5 +1,5 @@
 import { AuthError } from './../models/auth-error.model';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,7 +28,22 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './auth-modal.component.html',
   styleUrl: './auth-modal.component.css'
 })
-export class AuthModalComponent {
+export class AuthModalComponent implements OnInit {
+
+  isInputDisabled: boolean = false;
+  passwordCorrect = true
+  // phoneFormControl = new FormControl('value', Validators.minLength(2))
+  codeInput: boolean = false
+  phoneInput: boolean = true
+  userName: string;
+  userPassword: number;
+
+  timeInSeconds: number = 5;
+  timer;
+
+  errorMessage: string;
+  isErrorCode: boolean = false
+  error: AuthError
 
 
   constructor(
@@ -39,20 +54,9 @@ export class AuthModalComponent {
   ) { }
 
 
-  isInputDisabled:boolean = false;
-  // phoneFormControl = new FormControl('value', Validators.minLength(2))
-  codeInput:boolean = false
-  phoneInput:boolean = true
-  userName: string;
-  userPassword:number;
-
-  timeInSeconds: number = 5;
-  timer;
-
-  errorMessage: string;
-  isErrorCode:boolean = false
-  error: AuthError
-
+  ngOnInit(): void {
+    this.authService.checkBrowserTokenWithServer()
+  }
 
   closeModal(): void {
     this.dialogRef.close();
@@ -62,7 +66,6 @@ export class AuthModalComponent {
     this.phoneInput = true
     this.userName = ''
   }
-
 
 
 
@@ -76,7 +79,6 @@ export class AuthModalComponent {
       this.startTimer()
     })
   }
-
 
 
   startTimer() {
@@ -104,54 +106,60 @@ export class AuthModalComponent {
 
   }
 
-
-    onTryAgainClick() {
-      this.userPassword = null;
-      this.resetTimer();
-
-    }
-
-
-  letsAuth() {
-    const authData: AuthLogin = {
-          username: this.userName,
-          code: this.userPassword
-        };
-        this.authService.postUserData(authData)
-        .pipe(
-          catchError((error: any) => {
-            if (error.error && error.error.code === 1001) {
-              console.log('Неверный код');
-              console.log('Сообщение:', error.error.message);
-              this.stopTimer()
-              this.isInputDisabled = true
-              this.userPassword = null;
-              this.errorMessage = "Вы ввели не верный код, попробуйте снова"
-
-            } else {
-              console.log('Другая ошибка');
-            }
-
-            // Возвращаем ваше собственное сообщение в виде Observable
-            return of('ОШИБКА');
-
-          })
-        )
-        .subscribe((response: UserTokenModel) => {
-          const token = response.token
-          console.log(token);
-          this.authService.setLoggedInStatus(true)
-          this.tokenService.setAuthToken(token);
-          this.stopTimer();
-          this.closeModal();
-          this.router.navigate(['/user'])
-
-        });
+  onTryAgainClick() {
+    this.userPassword = null;
+    this.resetTimer();
 
   }
 
 
+  letsAuth() {
+    const authData: AuthLogin = {
+      username: this.userName,
+      code: this.userPassword
+    };
+    this.authService.postUserData(authData)
+      .pipe(
+        catchError((error: any) => {
+          if (error.error && error.error.code === 1001) {
 
+            console.log('Неверный код');
+            console.log('Сообщение:', error.error.message);
+            this.stopTimer()
+            this.isInputDisabled = true
+            this.userPassword = null;
+            this.errorMessage = "Вы ввели не верный код, попробуйте снова"
+
+          } else {
+            console.log('Другая ошибка');
+          }
+          // Возвращаем ваше собственное сообщение в виде Observable
+          return of('ОШИБКА');
+
+        })
+      )
+      .subscribe((response: UserTokenModel) => {
+        const token = response.token
+        if (!token) return
+        console.log(token);
+        this.authService.setLoggedInStatus(true)
+        this.tokenService.setAuthToken(token);
+        this.stopTimer();
+        this.closeModal();
+        this.router.navigate(['/user'])
+
+      });
+
+  }
+
+
+  passwordChange(event) {
+    const passwordValue = String(event).trim()
+    if (passwordValue.length === 4 && /^\d+$/.test(passwordValue)) {
+      this.isInputDisabled = true
+      this.letsAuth()
+    }
+  }
 
 
 

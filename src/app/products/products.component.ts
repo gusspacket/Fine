@@ -9,11 +9,17 @@ import { Observable } from 'rxjs';
 import { Cart2 } from '../models/cart2.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [FormsModule,CommonModule, RouterModule,ApplicationModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    RouterModule,
+    ApplicationPipesModule
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })

@@ -23,6 +23,8 @@
             value=""
             aria-labelledby="label-fname"
             autocomplete="off"
+            pattern="[0-9]*"
+            mask="+7(000) 00 00 000"
           >
           <label class="label" for="fname" id="label-fname">
             <div class="text">Введите телефон</div>
@@ -74,9 +76,12 @@
               autoFocus
               required
               [(ngModel)]="userPassword"
-              (keydown.enter)="letsAuth()"
+              (ngModelChange)="passwordChange($event)"
               [disabled]="isInputDisabled"
-              [ngClass]="{'disabled__input': isInputDisabled}"
+              [ngClass]="{
+                'disabled__input': isInputDisabled,
+                'password__correct':passwordCorrect
+              }"
 
             >
             <label class="label" for="fname" id="label-fname">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { TokenService } from '../servise/token.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../servise/auth.service';
 
 @Component({
@@ -14,30 +14,32 @@ import { AuthService } from '../servise/auth.service';
 export class UserComponent implements OnInit {
 
   user:User
-  constructor(private tokenService: TokenService,
-    private authService: AuthService) {
+  constructor(
+    private tokenService: TokenService,
+    private authService: AuthService,
+    private router:Router
+    ) {
 
   }
 
 
   ngOnInit(): void {
-
     this.tokenService.postUserDataWithToken().subscribe((user: User)=> {
       this.user = user
-      console.log(this.user);
     })
-
-
-
-
   }
 
   logOut() {
+    this.authService.deleteTokenFromServer()
     this.tokenService.clearAuthToken()
     this.authService.setLoggedInStatus(false)
-
-
+    this.router.navigate(['/']);
   }
+
+  // logOut2() {
+  //   this.authService.deleteTokenFromServer()
+
+  // }
 
 }
 

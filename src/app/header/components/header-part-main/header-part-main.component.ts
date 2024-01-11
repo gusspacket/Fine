@@ -61,7 +61,22 @@ export class HeaderPartMainComponent implements OnInit {
   }
 
 
+  authOrUser() {
+    this.authService.checkBrowserTokenWithServer().subscribe(
+        (isLoggedIn: boolean) => {
+            console.log(isLoggedIn);
 
+            if (isLoggedIn) {
+                this.router.navigate(['/user']);
+            } else {
+                this.openDialog('500ms', '100ms');
+            }
+        },
+        error => {
+          this.openDialog('500ms', '100ms'); // Можете выполнить другие действия в случае ошибки.
+        }
+    );
+}
 
 
   letsSearch(searchTerm: string): void {
@@ -73,6 +88,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   openDialog(enterAnimationDuration, exitAnimationDuration): void {
+    this.router.navigate(['']);
     this.dialog.open(AuthModalComponent, {
       width: '320px',
       height:'320px',

@@ -9,6 +9,7 @@ import { ProductComponent } from '../product/product.component';
 import { OrderComponent } from '../order/order.component';
 import { UserComponent } from '../user/user.component';
 import { ProductsComponent } from '../products/products.component';
+import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,9 @@ const routes: Routes = [
     {path: 'cart', component: CartComponent},
     {path: 'search', component: SearchingComponent},
     {path: 'order', component: OrderComponent},
-    {path: 'user', component: UserComponent}
+    {path: 'user', component: UserComponent},
+    {path: 'auth', component: AuthModalComponent},
+
 
   ]}
 

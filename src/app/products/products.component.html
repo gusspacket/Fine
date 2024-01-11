@@ -31,7 +31,7 @@
 
 
               <div class="card__price__product" *ngIf="!product.productAddedToCart">
-                <h1 class="card__price">{{ product.price }} &nbsp; ₽
+                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
                 </h1>
                 <div class="card__price__icon" (click)="postToCart2(product)">
 
@@ -42,7 +42,7 @@
               </div>
 
               <div class="card__price__product" *ngIf="product.productAddedToCart">
-                <h1 class="card__price">{{ product.price  }} &nbsp; ₽
+                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
                 </h1>
                 <div class="card__added" routerLink="/cart">
                   <span class="material-icons">

@@ -36,12 +36,9 @@ export class TokenService {
   postUserDataWithToken(){
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       Authorization: `token ${token}`
     });
-
     const options = { headers: headers };
-
     return this.http.get(this.tokenUrl, options);
   }
 
