@@ -14,6 +14,7 @@ import { AuthService } from '../servise/auth.service';
 export class UserComponent implements OnInit {
 
   user:User
+
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
@@ -36,10 +37,7 @@ export class UserComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  // logOut2() {
-  //   this.authService.deleteTokenFromServer()
 
-  // }
 
 }
 

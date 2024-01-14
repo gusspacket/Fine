@@ -10,6 +10,7 @@ export class TokenService {
 
   private _token: string; // Переменная для хранения токена
   private tokenUrl = 'http://89.108.114.139/api/user/info/'
+  private logOutUrl = 'http://89.108.114.139/api/user/logout/'
 
    // Получение токена из предыдущего ответа
    getAuthToken(){
@@ -39,8 +40,12 @@ export class TokenService {
       Authorization: `token ${token}`
     });
     const options = { headers: headers };
+    console.log(options);
+
     return this.http.get(this.tokenUrl, options);
   }
+
+
 
 
 }

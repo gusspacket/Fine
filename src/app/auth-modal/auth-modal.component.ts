@@ -1,6 +1,6 @@
 import { AuthError } from './../models/auth-error.model';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,7 +32,7 @@ export class AuthModalComponent implements OnInit {
 
   isInputDisabled: boolean = false;
   passwordCorrect = true
-  // phoneFormControl = new FormControl('value', Validators.minLength(2))
+  PhoneNumber = new FormControl('+7');
   codeInput: boolean = false
   phoneInput: boolean = true
   userName: string;
@@ -44,6 +44,7 @@ export class AuthModalComponent implements OnInit {
   errorMessage: string;
   isErrorCode: boolean = false
   error: AuthError
+  isGetCodeButtonEnabled:boolean = false
 
 
   constructor(
@@ -58,20 +59,19 @@ export class AuthModalComponent implements OnInit {
     this.authService.checkBrowserTokenWithServer()
   }
 
-  closeModal(): void {
-    this.dialogRef.close();
-  }
-
   backToCodeItputFalse() {
     this.phoneInput = true
     this.userName = ''
   }
 
+  closeModal(): void {
+    this.dialogRef.close();
+  }
 
 
   getCode() {
     const phoneData: AuthSmsService = {
-      phone: this.userName
+      phone: this.PhoneNumber.value.slice(1,12)
     }
     this.authService.sendSmsToServer(phoneData).subscribe(() => {
       this.phoneInput = false
@@ -80,42 +80,24 @@ export class AuthModalComponent implements OnInit {
     })
   }
 
+  keyPressPhone(event): boolean {
+    if ((this.PhoneNumber.value?.length || 0) >= 12) {
+        event.preventDefault();
+        return false;
+    }
+    const inp = String.fromCharCode(event.keyCode);
+    if (/[0-9+]/.test(inp)) {
+        return true;
 
-  startTimer() {
-    this.isInputDisabled = false
-    this.timer = setInterval(() => {
-      if (this.timeInSeconds > 0) {
-        this.timeInSeconds--;
-      } else {
-        clearInterval(this.timer);
-        this.isInputDisabled = true
-        this.userPassword = null;
-      }
-    }, 1000);
+    } else {
+        event.preventDefault();
+        return false;
+    }
   }
-
-  stopTimer() {
-    clearInterval(this.timer)
-  }
-
-  resetTimer() {
-    this.stopTimer();
-    this.isInputDisabled = false;
-    this.timeInSeconds = 5
-    this.startTimer()
-
-  }
-
-  onTryAgainClick() {
-    this.userPassword = null;
-    this.resetTimer();
-
-  }
-
 
   letsAuth() {
     const authData: AuthLogin = {
-      username: this.userName,
+      username: this.PhoneNumber.value.slice(1,12),
       code: this.userPassword
     };
     this.authService.postUserData(authData)
@@ -152,6 +134,11 @@ export class AuthModalComponent implements OnInit {
 
   }
 
+  onTryAgainClick() {
+    this.userPassword = null;
+    this.resetTimer();
+
+  }
 
   passwordChange(event) {
     const passwordValue = String(event).trim()
@@ -161,6 +148,48 @@ export class AuthModalComponent implements OnInit {
     }
   }
 
+  resetTimer() {
+    this.stopTimer();
+    this.isInputDisabled = false;
+    this.timeInSeconds = 5
+    this.startTimer()
+
+  }
+
+  startTimer() {
+    this.isInputDisabled = false
+    this.timer = setInterval(() => {
+      if (this.timeInSeconds > 0) {
+        this.timeInSeconds--;
+      } else {
+        clearInterval(this.timer);
+        this.isInputDisabled = true
+        this.userPassword = null;
+      }
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timer)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  onPhoneNumberChange() {
+    const inputValue = this.PhoneNumber.value || '';
+    this.isGetCodeButtonEnabled = inputValue.length === 12;
+  }
 
 
 

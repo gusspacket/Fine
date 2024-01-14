@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient,
     private tokenService: TokenService) { }
 
-  private logInUrl = 'http://89.108.114.139/api/user/login/'
+  private logInUrl = 'http://89.108.114.139/api/user/login_or_register/'
   private logOutUrl = 'http://89.108.114.139/api/user/logout/'
   private sendSmsUrl = 'http://89.108.114.139/api/sendsms/'
 
@@ -84,16 +84,16 @@ export class AuthService {
 
   deleteTokenFromServer() {
     const token = localStorage.getItem('token')
-    console.log(token);
-
     const headers = new HttpHeaders({
       Authorization: `token ${token}`
     });
     const options = { headers: headers };
     console.log(options);
-
-    return this.http.post(this.logOutUrl, options);
+    return this.http.get(this.logOutUrl, options).subscribe(response => {
+    });
   }
+
+
 
 
 }
