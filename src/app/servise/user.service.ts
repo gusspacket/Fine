@@ -14,13 +14,8 @@ export class UserService {
 
   getUserInfo() {
     const token = localStorage.getItem('token')
-    console.log(token);
-
     return this.http.post(this.userUrl, token)
   }
-
-
-
 
 
 }

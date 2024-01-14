@@ -10,6 +10,7 @@ import { OrderComponent } from '../order/order.component';
 import { UserComponent } from '../user/user.component';
 import { ProductsComponent } from '../products/products.component';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
+import { AuthGuard } from '../guards/auth-guard.guard';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
     {path: 'cart', component: CartComponent},
     {path: 'search', component: SearchingComponent},
     {path: 'order', component: OrderComponent},
-    {path: 'user', component: UserComponent},
+    {path: 'user', component: UserComponent,canActivate: [AuthGuard]},
     {path: 'auth', component: AuthModalComponent},
 
 

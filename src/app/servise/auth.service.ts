@@ -10,6 +10,7 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
 
+
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
@@ -88,7 +89,6 @@ export class AuthService {
       Authorization: `token ${token}`
     });
     const options = { headers: headers };
-    console.log(options);
     return this.http.get(this.logOutUrl, options).subscribe(response => {
     });
   }

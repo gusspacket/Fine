@@ -40,11 +40,12 @@ export class TokenService {
       Authorization: `token ${token}`
     });
     const options = { headers: headers };
-    console.log(options);
-
     return this.http.get(this.tokenUrl, options);
   }
 
+  headersWithToken() {
+
+  }
 
 
 
