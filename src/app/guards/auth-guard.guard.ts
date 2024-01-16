@@ -1,6 +1,8 @@
 import {inject } from '@angular/core';
 import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { AuthService } from '../servise/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 
 
 
@@ -9,17 +11,26 @@ import { HeaderComponent } from '../header/header.component';
 export const AuthGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
-) => {
+) =>
+{
   const router: Router = inject(Router);
-  const protectedRoutes: string[] = ['/'];
-  if (localStorage.getItem('token')) {
+  const isLoggin = inject(AuthService).isLoggedInSubject.value
+  const openDialog = inject(MatDialog)
+
+  if (isLoggin) {
     return true;
   } else {
-    router.navigate(['/'])
+    router.navigate([''])
+    openDialog.open(AuthModalComponent, {
+      width: '320px',
+      height: '320px',
+    });
     return false;
   }
 
 };
+
+
 
 
 

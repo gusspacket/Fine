@@ -1,7 +1,46 @@
+* {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+}
+
+.container {
+  height: auto;
+}
+
+
+.user__title {
+  font-size: 25px;
+  font-weight: 600;
+}
+
 .modal__code__button {
   width: 200px;
   height: 60px;
-  margin: auto;
+  border: none;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__code__button:hover {
+  opacity: 80%;
+}
+
+.user__edit {
+  color: #76BC21;
+  cursor: pointer;
+  margin-top: -20px;
+}
+
+.user__cange,
+.user__cange__canсel
+{
+  width: 100px;
+  height: 30px;
   border: none;
   background-color: #76BC21;
   border-radius: 5%;
@@ -9,6 +48,50 @@
   cursor: pointer;
 }
 
-.modal__code__button:hover {
+.user__cange:hover,
+.user__cange__canсel:hover
+{
   opacity: 80%;
 }
+
+
+
+
+
+input {
+  width: 100%;
+  height: 25px;
+  border: none;
+  border-bottom: 1px solid #76BC21;
+
+}
+
+input:focus {
+  border-color: #76BC21;
+  /* box-shadow: 0 0 5px #76BC21; */
+  outline: none; /* Уберите стандартный контур фокуса в некоторых браузерах */
+  color: #333;
+}
+
+.custom-width {
+  width: 200px; /* Укажите нужную вам ширину для ячейки */
+}
+
+.modal__code__button__block {
+  width: 100px;
+  height: 30px;
+  border: none;
+  color: white;
+  opacity: 60%;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* input.ng-invalid.ng-touched {
+  border: 1px solid red;
+} */
+
+
+

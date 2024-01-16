@@ -11,7 +11,7 @@ import { TokenService } from './token.service';
 export class AuthService {
 
 
-  private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   constructor(private http: HttpClient,
@@ -36,13 +36,18 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const isLoggedIn = !!token;
     this.setLoggedInStatus(isLoggedIn);
+
     console.log("isLoggedIn?", isLoggedIn);
     return isLoggedIn;
 }
 
 
+
+
   setLoggedInStatus(isLoggedIn: boolean): void {
     this.isLoggedInSubject.next(isLoggedIn);
+    console.log(this.isLoggedIn$);
+
   }
 
   checkBrowserTokenWithServer() {

@@ -1,5 +1,5 @@
 import { AuthError } from './../models/auth-error.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { catchError, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../servise/token.service';
 import { Router, RouterModule } from '@angular/router';
+import IMask from 'imask';
 
 
 @Component({
@@ -79,6 +80,28 @@ export class AuthModalComponent implements OnInit {
       this.startTimer()
     })
   }
+
+  getCodeIMASK() {
+
+    const inputElement = this.phoneMaskInput.nativeElement;
+    const enteredNumber = inputElement.value;
+    const cleanedNumber = enteredNumber.replace(/\D/g, '')
+    const phoneData: AuthSmsService = {
+      phone: cleanedNumber
+    }
+
+    console.log('Введенный телефонный номер:', cleanedNumber);
+
+    this.authService.sendSmsToServer(phoneData).subscribe(() => {
+      this.phoneInput = false
+      this.codeInput = true
+      this.startTimer()
+    })
+
+
+  }
+
+
 
   keyPressPhone(event): boolean {
     if ((this.PhoneNumber.value?.length || 0) >= 12) {
@@ -175,22 +198,25 @@ export class AuthModalComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   onPhoneNumberChange() {
     const inputValue = this.PhoneNumber.value || '';
     this.isGetCodeButtonEnabled = inputValue.length === 12;
   }
 
 
+
+@ViewChild('phoneInput', { static: false }) phoneMaskInput: ElementRef;
+ngAfterViewInit() {
+  const maskOptions = {
+    mask: '+{7} ({9}00) 000-00-00',
+    lazy: false,
+  };
+
+  const mask = IMask(this.phoneMaskInput.nativeElement, maskOptions);
+
+
+
+
+}
 
 }

@@ -29,12 +29,29 @@
           <label class="label" for="fname" id="label-fname">
             <div class="text">Введите телефон</div>
           </label>
+
+          <!-- <input
+            type="text"
+            #phoneInput
+          >
+          <label class="label" for="fname" id="label-fname">
+            <div class="text">Введите телефон</div>
+          </label>
+          <button
+        class="mt-3"
+        (click)="getCodeIMASK()"
+        >
+         Получить код
+        </button> -->
+
+
         </div>
       </div>
 
         <button
         class="mt-3"
         (click)="getCode()"
+        (keydown.enter)="getCode()"
         [disabled]="!isGetCodeButtonEnabled"
         [ngClass]="{'modal__code__button__block': !isGetCodeButtonEnabled,
           'modal__code__button': isGetCodeButtonEnabled}"

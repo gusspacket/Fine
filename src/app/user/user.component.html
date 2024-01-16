@@ -1,19 +1,208 @@
-<div class="container">
-  <div class="row">
-    <div class=" col-5 name mt-5">
-      @if (user) {
-      <p>Имя: <b>{{user.last_name}}</b></p>
-      <p>Фамилия: <b>{{user.first_name}}</b></p>
-      <p>Почта: <b>{{user.email}}</b></p>
-      <p>номер тедефона: <b>{{user.username}}</b></p>
-      <button class="modal__code__button mt-2"
-        (click)="logOut()"
-      >
-        Выйти
-      </button>
-      }
+@if (updateFlag) {
+  <div class="container">
+
+    <div class="row">
+     <div class="user__sidebar col-3 mt-5">
+       <div class="row">
+         <p>Контактные даннные</p>
+         <p>Адреса доставки</p>
+         <button class="modal__code__button mt-2"
+           (click)="logOut()"
+         >
+           <span>Выйти</span>
+           <span class="material-icons mx-2">
+             logout
+             </span>
+
+         </button>
+       </div>
+     </div>
+
+
+       <div class="user__data col-9 mt-5">
+         <div class="row">
+           <div class="name">
+               <div class="user__header">
+                 <p class="user__title">Контактные данные</p>
+                 @if (!isEditing) {
+                   <p class="user__edit" (click)="startEdit()">Редактировать</p>
+                 }
+
+               </div>
+
+
+             @if (!isEditing) {
+               @if (user) {
+                 <table class="table">
+                   <tr>
+                     <td class="custom-width">Имя:</td>
+                     <td>{{user.first_name}}</td>
+                   </tr>
+                   <tr>
+                     <td>Фамилия:</td>
+                     <td>{{user.last_name}}</td>
+                   </tr>
+                   <tr>
+                     <td>Контактный email:</td>
+                     <td>{{user.email}}</td>
+                   </tr>
+                   <tr>
+                     <td>Телефон для SMS:</td>
+                     <td>+{{user.phone}}</td>
+                   </tr>
+                 </table>
+                 }
+             } @else if(isEditing) {
+               <table class="table">
+
+                 <tr>
+                   <td class="custom-width">Имя:</td>
+                   <td><input
+                      [(ngModel)]="editedUser.first_name"
+                       (input)="onInputChange($event)"
+                       /></td>
+                       <!-- [(ngModel)]="editedUser.last_name" -->
+                 </tr>
+                 <tr class="table">
+                   <td>Фамилия:</td>
+                   <td><input
+                     [(ngModel)]="editedUser.last_name" /></td>
+                 </tr>
+                 <tr class="table">
+                   <td>Контактный email:</td>
+                   <td>
+                     <input
+                       [(ngModel)]="editedUser.email"
+                     /></td>
+                 </tr>
+                 <tr class="table">
+                   <td>Телефон для SMS:</td>
+                   <td><input [(ngModel)]="editedUser.phone" /></td>
+                 </tr>
+
+               </table>
+
+
+
+               <button class="user__cange__canсel mt-1" (click)="cancelEditing()">Отмена</button>
+               <button
+                 class="mt-1 ms-4"
+                 (click)="saveChanges()"
+                 [disabled]="!changesMade"
+                 [ngClass]="{'modal__code__button__block': !changesMade,'user__cange': changesMade,}"
+               >
+                 Сохранить
+               </button>
+
+               <button
+                 class="mt-1 ms-4"
+                 (click)="changeUserInfo()"
+               >
+                 Отправить
+               </button>
+
+
+             }
+
+
+
+
+             <input
+               type="text"
+               #phoneInput
+
+
+             >
+
+             <button
+                type="submit"
+              (click)="numberMask()"
+
+
+             >
+               Сохранить
+             </button>
+
+
+
+
+
+           </div>
+          <!-- <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div ngModelGroup="user" >
+              <div class="form-group"
+              [ngClass]="{'has-error': email.invalid && email.touched}">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                ngModel
+                name="email"
+                required
+                email
+                #email="ngModel"
+                placeholder="name@example.com"
+              >
+             </div>
+
+             <div class="form-group"
+              [ngClass]="{'has-error': email.invalid && email.touched}">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                ngModel
+                name="email"
+                required
+                email
+                #email="ngModel"
+                placeholder="name@example.com"
+              >
+             </div>
+            </div>
+
+           <p *ngIf="email.invalid && email.touched">Введите корректный Email</p>
+           <button
+           type="submit"
+           [disabled]="!form.valid"
+         >
+           Сохранить
+         </button>
+
+          </form> -->
+
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div formGroupName="user">
+              <div class="form-group">
+              <label>Email</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+
+              >
+             </div>
+            </div>
+            <p *ngIf="form.get('user.email').invalid && form.get('user.email').touched">Введите корректный Email</p>
+
+           <button
+           type="submit"
+           [disabled]="form.invalid"
+
+         >
+           Сохранить
+         </button>
+
+          </form>
+
+
+
+         </div>
+       </div>
     </div>
 
+   </div>
+}
 
-  </div>
-</div>
+
