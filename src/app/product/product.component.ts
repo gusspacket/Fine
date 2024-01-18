@@ -1,3 +1,4 @@
+import { catchError, of } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/servise/product.service';
@@ -36,10 +37,6 @@ export class ProductComponent implements OnInit {
 
 
 
-
-
-
-
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
@@ -52,10 +49,16 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-     this.route.queryParams.subscribe((params) => {
+    //  this.route.queryParams.subscribe((params) => {
+    //   this.id = +params['id'];
+    //   this.loadProduct();
+    // });
+
+    this.route.params.subscribe((params) => {
+      this.category = params['category'];
+      this.slug = params['slug'];
       this.id = +params['id'];
       this.loadProduct();
-
     });
 
 
@@ -63,12 +66,23 @@ export class ProductComponent implements OnInit {
   }
 
   loadProduct() {
-    this.productService.getProductById(this.id).subscribe(
-      (products) => {
-        this.product = products[0];
-        this.categoryName = this.product.category.name
-      }
-    );
+      this.productService.getProductBySlug(this.slug)
+      .pipe(
+        catchError((error: any) => {
+          if (error.error && error.error.code === 404) {
+            console.log('Сообщение:', error.error.message);
+          } else {
+            console.log('Другая ошибка');
+            this.router.navigate(['/products'])
+          }
+          return of('ОШИБКА')
+        })
+      )
+      .subscribe(
+        (products: Product) => {
+          this.product = products;
+          this.categoryName = this.product.category.name
+        });
 
 
 
@@ -78,6 +92,8 @@ export class ProductComponent implements OnInit {
   activateCharacteristics() {
     this.productTabsComponent.productShowCharacteristics()
   }
+
+
 
 
 

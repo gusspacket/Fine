@@ -85,16 +85,11 @@ export class ProductsComponent implements OnInit {
 
 
 ngOnInit() {
-
-  this.route.queryParams.subscribe((params) => {
+  this.route.params.subscribe(params => {
     this.category = params['category'];
-    console.log(this.category);
-
     this.loadProducts();
-
-
-
   });
+
 }
 
 
@@ -147,6 +142,8 @@ loadProducts() {
 searchColor() {
 
 }
+
+
 
 
 

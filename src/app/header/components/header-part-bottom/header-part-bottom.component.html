@@ -14,7 +14,6 @@
         class="collections__items"
         [routerLink]="['/products', category.slug]"
         *ngIf="i < visibleCategoriesCount"
-        [queryParams]="{category: category.slug}"
       >
         {{ category.name }}
       </a>

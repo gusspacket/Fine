@@ -1,5 +1,4 @@
-import { UserService } from './../../../servise/user.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {  Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -20,6 +19,7 @@ export class HeaderPartMainComponent implements OnInit {
 
   @Input()
   settings: Settings;
+
 
   searchTerm = '';
   products$: Observable<Product[]>
@@ -45,7 +45,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   ngOnInit() {
-
+    // this.openDialog('500ms', '100ms')
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLogging = isLoggedIn;})
 
@@ -77,15 +77,18 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   letsSearch(searchTerm: string): void {
-    this.router.navigate(['/search'], {
-      queryParams: { term: searchTerm },
-    });
-    this.searchTerm = '';
+    if(searchTerm.length >=1) {
+      this.router.navigate(['/search'], {
+        queryParams: { term: searchTerm },
+      });
+      this.searchTerm = '';
+    }
+
+
   }
 
 
   openDialog(enterAnimationDuration, exitAnimationDuration): void {
-    this.router.navigate(['']);
     this.dialog.open(AuthModalComponent, {
       width: '320px',
       height:'320px',

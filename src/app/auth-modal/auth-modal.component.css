@@ -74,7 +74,7 @@ input {
 
 
 
-.label {
+/* .label {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -83,11 +83,32 @@ input {
   align-items: center;
   pointer-events: none;
   color: #c0c0c0;
+} */
+
+.label {
+  position: absolute;
+  color: black;
+  top: -50px;
+  bottom: 0;
+  left:30px;
+  display: flex;
+  align-items: center;
+  color: #c0c0c0;
+  background-color: transparent;
+
 }
+
 
 input, .label .text {
   font-family: 'Jost', sans-serif;
+  font-size: 12px;
+
+}
+
+.input__mask{
+  font-family: 'Jost', sans-serif;
   font-size: 16px;
+   font-weight: 450;
 }
 
 .disabled__input {
@@ -113,13 +134,16 @@ input:focus {
   border: 2px solid #76BC21;
 }
 
+
+
 input:focus + .label .text {
+  color: #c0c0c0;
   font-size: 12px;
-  transform: translate(0, -110%);
+  transform: translate(-10%, 0%);
   background-color: white;
   padding-left: 4px;
   padding-right: 4px;
-  color: #76BC21;
+  color: #1d1e1c;
 }
 
 .label .text {

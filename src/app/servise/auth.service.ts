@@ -84,6 +84,8 @@ export class AuthService {
     return this.http.post(this.sendSmsUrl, phone)
   }
 
+
+
   postUserData(authData: AuthLogin) {
     return this.http.post(this.logInUrl, authData)
   }

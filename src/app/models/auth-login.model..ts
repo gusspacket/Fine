@@ -1,5 +1,5 @@
 export interface AuthLogin {
-  username:string;
+  username:number;
   code: number;
 }
 

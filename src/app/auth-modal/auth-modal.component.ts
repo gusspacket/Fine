@@ -1,5 +1,5 @@
 import { AuthError } from './../models/auth-error.model';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,7 +33,9 @@ export class AuthModalComponent implements OnInit {
 
   isInputDisabled: boolean = false;
   passwordCorrect = true
-  PhoneNumber = new FormControl('+7');
+  // PhoneNumber = new FormControl('+7');
+   PhoneNumber = new FormControl('');
+   control = new FormControl<number>(9);
   codeInput: boolean = false
   phoneInput: boolean = true
   userName: string;
@@ -47,6 +49,13 @@ export class AuthModalComponent implements OnInit {
   error: AuthError
   isGetCodeButtonEnabled:boolean = false
 
+  userDataNumber: number
+
+  @ViewChild('phoneInput', { static: false }) phoneMaskInput: ElementRef ;
+  phoneMask: any;
+
+
+
 
   constructor(
     public dialogRef: MatDialogRef<AuthModalComponent>,
@@ -55,14 +64,30 @@ export class AuthModalComponent implements OnInit {
     private router: Router
   ) { }
 
+  @Input() startMask: boolean;
 
   ngOnInit(): void {
+
+   console.log(this.startMask);
+
     this.authService.checkBrowserTokenWithServer()
+
   }
 
   backToCodeItputFalse() {
     this.phoneInput = true
-    this.userName = ''
+    if (this.phoneInput) {
+      // Проверяем, что переменная phoneMaskInput определена
+      const maskOptions = {
+        mask: '+{7} ({9}00) 000-00-00',
+        lazy: false,
+      };
+
+      const mask = IMask(this.phoneMaskInput.nativeElement, maskOptions);
+      // Остальной код
+    }
+
+
   }
 
   closeModal(): void {
@@ -70,64 +95,59 @@ export class AuthModalComponent implements OnInit {
   }
 
 
-  getCode() {
-    const phoneData: AuthSmsService = {
-      phone: this.PhoneNumber.value.slice(1,12)
-    }
-    this.authService.sendSmsToServer(phoneData).subscribe(() => {
-      this.phoneInput = false
-      this.codeInput = true
-      this.startTimer()
-    })
+
+lastMask:any
+// ngAfterViewInit
+
+  ngAfterViewInit() {
+    const maskOptions = {
+      mask: '{{+{7} ({9}00) 000-00-00}}',
+      lazy: false,
+    };
+    const mask = IMask(this.phoneMaskInput.nativeElement, maskOptions);
+
+    mask.on('accept', () => {
+      const cleanedNumber = mask.unmaskedValue; // Получаем "чистое" значение без символов маски
+      if (cleanedNumber && cleanedNumber.length === 11) {
+        this.isGetCodeButtonEnabled = true;
+      } else {
+        this.isGetCodeButtonEnabled = false;
+      }
+
+
+    });
   }
+
 
   getCodeIMASK() {
+    const enteredNumber = this.phoneMaskInput.nativeElement.value;
+    this.userName = this.phoneMaskInput.nativeElement.value
 
-    const inputElement = this.phoneMaskInput.nativeElement;
-    const enteredNumber = inputElement.value;
     const cleanedNumber = enteredNumber.replace(/\D/g, '')
-    const phoneData: AuthSmsService = {
-      phone: cleanedNumber
+    const phoneAsNumber = parseInt(cleanedNumber, 10);
+    this.userDataNumber = phoneAsNumber
+    const phone: AuthSmsService = {
+      phone: phoneAsNumber
     }
-
-    console.log('Введенный телефонный номер:', cleanedNumber);
-
-    this.authService.sendSmsToServer(phoneData).subscribe(() => {
+    this.authService.sendSmsToServer(phone).subscribe(() => {
       this.phoneInput = false
       this.codeInput = true
       this.startTimer()
+
     })
-
-
   }
 
-
-
-  keyPressPhone(event): boolean {
-    if ((this.PhoneNumber.value?.length || 0) >= 12) {
-        event.preventDefault();
-        return false;
-    }
-    const inp = String.fromCharCode(event.keyCode);
-    if (/[0-9+]/.test(inp)) {
-        return true;
-
-    } else {
-        event.preventDefault();
-        return false;
-    }
-  }
 
   letsAuth() {
     const authData: AuthLogin = {
-      username: this.PhoneNumber.value.slice(1,12),
+      username: this.userDataNumber,
       code: this.userPassword
     };
+
     this.authService.postUserData(authData)
       .pipe(
         catchError((error: any) => {
           if (error.error && error.error.code === 1001) {
-
             console.log('Неверный код');
             console.log('Сообщение:', error.error.message);
             this.stopTimer()
@@ -140,7 +160,6 @@ export class AuthModalComponent implements OnInit {
           }
           // Возвращаем ваше собственное сообщение в виде Observable
           return of('ОШИБКА');
-
         })
       )
       .subscribe((response: UserTokenModel) => {
@@ -157,11 +176,6 @@ export class AuthModalComponent implements OnInit {
 
   }
 
-  onTryAgainClick() {
-    this.userPassword = null;
-    this.resetTimer();
-
-  }
 
   passwordChange(event) {
     const passwordValue = String(event).trim()
@@ -170,6 +184,15 @@ export class AuthModalComponent implements OnInit {
       this.letsAuth()
     }
   }
+
+
+  onTryAgainClick() {
+    this.userPassword = null;
+    this.resetTimer();
+
+  }
+
+
 
   resetTimer() {
     this.stopTimer();
@@ -198,25 +221,39 @@ export class AuthModalComponent implements OnInit {
 
 
 
-  onPhoneNumberChange() {
-    const inputValue = this.PhoneNumber.value || '';
-    this.isGetCodeButtonEnabled = inputValue.length === 12;
-  }
-
-
-
-@ViewChild('phoneInput', { static: false }) phoneMaskInput: ElementRef;
-ngAfterViewInit() {
-  const maskOptions = {
-    mask: '+{7} ({9}00) 000-00-00',
-    lazy: false,
-  };
-
-  const mask = IMask(this.phoneMaskInput.nativeElement, maskOptions);
-
 
 
 
 }
 
-}
+// СТАРЫЙ ИНПУТ
+
+  // keyPressPhone(event): boolean {
+  //   if ((this.PhoneNumber.value?.length || 0) >= 12) {
+  //       event.preventDefault();
+  //       return false;
+  //   }
+  //   const inp = String.fromCharCode(event.keyCode);
+  //   if (/[0-9+]/.test(inp)) {
+  //       return true;
+
+  //   } else {
+  //       event.preventDefault();
+  //       return false;
+  //   }
+  // }
+
+    // getCode() {
+  //   const phoneData: AuthSmsService = {
+  //     phone: +this.PhoneNumber.value.slice(1,12)
+  //   }
+  //   this.authService.sendSmsToServer(phoneData).subscribe(() => {
+  //     this.phoneInput = false
+  //     this.codeInput = true
+  //     this.startTimer()
+  //   })
+  // }
+
+
+
+

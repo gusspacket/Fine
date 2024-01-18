@@ -1,5 +1,5 @@
 export interface AuthSmsService {
-  phone:string;
+  phone: number;
 }
 
 

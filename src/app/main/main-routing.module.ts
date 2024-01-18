@@ -18,7 +18,8 @@ const routes: Routes = [
   {path: '', component: MainComponent, children: [
     {path: '', component: DashboardComponent},
     {path: 'products/:category', component: ProductsComponent},
-    {path: 'product', component: ProductComponent},
+
+    { path: 'product/:slug', component: ProductComponent },
     {path: 'cart', component: CartComponent},
     {path: 'search', component: SearchingComponent},
     {path: 'order', component: OrderComponent},
@@ -29,7 +30,7 @@ const routes: Routes = [
   ]}
 
 
-
+// {path: 'product', component: ProductComponent},
 
 
 

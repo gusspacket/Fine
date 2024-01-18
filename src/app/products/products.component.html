@@ -17,11 +17,14 @@
         >
           <div class="catalog">
             <div class="card" style="width: 15rem; height: 25rem;">
-              <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}">
+              <!-- <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}"> -->
+                <a class="link" [routerLink]="['/product', product.slug]">
+
                 <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
                 <div class="card__body mt-3">
                   @if (product.title.length > 55 ) {
                     <div class="card__title"> {{product.title.slice(0, 55)}}... </div>
+
                   } @else  {
                     <div class="card__title"> {{product.title}} </div>
                   }
@@ -31,7 +34,7 @@
 
 
               <div class="card__price__product" *ngIf="!product.productAddedToCart">
-                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
+                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }}&nbsp;₽
                 </h1>
                 <div class="card__price__icon" (click)="postToCart2(product)">
 

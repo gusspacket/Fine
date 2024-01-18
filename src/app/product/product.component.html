@@ -1,11 +1,8 @@
-
-
 <div class="container" >
   <div *ngIf="product">
     <div class="navigate mt-3">
       <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a>/
-      <a class="navigate__choice" [routerLink]="['/products', product.category.slug]"
-        [queryParams]="{category: product.category.slug}">
+      <a class="navigate__choice" [routerLink]="['/products', product.category.slug]">
         &nbsp; {{categoryName}}
       </a>
     </div>
@@ -14,6 +11,7 @@
     <div class="row mt-4" >
       <div class="product__title">
         <span>{{product.title}}</span>
+
       </div>
 
       <div class="productArea mt-3">

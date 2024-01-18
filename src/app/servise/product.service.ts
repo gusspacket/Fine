@@ -17,11 +17,18 @@ export class ProductService {
   private categoryUrl = 'http://89.108.114.139/api/category/';
   private laptopUrl = 'http://89.108.114.139/api/category/noutbuki/';
   private getProductbyIdUrl = 'http://89.108.114.139/api/product/?id='
+  private getProductbySlug = 'http://89.108.114.139/api/product/'
 
   getProductById(id: number):Observable<Product> {
     const fullUrl = `${this.getProductbyIdUrl}${id}`;
     return this.http.get<Product>(fullUrl)
   }
+
+  getProductBySlug(slug: string):Observable<Product> {
+    const fullUrl = `${this.getProductbySlug}${slug}${'/'}`;
+    return this.http.get<Product>(fullUrl)
+  }
+
 
 
   getAllPhones2(): Observable<Product[]> {
