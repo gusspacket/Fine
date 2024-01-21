@@ -1,0 +1,127 @@
+* {
+  font-family: 'Jost', sans-serif;
+}
+
+.modal__title {
+  font-size: 20px;
+  font-weight: 400;
+  width: 100%;
+  margin: auto;
+}
+
+.code__input__titile {
+  display: flex;
+  align-items: center;
+}
+
+.modal__arrow {
+  cursor: pointer;
+  width: auto;
+}
+
+.account__title {
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.account__number {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+
+
+.disabled__input {
+  height: 50px;
+  width: 100%;
+  border: 0.1px solid red;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.password__correct {
+  height: 50px;
+  width: 100%;
+  border: 0.1px solid #76BC21;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+input, .label .text {
+  font-family: 'Jost', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #76BC21;
+}
+
+input:focus + .label .text {
+  color: #c0c0c0;
+  font-size: 12px;
+  transform: translate(-10%, 0%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #1d1e1c;
+}
+
+.label {
+  position: absolute;
+  color: black;
+  top: -115px;
+  bottom: 0;
+  left:30px;
+  display: flex;
+  align-items: center;
+  color: #c0c0c0;
+  background-color: transparent;
+
+}
+
+input::placeholder {
+  font-size: 17px;
+
+}
+
+
+.label .text {
+  transition: all 0.15s ease-out;
+}
+
+
+.repeat__timer {
+  text-align: left;
+}
+
+.error__message {
+  color: red;
+  font-size: 15px;
+}
+
+
+.modal__code__button {
+  width: 200px;
+  height: 60px;
+  margin: auto;
+  border: none;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+  cursor: pointer;
+}
+
+.button__isAuth {
+  width: 200px;
+  height: 60px;
+  margin: auto;
+  border: none;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+}

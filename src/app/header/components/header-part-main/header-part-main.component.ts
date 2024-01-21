@@ -1,8 +1,10 @@
+import { AuthCodeComponent } from './../../../auth/auth-code/auth-code.component';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {  Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthModalComponent } from 'src/app/auth-modal/auth-modal.component';
+import { AuthComponent } from 'src/app/auth/auth.component';
 import { Product } from 'src/app/models/product.model';
 import { Settings } from 'src/app/models/settings.model';
 import { User } from 'src/app/models/user.model';
@@ -45,7 +47,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.openDialog('500ms', '100ms')
+    this.openDialog('200ms', '100ms')
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLogging = isLoggedIn;})
 
@@ -89,7 +91,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   openDialog(enterAnimationDuration, exitAnimationDuration): void {
-    this.dialog.open(AuthModalComponent, {
+    this.dialog.open(AuthComponent, {
       width: '320px',
       height:'320px',
       enterAnimationDuration,

@@ -49,11 +49,6 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     window.scrollTo(0, 0);
-    //  this.route.queryParams.subscribe((params) => {
-    //   this.id = +params['id'];
-    //   this.loadProduct();
-    // });
-
     this.route.params.subscribe((params) => {
       this.category = params['category'];
       this.slug = params['slug'];

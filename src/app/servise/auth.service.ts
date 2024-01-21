@@ -14,8 +14,15 @@ export class AuthService {
   public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  constructor(private http: HttpClient,
-    private tokenService: TokenService) { }
+  public phoneInputSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  phoneInput$: Observable<boolean> = this.phoneInputSubject.asObservable();
+
+  userName:string = ''
+
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) { }
 
   private logInUrl = 'http://89.108.114.139/api/user/login_or_register/'
   private logOutUrl = 'http://89.108.114.139/api/user/logout/'
@@ -98,6 +105,10 @@ export class AuthService {
     const options = { headers: headers };
     return this.http.get(this.logOutUrl, options).subscribe(response => {
     });
+  }
+
+  setUserName(userName: string) {
+    this.userName = userName;
   }
 
 
