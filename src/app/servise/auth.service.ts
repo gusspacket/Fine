@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthLogin } from '../models/auth-login.model.';
-import { AuthSmsService } from '../models/auth-sms.model';
+import { AuthSmsModel } from '../models/auth-sms.model';
 import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
 import { TokenService } from './token.service';
 
@@ -87,7 +87,7 @@ export class AuthService {
 
 
 
-  sendSmsToServer(phone: AuthSmsService) {
+  sendSmsToServer(phone: AuthSmsModel) {
     return this.http.post(this.sendSmsUrl, phone)
   }
 
@@ -107,7 +107,7 @@ export class AuthService {
     });
   }
 
-  setUserName(userName: string) {
+  setUserName(userName: any) {
     this.userName = userName;
   }
 

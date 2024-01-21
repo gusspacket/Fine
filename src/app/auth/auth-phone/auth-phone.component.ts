@@ -4,7 +4,7 @@ import { AuthComponent } from '../auth.component';
 import { AuthService } from 'src/app/servise/auth.service';
 import { CommonModule } from '@angular/common';
 import IMask from 'imask';
-import { AuthSmsService } from 'src/app/models/auth-sms.model';
+import { AuthSmsModel } from 'src/app/models/auth-sms.model';
 
 
 @Component({
@@ -59,9 +59,7 @@ export class AuthPhoneComponent implements OnInit {
     const cleanedNumber = enteredNumber.replace(/\D/g, '')
     const phoneAsNumber = parseInt(cleanedNumber, 10);
     this.userDataNumber = phoneAsNumber
-
-
-    const phone: AuthSmsService = {
+    const phone: AuthSmsModel = {
       phone: phoneAsNumber
     }
     this.authService.phoneInputSubject.next(false)

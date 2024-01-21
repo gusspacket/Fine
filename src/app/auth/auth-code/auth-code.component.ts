@@ -9,6 +9,8 @@ import { UserTokenModel } from 'src/app/models/user-token.model';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthModalComponent } from 'src/app/auth-modal/auth-modal.component';
+import { AuthSmsModel } from 'src/app/models/auth-sms.model';
+
 
 
 @Component({
@@ -22,19 +24,18 @@ export class AuthCodeComponent implements OnInit {
 
 
   isInputDisabled: boolean = false
-  userName:string
+  userNameFromAuth:string
+  userNameTypeNumber:any
   userPassword: number;
-
   timeInSeconds: number = 15;
+  timeInterval:number
   timer;
-
   errorMessage: string;
-
-
   passwordCorrect = true
   wrongCodeAttempts: number = 0;
   tryAgainButton = false
   isAuth = false
+  timeIsOver = false
 
 
   constructor(
@@ -47,7 +48,7 @@ export class AuthCodeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userName = this.authService.userName
+    this.userNameFromAuth = this.authService.userName
     this.startTimer()
     this.wrongCodeAttempts = 0
 
@@ -62,10 +63,10 @@ export class AuthCodeComponent implements OnInit {
   }
 
   letsAuth() {
-    const phoneLogin = this.userName
+    const phoneLogin = this.userNameFromAuth
     const cleanedNumber = phoneLogin.replace(/\D/g, '').toString()
     const username = parseInt(cleanedNumber, 10)
-
+    this.userNameTypeNumber = username
     const authData: AuthLogin = {
       username: username,
       code: this.userPassword
@@ -79,13 +80,13 @@ export class AuthCodeComponent implements OnInit {
             // this.isInputDisabled = false
             this.userPassword = null;
             // this.wrongCodeAttempts++
-            if(this.wrongCodeAttempts < 2) {
+            if(this.wrongCodeAttempts < 5) {
               this.wrongCodeAttempts++
               this.errorMessage = "Вы ввели не верный код, попробуйте снова"
               this.isInputDisabled = false
               this.userPassword = null;
             }
-            if(this.wrongCodeAttempts >=2) {
+            if(this.wrongCodeAttempts >=5) {
               this.isInputDisabled = true
               this.tryAgainButton = true
               this.stopTimer()
@@ -105,16 +106,10 @@ export class AuthCodeComponent implements OnInit {
         this.authService.setLoggedInStatus(true)
         this.tokenService.setAuthToken(token);
         this.stopTimer();
-        timer(2000).pipe(delay(0)).subscribe(() => {
+        timer(1000).pipe(delay(0)).subscribe(() => {
           this.closeModal();
           this.router.navigate(['/user'])
         })
-
-          // this.closeModal();
-          // this.router.navigate(['/user'])
-
-
-
       });
   }
 
@@ -129,31 +124,38 @@ export class AuthCodeComponent implements OnInit {
 
   }
   onTryAgainClick() {
+    const phone: AuthSmsModel = {
+      phone: this.userNameTypeNumber
+    }
+    this.authService.sendSmsToServer(phone).subscribe()
     this.tryAgainButton = false
     this.isInputDisabled= false
-    this.errorMessage = ''
     this.userPassword = null;
+    this.stopTimer()
     this.resetTimer();
+    this.startTimer()
     this.wrongCodeAttempts = 0
-    this.letsAuth()
   }
 
   resetTimer() {
-    this.stopTimer();
     this.isInputDisabled = false;
-    this.startTimer()
-
+    this.timeIsOver = false;
+    this.errorMessage = null;
   }
 
+
   startTimer() {
+    this.timeInterval = this.timeInSeconds
     this.isInputDisabled = false
     this.timer = setInterval(() => {
-      if (this.timeInSeconds > 0) {
-        this.timeInSeconds--;
+      if (this.timeInterval > 0) {
+        this.timeInterval--;
       } else {
-        clearInterval(this.timer);
+        // clearInterval(this.timer);
         this.isInputDisabled = true
+        this.timeIsOver = true
         this.userPassword = null;
+        this.stopTimer()
       }
     }, 1000);
   }

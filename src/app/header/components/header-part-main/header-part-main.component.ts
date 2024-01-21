@@ -47,7 +47,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   ngOnInit() {
-    this.openDialog('200ms', '100ms')
+    // this.openDialog('200ms', '100ms')
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLogging = isLoggedIn;})
 
@@ -68,11 +68,11 @@ export class HeaderPartMainComponent implements OnInit {
             if (isLoggedIn) {
                 this.router.navigate(['/user']);
             } else {
-                this.openDialog('500ms', '100ms');
+                this.openDialog('300ms', '100ms');
             }
         },
         error => {
-          this.openDialog('500ms', '100ms'); // Можете выполнить другие действия в случае ошибки.
+          this.openDialog('300ms', '100ms'); // Можете выполнить другие действия в случае ошибки.
         }
     );
 }

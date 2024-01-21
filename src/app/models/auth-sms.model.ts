@@ -1,4 +1,4 @@
-export interface AuthSmsService {
+export interface AuthSmsModel {
   phone: number;
 }
 

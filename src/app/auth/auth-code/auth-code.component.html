@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="account__number">
-      <p>Ваш номер: {{userName}}</p>
+      <p>Ваш номер: {{userNameFromAuth}}</p>
     </div>
 
     <div class="modal__input">
@@ -45,7 +45,7 @@
     @if (!isInputDisabled) {
       <div class="repeat__timer mt-1">
         <p class="error__message mt-1">{{errorMessage}}</p>
-        <p>Отправить повторно через: {{ timeInSeconds }} сек.</p>
+        <p>Отправить повторно через: {{ timeInterval }} сек.</p>
 
       </div>
     }
@@ -53,6 +53,16 @@
 
     @if (tryAgainButton) {
       <p class="error__message mt-1">Было более 5 попыток. Попробуйте снова</p>
+      <button
+      class="modal__code__button mt-2"
+      (click)="onTryAgainClick()"
+      [disabled]="!isInputDisabled"
+    >
+      Попробуйте снова
+    </button>
+    }
+
+    @if (timeIsOver) {
       <button
       class="modal__code__button mt-2"
       (click)="onTryAgainClick()"

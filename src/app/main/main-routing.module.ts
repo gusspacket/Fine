@@ -23,9 +23,6 @@ const routes: Routes = [
     {path: 'search', component: SearchingComponent},
     {path: 'order', component: OrderComponent},
     {path: 'user', component: UserComponent,canActivate: [AuthGuard]},
-    {path: 'auth', component: AuthModalComponent},
-
-
   ]}
 
 

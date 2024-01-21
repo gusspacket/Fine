@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../servise/auth.service';
 import { AuthLogin } from '../models/auth-login.model.';
-import { AuthSmsService } from '../models/auth-sms.model';
+import { AuthSmsModel } from '../models/auth-sms.model';
 import { UserTokenModel } from '../models/user-token.model';
 import { catchError, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -126,7 +126,7 @@ lastMask:any
     const cleanedNumber = enteredNumber.replace(/\D/g, '')
     const phoneAsNumber = parseInt(cleanedNumber, 10);
     this.userDataNumber = phoneAsNumber
-    const phone: AuthSmsService = {
+    const phone: AuthSmsModel = {
       phone: phoneAsNumber
     }
     this.authService.sendSmsToServer(phone).subscribe(() => {
