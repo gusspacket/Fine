@@ -100,7 +100,7 @@ input::placeholder {
 }
 
 .error__message {
-  color: red;
+  color: lightcoral;
   font-size: 15px;
 }
 
@@ -124,4 +124,14 @@ input::placeholder {
   background-color: #76BC21;
   border-radius: 5%;
   color: white;
+}
+
+.time__counter {
+  padding-top: -100px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

@@ -20,7 +20,7 @@
           name="password"
           placeholder="Код из СМС"
           value=""
-          aria-labelledby="abel-password"
+          aria-labelledby="label-password"
           autocomplete="off"
           pattern="[0-9]*"
           minlength="4"
@@ -43,9 +43,9 @@
 
 
     @if (!isInputDisabled) {
-      <div class="repeat__timer mt-1">
-        <p class="error__message mt-1">{{errorMessage}}</p>
-        <p>Отправить повторно через: {{ timeInterval }} сек.</p>
+      <div class="repeat__timer">
+        <p class="error__message">{{errorMessage}}</p>
+        <p class="time__counter">Отправить повторно через: {{ timeInterval }} сек.</p>
 
       </div>
     }
@@ -63,6 +63,7 @@
     }
 
     @if (timeIsOver) {
+      <p class="error__message">Время вышло! Попробуйте снова</p>
       <button
       class="modal__code__button mt-2"
       (click)="onTryAgainClick()"

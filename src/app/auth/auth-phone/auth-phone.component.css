@@ -34,10 +34,6 @@
   cursor: pointer;
 }
 
-.modal__code__button:hover {
-
-  opacity: 80%;
-}
 
 
 .modal__code__button__block {

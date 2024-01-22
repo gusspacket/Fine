@@ -62,6 +62,8 @@ export class AuthCodeComponent implements OnInit {
     }
   }
 
+
+
   letsAuth() {
     const phoneLogin = this.userNameFromAuth
     const cleanedNumber = phoneLogin.replace(/\D/g, '').toString()
@@ -120,12 +122,15 @@ export class AuthCodeComponent implements OnInit {
 
   backToCodeItputFalse() {
   this.authService.phoneInputSubject.next(true)
-
-
   }
+
+
   onTryAgainClick() {
+    const phoneLogin = this.userNameFromAuth
+    const cleanedNumber = phoneLogin.replace(/\D/g, '').toString()
+    const username = parseInt(cleanedNumber, 10)
     const phone: AuthSmsModel = {
-      phone: this.userNameTypeNumber
+      phone: username
     }
     this.authService.sendSmsToServer(phone).subscribe()
     this.tryAgainButton = false
@@ -151,7 +156,6 @@ export class AuthCodeComponent implements OnInit {
       if (this.timeInterval > 0) {
         this.timeInterval--;
       } else {
-        // clearInterval(this.timer);
         this.isInputDisabled = true
         this.timeIsOver = true
         this.userPassword = null;
