@@ -3,17 +3,11 @@
   font-weight: 400;
 }
 
-
-.user__info {
-  box-shadow: 1px 1px 10px #ababab;
-  margin: 0;
-}
-
-
 .user__title {
   font-size: 25px;
   font-weight: 600;
-  margin: 0;
+  height: auto;
+  margin: auto;
 }
 
 
@@ -22,15 +16,9 @@
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
-
-
-
+table, td, tr {
+  font-size: 19px;
+  font-weight: 400;
+}
 
 

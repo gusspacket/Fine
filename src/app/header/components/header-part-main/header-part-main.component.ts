@@ -63,8 +63,6 @@ export class HeaderPartMainComponent implements OnInit {
   authOrUser() {
     this.authService.checkBrowserTokenWithServer().subscribe(
         (isLoggedIn: boolean) => {
-            console.log(isLoggedIn);
-
             if (isLoggedIn) {
                 this.router.navigate(['/user']);
             } else {
@@ -80,9 +78,10 @@ export class HeaderPartMainComponent implements OnInit {
 
   letsSearch(searchTerm: string): void {
     if(searchTerm.length >=1) {
-      this.router.navigate(['/search'], {
-        queryParams: { term: searchTerm },
-      });
+        this.router.navigate(['/search'], {
+          queryParams: { term: searchTerm },
+        });
+
       this.searchTerm = '';
     }
 

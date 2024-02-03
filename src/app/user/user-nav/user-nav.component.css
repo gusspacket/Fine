@@ -1,0 +1,21 @@
+* {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+}
+
+.modal__code__button {
+  width: 150px;
+  height: 45px;
+  border: none;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__code__button:hover {
+  opacity: 80%;
+}

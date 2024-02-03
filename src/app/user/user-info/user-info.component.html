@@ -1,0 +1,23 @@
+@if (user) {
+  <table class="table">
+    <tr>
+      <td class="col-2">Имя:</td>
+      <td class="col-10">{{user.first_name}}
+      </td>
+    </tr>
+    <tr>
+      <td>Фамилия:</td>
+      <td>{{user.last_name}}</td>
+    </tr>
+    <tr>
+      <td>Контактный email:</td>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <td>Телефон для SMS:</td>
+      <td >{{user.phone | mask: '+0(000)000-00-00'}}</td>
+    </tr>
+  </table>
+}
+
+

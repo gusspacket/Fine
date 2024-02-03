@@ -8,6 +8,7 @@ import { FooterModule } from '../footer/footer.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
+import { ProductsComponent } from '../products/products.component';
 
 
 
@@ -24,7 +25,8 @@ import { ApplicationPipesModule } from '../pipes/products-price/application-pipe
     HeaderModule,
     FooterModule,
     FormsModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    ProductsComponent
 
   ],
   exports: [

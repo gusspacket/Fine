@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from '../servise/search.service';
 import { Search } from '../models/search.model';
+import { ProductService } from '../servise/product.service';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-searching',
@@ -11,7 +13,7 @@ import { Search } from '../models/search.model';
 })
 export class SearchingComponent implements OnInit {
 
-  searchProducts: Search[] = []
+  searchProducts: Product[]
   searchTerm: string
 
   noResultsFound = false;
@@ -20,8 +22,13 @@ export class SearchingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private searchService: SearchService) {
+    private searchService: SearchService,
+    private productService: ProductService) {
   }
+
+  searchCat
+  searchSlug:string
+  sproduct
 
   ngOnInit() {
 
@@ -34,6 +41,10 @@ export class SearchingComponent implements OnInit {
             this.noResultsFound = true;
           } else {
             this.searchProducts = products;
+           this.searchCat = products.forEach(product => {
+            this.searchSlug = product.category.slug
+           });
+
             this.noResultsFound = false;
           }
         }

@@ -1,4 +1,4 @@
-import { ApplicationModule, Component, OnInit, ViewChild } from '@angular/core';
+import { ApplicationModule, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ProductService } from '../servise/product.service';
 import { CartService } from '../cart/cart.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -10,6 +10,7 @@ import { Cart2 } from '../models/cart2.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
+import { SearchService } from '../servise/search.service';
 
 @Component({
   selector: 'app-products',
@@ -24,6 +25,8 @@ import { ApplicationPipesModule } from '../pipes/products-price/application-pipe
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit {
+
+  @Input() categorySlugFromSearch: string
 
 
   category: string;
@@ -55,6 +58,7 @@ export class ProductsComponent implements OnInit {
   arrays:any = []
   originalProducts = []
   brands = []
+  noResultsFound = false
 
 
   // FILTER
@@ -79,16 +83,30 @@ export class ProductsComponent implements OnInit {
   constructor
   ( private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private searchService: SearchService
 
    ) {}
 
 
+
 ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    this.searchTerm = params['term']
+    if(this.searchTerm) {
+      this.loadProductsSearch()
+    }
+
+  })
+
   this.route.params.subscribe(params => {
     this.category = params['category'];
-    this.loadProducts();
+    if(this.category) {
+      this.noResultsFound = false
+      this.loadProducts();
+    }
   });
+
 
 }
 
@@ -107,32 +125,20 @@ loadProducts() {
 
 }
 
-
-
-
-// PAGINATOR
-
-// onPageChange(event: PageEvent) {
-//   console.log(event);
-
-//   const startIndex = event.pageIndex * event.pageSize;
-//   let endIndex = startIndex + event.pageSize;
-//   if (endIndex > this.originalProducts.length) {
-//     endIndex = this.originalProducts.length;
-//   }
-
-//   // Обновление this.pageSlice для использования в шаблоне
-//   this.pageSlice = this.originalProducts.slice(startIndex, endIndex);
-
-//   // Обновление this.products на основе this.pageSlice
-//   this.products = this.pageSlice;
-
-//   console.log(this.products);
-
-//   // Обновление значения lengthProducts после изменения this.products
-//   this.lengthProducts = this.originalProducts.length;
-// }
-
+loadProductsSearch() {
+  this.searchService.getAllProducts(this.searchTerm).subscribe(
+    (products) => {
+      if (products.length === 0) {
+        this.noResultsFound = true;
+        this.categoryName = "Поиск"
+      } else {
+        this.products = products;
+        this.categoryName = "Поиск"
+        this.noResultsFound = false;
+      }
+    }
+  );
+}
 
 
 

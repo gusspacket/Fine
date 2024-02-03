@@ -36,62 +36,6 @@ a {
   border: 1px silid red;
 }
 
-.header__bottom__input {
-  position: relative;
-  display: flex;
-}
-
-input-container {
-  height: auto;
-
-}
-
-input {
-  height: 50px;
-  width: 300px;
-  border: 0.1px solid #c0c0c0;
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 16px;
-}
-
-
-
-input, .label .text {
-  font-family: 'Jost', sans-serif;
-  font-size: 16px;
-}
-
-input:focus {
-  outline: none;
-  border: 2px solid #76BC21;
-}
-
-input:focus + .label .text {
-  font-size: 12px;
-  transform: translate(0, -110%);
-  background-color: white;
-  padding-left: 4px;
-  padding-right: 4px;
-  color: #76BC21;
-}
-
-
-
-.search__icon {
-  height: 50px;
-  width: 50px;
-  background-color: #76BC21;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-}
-
-.search__icon span {
-  color: #ffff;
-
-}
 
 
 
@@ -101,14 +45,19 @@ input:focus + .label .text {
   font-size: 25px;
 }
 
+.catalog__page__heading {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+}
 
 .catalog {
   display: flex;
   justify-content: center;
 }
 
-
 .link {
+  text-decoration: none;
   color: black;
 }
 
@@ -116,47 +65,51 @@ input:focus + .label .text {
   margin: 10px;
   border: none;
   cursor: pointer;
-  /* border: 1px solid darkgreen */
 }
 
 .card img {
   height: 250px;
-  object-fit:contain;
+  object-fit: contain;
   object-position: center;
 }
-
 
 .card__body {
   width: 100%;
   height: 70px;
-  /* border: 1px solid darkred; */
+}
+
+.card__title {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 390;
+  height: 60px;
+  overflow: hidden;
+  /* overflow-wrap:inherit */
+
 
 }
 
-.card__title  {
-  font-size: 20px;
-  font-weight: 400;
-  /* border: 1px solid darkblue; */
-  text-align: center;
-
-
+.card__title__characteristics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
+.card__title__characteristics p {
+  font-size: 18px;
+  font-weight: 390;
+}
 
 .card__price__product {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  /* border: 1px solid greenyellow */
 }
 
 .card__price {
-margin: auto 0;
-font-size: 30px;
-/* border: 1px solid greenyellow */
+  margin: auto 0;
+  font-size: 30px;
 }
 
 .card__price__icon {
@@ -181,21 +134,57 @@ font-size: 30px;
 
 .card__added span {
   color: #76BC21;
-  /* color: red; */
-
 }
-
 
 .filter__item {
   display: flex;
   justify-content: space-between;
-
 }
-
-
-
 
 .poginator {
   display: flex;
   justify-content: center;
+}
+
+
+.products__filter{
+  width: 100%;
+  height: auto;
+  border: 1px solid #aaa;
+
+}
+
+
+.filter{
+  width: 100%;
+}
+
+.checkbox__title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.price__filter {
+  display: flex;
+}
+
+.price__control {
+  width: 80px;
+}
+
+.price__symbol {
+  display: flex;
+  align-items: center;
+}
+
+.clear__button {
+  width: 100%;
+  border: 1px solid #76BC21;
+  color: #76BC21;
+  background-color: transparent;
+  bottom: 10px;
+}
+
+.clear__button:hover {
+  color: red
 }

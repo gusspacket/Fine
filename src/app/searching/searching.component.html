@@ -1,85 +1,96 @@
 <div class="container">
-  <div class="navigate mt-3">
-    <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a> &#8212; &nbsp;
-    <p class="navigate__choice">Поиск</p>
-  </div>
-
-  <div *ngIf="noResultsFound">
-    <div class="my-4 header__bottom__input">
-      <div class="input-container">
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          value=""
-          aria-labelledby="label-fname"
-          [(ngModel)]="searchTerm"
-          (keydown.enter)="letsSearch(searchTerm)"
-        >
-      </div>
-      <button
-        class="search__icon"
-        (click)="letsSearch(searchTerm)"
-      >
-        <span class="material-icons">
-          search
-        </span>
-      </button>
+  <div class="row">
+    <div class="navigate mt-3">
+      <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a> &#8212; &nbsp;
+      <p class="navigate__choice">Поиск</p>
     </div>
-    <span class="navigate__result ">Не найдено. Попробуйте снова</span>
-    <span class="material-icons navigate__result__smile">
-      sentiment_satisfied_alt
-      </span>
+    <div class="row">
+      <div *ngIf="noResultsFound">
+        <!-- <div class="my-4 header__bottom__input">
+          <div class="input-container">
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              value=""
+              aria-labelledby="label-fname"
+              [(ngModel)]="searchTerm"
+              (keydown.enter)="letsSearch(searchTerm)"
+            >
+          </div>
+          <button
+            class="search__icon"
+            (click)="letsSearch(searchTerm)"
+          >
+            <span class="material-icons">
+              search
+            </span>
+          </button>
+        </div> -->
+        <span class="navigate__result ">Не найдено. Попробуйте снова</span>
+        <span class="material-icons navigate__result__smile">
+          sentiment_satisfied_alt
+          </span>
+      </div>
+    </div>
   </div>
-
-
-
 
 
   <div class="row mt-2" *ngIf="!noResultsFound">
+    <!-- <app-products [categorySlugFromSearch]="searchSlug"></app-products> -->
+
+
     <div *ngFor="let product of searchProducts" class="col-3">
       <div class="catalog">
         <div class="card" style="width: 15rem; height: 25rem;">
-          <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}"
-          >
+            <a class="link" [routerLink]="['/product', product.slug]">
+
+
             <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
-            <div class="card__body">
-              <div class="card__title"> {{product.title}}</div>
+            <div class="card__body mt-3">
+              @if (product.title.length > 55 ) {
+                <div class="card__title"> {{product.title.slice(0, 55)}}... </div>
+
+              } @else  {
+                <div class="card__title"> {{product.title}} </div>
+              }
             </div>
           </a>
 
 
 
-          <div class="card__price__product">
-            <h1 class="card__price">{{ product.price | productsPriceFormatPipe  }} &nbsp; ₽
+          <div class="card__price__product" *ngIf="!product.productAddedToCart">
+            <h1 class="card__price">{{ product.price | productsPriceFormatPipe }}&nbsp;₽
             </h1>
-            <div class="card__price__icon"
-              (click)="addToCart(product)"
-          >
+            <div class="card__price__icon" >
+
               <span class="material-icons">
                 shopping_cart
               </span>
             </div>
           </div>
 
-          <!-- <div class="card__price__product">
-            <h1 class="card__price">{{ product.sku.price   }} &nbsp; ₽
+          <div class="card__price__product" *ngIf="product.productAddedToCart">
+            <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
             </h1>
-            <div class="card__added"
-              routerLink="/cart"
-            >
+            <div class="card__added" routerLink="/cart">
               <span class="material-icons">
                 shopping_cart
               </span>
             </div>
-          </div> -->
-
-
-
-
+          </div>
         </div>
       </div>
+
+
     </div>
   </div>
-</div>
+
+
+
+
+
+
+
+
 

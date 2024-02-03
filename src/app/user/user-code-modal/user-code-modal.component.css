@@ -1,0 +1,119 @@
+* {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  width: auto;
+
+}
+
+
+
+.modal__title {
+  font-size: 15px;
+  text-align: center;
+}
+
+
+.modal__code__button {
+  width: 200px;
+  height: 60px;
+  margin: auto;
+  border: none;
+  background-color: #76BC21;
+  border-radius: 5%;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 5px 5px 5px #ababab;
+}
+
+.modal__code__button:hover {
+  opacity: 80%;
+}
+
+.modal__close {
+  cursor: pointer;
+  text-align: right;
+}
+
+.modal__close:hover {
+  color:  #76BC21;;
+}
+
+.modal__number {
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+}
+
+input, .label .text {
+  font-size: 20px;
+  font-weight: 400;
+
+}
+
+input:focus + .label .text {
+  color: #c0c0c0;
+  font-size: 12px;
+  transform: translate(-10%, 0%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: #1d1e1c;
+}
+input::placeholder {
+  font-size: 17px;
+
+}
+
+.repeat__timer {
+  text-align: left;
+}
+
+.input__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* .disabled__input {
+  height: 50px;
+  width: 240px;
+  border: 0.1px solid red;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+} */
+
+.password__correct {
+  height: 50px;
+  width: 240px;
+  border: #76BC21;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.modal__input:focus {
+  border-color: #76BC21; /* Используйте "initial", чтобы сбросить цвет границы на значение по умолчанию */
+}
+
+.time__counter {
+  text-align: center;
+}
+
+.error__message {
+  color: lightcoral;
+  font-size: 18px;
+  text-align: center;
+}
+
+

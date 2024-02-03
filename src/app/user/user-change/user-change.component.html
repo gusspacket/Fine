@@ -1,0 +1,144 @@
+@if (editedUser) {
+ <table class="table">
+  <tr>
+    <td class="col-2">Имя:</td>
+    <td class="col-10">
+      <input
+        appLettersOnly
+        [(ngModel)]="editedUser.first_name"
+        (ngModelChange)="onInputFirstNameChange($event)"
+        [ngClass]="{'input__invalid': isFirsNameEmpty, 'input': !isFirsNameEmpty}"
+      />
+      @if (isFirsNameEmpty) {
+        <p class="error__message">Поле не может быть пустым</p>
+       }
+    </td>
+  </tr>
+  <tr class="table">
+    <td>Фамилия:</td>
+    <td>
+      <input
+        appLettersOnly
+        [(ngModel)]="editedUser.last_name"
+        (ngModelChange)="onInputLastNameChange($event)"
+        [ngClass]="{'input__invalid': isLastNameEmpty, 'input': !isLastNameEmpty}"
+      />
+      @if (isLastNameEmpty) {
+        <p class="error__message">Поле не может быть пустым</p>
+       }
+    </td>
+  </tr>
+  <tr class="table">
+    <td>Контактный email:</td>
+    <td>
+      <input
+        [(ngModel)]="editedUser.email"
+        email
+        required
+        #emailInput="ngModel"
+        (input)="onInputEmailChange($event)"
+        [ngClass]="{
+        'input__invalid': isEmailCorrect,
+        'input': !isEmailCorrect}"
+      />
+      @if (isEmailCorrect) {
+        <p class="error__message">Введите корректный email</p>
+       }
+    </td>
+  </tr>
+  <tr class="table">
+    <td>Телефон для SMS:</td>
+    <td>
+      <input
+        class="input__mask"
+        [(ngModel)]="editedUser.phone"
+        [mask]="'+0(000)000-00-00'"
+        (input)="onInputPhoneChange($event)"
+        (ngModelChange)="onInputPhoneBefore($event)"
+        [ngClass]="{'input__invalid': isPhoneValid(), 'input': !isPhoneValid()}"
+      />
+      @if (isPhoneValid()) {
+        <p class="error__message">Введите корректный телефон</p>
+       }
+    </td>
+
+  </tr>
+
+</table>
+
+
+
+
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <table class="table" formGroupName="user">
+      <tr>
+        <td class="col-2">Имя:</td>
+        <td class="col-10">
+          <input formControlName="first_name"/>
+        </td>
+      </tr>
+      <tr class="table">
+        <td>Фамилия:</td>
+        <td>
+          <input formControlName="last_name"/>
+          @if (form.get('user.last_name').invalid && form.get('user.last_name').touched ) {
+            <p class="error__message">Поле не может быть пустым</p>
+          }
+        </td>
+      </tr>
+      <tr class="table">
+        <td>Контактный email:</td>
+
+        <td>
+          <input formControlName="email">
+          @if (form.get('user.email').invalid && form.get('user.email').touched ) {
+            <p class="error__message">Введите корректный email</p>
+          }
+        </td>
+      </tr>
+      <tr class="table">
+        <td>Телефон для SMS:</td>
+        <td>
+          <input
+            class="input__mask"
+            [mask]="'+0(000)000-00-00'"
+            formControlName="phone"
+         />
+         @if (form.get('user.phone').errors['length']) {
+          <p class="error__message">Не достаточно символов</p>
+        }
+        @if (form.get('phone').errors['required'] ) {
+          <p class="error__message">Поле телефона не может быть пустым</p>
+        }
+
+        </td>
+
+      </tr>
+    </table>
+    <button
+      class="user__cange__canсel mt-5 mt-5"
+      type="submit"
+
+    >
+      Submit
+    </button>
+  </form> -->
+@if (haveError) {
+<p class="change__error">{{noChangeError}}</p>
+}
+
+<button class="user__cange__canсel mt-1" (click)="cancelEditing()">Отмена</button>
+<button
+  class="mt-1 ms-4 mb-4"
+  [disabled]="!isFormValid"
+  (click)="changeUserInfo()"
+  [ngClass]="{'user__cange__disabled': !isFormValid, 'user__cange__canсel': isFormValid}"
+>
+  Сохранить
+</button>
+
+
+
+}
+
+

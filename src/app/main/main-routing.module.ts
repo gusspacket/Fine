@@ -9,7 +9,6 @@ import { ProductComponent } from '../product/product.component';
 import { OrderComponent } from '../order/order.component';
 import { UserComponent } from '../user/user.component';
 import { ProductsComponent } from '../products/products.component';
-import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 import { AuthGuard } from '../guards/auth-guard.guard';
 
 
@@ -18,9 +17,10 @@ const routes: Routes = [
   {path: '', component: MainComponent, children: [
     {path: '', component: DashboardComponent},
     {path: 'products/:category', component: ProductsComponent},
+    {path: 'search', component: ProductsComponent},
     { path: 'product/:slug', component: ProductComponent },
     {path: 'cart', component: CartComponent},
-    {path: 'search', component: SearchingComponent},
+    // {path: 'search', component: SearchingComponent},
     {path: 'order', component: OrderComponent},
     {path: 'user', component: UserComponent,canActivate: [AuthGuard]},
   ]}

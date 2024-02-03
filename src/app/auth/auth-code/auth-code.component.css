@@ -117,18 +117,15 @@ input::placeholder {
 }
 
 .button__isAuth {
-  width: 200px;
-  height: 60px;
-  margin: auto;
   border: none;
-  background-color: #76BC21;
+  background-color: transparent;
   border-radius: 5%;
-  color: white;
+  color: black;
 }
 
-.time__counter {
+/* .time__counter {
   padding-top: -100px;
-}
+} */
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

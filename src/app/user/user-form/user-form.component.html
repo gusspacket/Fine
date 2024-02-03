@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <table class="table" formGroupName="user">
+    <tr>
+      <td class="col-2">Имя:</td>
+      <td class="col-10">
+        <input formControlName="first_name" [(ngModel)]="editedUser.first_name"/>
+      </td>
+    </tr>
+    <tr class="table">
+      <td>Фамилия:</td>
+      <td>
+        <input formControlName="last_name"  [(ngModel)]="editedUser.last_name"/>
+        @if (form.get('user.last_name').invalid && form.get('user.last_name').touched ) {
+          <p class="error__message">Поле не может быть пустым</p>
+        }
+      </td>
+    </tr>
+    <tr class="table">
+      <td>Контактный email:</td>
+
+      <td>
+        <input formControlName="email"  [(ngModel)]="editedUser.email">
+        @if (form.get('user.email').invalid && form.get('user.email').touched ) {
+          <p class="error__message">Введите корректный email</p>
+        }
+      </td>
+
+  </table>
+  <button
+    class="user__cange__canсel mt-5 mt-5"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>

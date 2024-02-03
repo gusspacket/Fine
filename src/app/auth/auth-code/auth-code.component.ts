@@ -10,13 +10,14 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthModalComponent } from 'src/app/auth-modal/auth-modal.component';
 import { AuthSmsModel } from 'src/app/models/auth-sms.model';
+import { DigitsOnlyDirective } from './digits-only.directive';
 
 
 
 @Component({
   selector: 'app-auth-code',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DigitsOnlyDirective],
   templateUrl: './auth-code.component.html',
   styleUrl: './auth-code.component.css'
 })
@@ -27,7 +28,7 @@ export class AuthCodeComponent implements OnInit {
   userNameFromAuth:string
   userNameTypeNumber:any
   userPassword: number;
-  timeInSeconds: number = 15;
+  timeInSeconds: number = 7;
   timeInterval:number
   timer;
   errorMessage: string;
@@ -36,39 +37,57 @@ export class AuthCodeComponent implements OnInit {
   tryAgainButton = false
   isAuth = false
   timeIsOver = false
+  reSend= false
+  timeIntervalShow = false
+  codeFalse = false
 
 
-  constructor(
+  constructor
+  (
     private router:Router,
     public dialogRef: MatDialogRef<AuthModalComponent>,
     private authService: AuthService,
     private tokenService: TokenService
-    ) {
-  }
+  ) {}
 
 
   ngOnInit(): void {
     this.userNameFromAuth = this.authService.userName
     this.startTimer()
+    this.timeIntervalShow = true
     this.wrongCodeAttempts = 0
 
   }
 
+
+
   passwordChange(event) {
     const passwordValue = String(event).trim()
     if (passwordValue.length === 4 && /^\d+$/.test(passwordValue)) {
-      this.isInputDisabled = true
+      // this.isInputDisabled = true
       this.letsAuth()
     }
   }
 
 
+    // checkLength(event: Event) {
+    //   const inputElement = event.target as HTMLInputElement;
+
+    //   if (inputElement.value.length === 4) {
+    //     if(this.timeInterval !== 0) {
+    //       console.log("Ввели новый пароль",this.userPassword);
+    //       this.letsAuth()
+    //     }
+    //   }
+
+    // }
 
   letsAuth() {
     const phoneLogin = this.userNameFromAuth
     const cleanedNumber = phoneLogin.replace(/\D/g, '').toString()
     const username = parseInt(cleanedNumber, 10)
     this.userNameTypeNumber = username
+    this.userPassword
     const authData: AuthLogin = {
       username: username,
       code: this.userPassword
@@ -79,21 +98,19 @@ export class AuthCodeComponent implements OnInit {
         catchError((error: any) => {
           if (error.error && error.error.code === 1001) {
             console.log('Неверный код');
-            // this.isInputDisabled = false
-            this.userPassword = null;
-            // this.wrongCodeAttempts++
+
             if(this.wrongCodeAttempts < 5) {
-              this.wrongCodeAttempts++
-              this.errorMessage = "Вы ввели не верный код, попробуйте снова"
-              this.isInputDisabled = false
               this.userPassword = null;
+              this.wrongCodeAttempts++
+              this.codeFalse = true
             }
             if(this.wrongCodeAttempts >=5) {
+              this.timeIntervalShow = false
+              this.codeFalse = false
               this.isInputDisabled = true
               this.tryAgainButton = true
               this.stopTimer()
             }
-
           } else {
             console.log('Другая ошибка');
           }
@@ -105,6 +122,7 @@ export class AuthCodeComponent implements OnInit {
         const token = response.token
         if (!token) return
         this.isAuth = true
+        this.timeIntervalShow = false
         this.authService.setLoggedInStatus(true)
         this.tokenService.setAuthToken(token);
         this.stopTimer();
@@ -125,6 +143,7 @@ export class AuthCodeComponent implements OnInit {
   }
 
 
+
   onTryAgainClick() {
     const phoneLogin = this.userNameFromAuth
     const cleanedNumber = phoneLogin.replace(/\D/g, '').toString()
@@ -135,10 +154,10 @@ export class AuthCodeComponent implements OnInit {
     this.authService.sendSmsToServer(phone).subscribe()
     this.tryAgainButton = false
     this.isInputDisabled= false
-    this.userPassword = null;
     this.stopTimer()
     this.resetTimer();
     this.startTimer()
+    this.timeIntervalShow=true
     this.wrongCodeAttempts = 0
   }
 
@@ -156,9 +175,10 @@ export class AuthCodeComponent implements OnInit {
       if (this.timeInterval > 0) {
         this.timeInterval--;
       } else {
+        this.codeFalse=false
+        this.timeIntervalShow = false
         this.isInputDisabled = true
         this.timeIsOver = true
-        this.userPassword = null;
         this.stopTimer()
       }
     }, 1000);

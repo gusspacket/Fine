@@ -25,6 +25,20 @@ a {
 
 }
 
+.navigate__no__result {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.navigate__result {
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+
+
 .catalog__page__heading {
   font-family: 'Jost', sans-serif;
   font-weight: 500;
@@ -97,6 +111,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 10px 10px #ababab
 }
 
 .card__added {

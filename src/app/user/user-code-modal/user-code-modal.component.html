@@ -1,0 +1,86 @@
+<p class="material-icons modal__close mt-1" (click)="closeModal()">
+  close
+</p>
+@if (smsButton) {
+  <div class="header">
+    <p class="modal__title">Сообщение будет отправлено на номер:</p>
+    <p class="modal__number">{{userPhone | mask: '+0(000)000-00-00'}}</p>
+
+  </div>
+  <button class="modal__code__button mt-2 mb-5" (click)="getUserCode()">
+    Отправить СМС
+  </button>
+
+
+} @else {
+  <div class="header">
+    <p class="modal__title">Введите код из СМС: </p>
+    <p class="modal__number">{{userPhone | mask: '+0(000)000-00-00'}}</p>
+
+  </div>
+
+  @if (!isUserAlreadyExist) {
+  <div class="input__container">
+    <input
+    appDigitsOnly
+    type="number"
+    class="modal__input"
+    appDigitsOnly
+    id="password"
+    inputmode="numeric"
+    name="password"
+    placeholder="Код из СМС"
+    aria-labelledby="label-password"
+    autocomplete="off"
+    autoFocus
+    required
+    [(ngModel)]="userPassword"
+    (ngModelChange)="passwordChange($event)"
+    [disabled]="isInputDisabled"
+    [ngClass]="{
+      'disabled__input': isInputDisabled,
+      'password__correct':passwordCorrect
+    }"
+  >
+
+  </div>
+  }
+
+
+    @if (isUserAlreadyExist) {
+        <p class="error__message mb-5">Пользователь с таким номером уже существует</p>
+    }
+
+
+    @if (timeIntervalShow) {
+      <p class="time__counter mt-1 mb-2">Отправить повторно через: {{ timeInterval }} сек.</p>
+    }
+
+    @if (codeFalse) {
+      <p class="error__message">Введен неверный код</p>
+    }
+
+    @if (tryAgainButton) {
+      <p class="error__message">Было более 5 попыток. Попробуйте снова</p>
+      <button
+      class="modal__code__button mb-5"
+      (click)="onTryAgainClick()"
+      [disabled]="!isInputDisabled"
+    >
+      Отправить СМС   </button>
+    }
+
+    @if (timeIsOver) {
+      <p class="error__message">Время вышло! Попробуйте снова</p>
+      <button
+      class="modal__code__button mt-2 mb-5"
+      (click)="onTryAgainClick()"
+      [disabled]="!isInputDisabled"
+    >
+      Отправить СМС
+    </button>
+    }
+}
+
+
+

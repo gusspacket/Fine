@@ -7,84 +7,72 @@
   </div>
 
   <div class="row">
+    @if (noResultsFound) {
+      <div class="navigate__no__result">
+        <span class="navigate__result ">Не найдено. Попробуйте снова</span>
+        <span class="material-icons navigate__result__smile ms-1">
+          sentiment_satisfied_alt
+          </span>
+      </div>
 
-    <div class="col-10">
-      <div class="row mt-2">
-        <h2 class="catalog__page__heading">{{ categoryName }}</h2>
-        <div
-          *ngFor="let product of products"
-          class="col-4"
-        >
-          <div class="catalog">
-            <div class="card" style="width: 15rem; height: 25rem;">
-              <!-- <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}"> -->
-                <a class="link" [routerLink]="['/product', product.slug]">
+    } @else  {
+        <div class="col-10">
+          <div class="row mt-2">
+            <h2 class="catalog__page__heading">{{ categoryName }}</h2>
+            <div
+              *ngFor="let product of products"
+              class="col-4"
+            >
+              <div class="catalog">
+                <div class="card" style="width: 15rem; height: 25rem;">
+                  <!-- <a class="link" [routerLink]="['/product']" [queryParams]="{id: product.id}"> -->
+                    <a class="link" [routerLink]="['/product', product.slug]">
 
-                <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
-                <div class="card__body mt-3">
-                  @if (product.title.length > 55 ) {
-                    <div class="card__title"> {{product.title.slice(0, 55)}}... </div>
+                    <img class="card-img-top" alt="phoneImg" [src]="product.img_url">
+                    <div class="card__body mt-3">
+                      @if (product.title.length > 55 ) {
+                        <div class="card__title"> {{product.title.slice(0, 55)}}... </div>
 
-                  } @else  {
-                    <div class="card__title"> {{product.title}} </div>
-                  }
-                </div>
-              </a>
+                      } @else  {
+                        <div class="card__title"> {{product.title}} </div>
+                      }
+                    </div>
+                  </a>
 
 
 
-              <div class="card__price__product" *ngIf="!product.productAddedToCart">
-                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }}&nbsp;₽
-                </h1>
-                <div class="card__price__icon" (click)="postToCart2(product)">
+                  <div class="card__price__product" *ngIf="!product.productAddedToCart">
+                    <h1 class="card__price">{{ product.price | productsPriceFormatPipe }}&nbsp;₽
+                    </h1>
+                    <div class="card__price__icon" (click)="postToCart2(product)">
 
-                  <span class="material-icons">
-                    shopping_cart
-                  </span>
-                </div>
-              </div>
+                      <span class="material-icons">
+                        shopping_cart
+                      </span>
+                    </div>
+                  </div>
 
-              <div class="card__price__product" *ngIf="product.productAddedToCart">
-                <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
-                </h1>
-                <div class="card__added" routerLink="/cart">
-                  <span class="material-icons">
-                    shopping_cart
-                  </span>
+                  <div class="card__price__product" *ngIf="product.productAddedToCart">
+                    <h1 class="card__price">{{ product.price | productsPriceFormatPipe }} &nbsp; ₽
+                    </h1>
+                    <div class="card__added" routerLink="/cart">
+                      <span class="material-icons">
+                        shopping_cart
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- PAGINATOR
-
-      <div class="paginator">
-        <mat-paginator
-          [length]="lengthProducts"
-          [pageSize]="6"
-          aria-label="Select page"
-          (page)="onPageChange($event)"
-
-        >
-        </mat-paginator>
-      </div> -->
-
-
-
-
-
-    </div>
-
-
-
-
+    }
 
 
 
 
     <!-- FILTER  -->
-
+  @if (!noResultsFound) {
     <div class="col-2 mt-3">
       <div class="row">
         <div class="products__filter">
@@ -142,5 +130,7 @@
         </div>
       </div>
     </div>
+  }
+
   </div>
 </div>

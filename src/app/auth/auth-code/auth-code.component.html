@@ -13,21 +13,29 @@
     </div>
 
     <div class="modal__input">
+      <!-- your-component.component.html -->
+      <!-- <input type="text" appDigitsOnly [(ngModel)]="code" (input)="checkCode($event)"> -->
+
+      <!-- <input type="text" appDigitsOnly [(ngModel)]="password" (keyup)="checkLength()"> -->
+      <!-- <input type="text" appDigitsOnly [(ngModel)]="password" (input)="checkLength($event)"> -->
+
+
+
       <div class="input-container">
         <input
           type="number"
+          appDigitsOnly
           id="password"
+          inputmode="numeric"
           name="password"
           placeholder="Код из СМС"
           value=""
           aria-labelledby="label-password"
           autocomplete="off"
-          pattern="[0-9]*"
-          minlength="4"
-          maxlength="4"
           autoFocus
           required
           [(ngModel)]="userPassword"
+
           (ngModelChange)="passwordChange($event)"
           [disabled]="isInputDisabled"
           [ngClass]="{
@@ -35,31 +43,36 @@
             'password__correct':passwordCorrect
           }"
         >
-        <!-- <label class="label" for="fcode" id="label-fcode">
-          <div class="text">Код из СМС</div>
-        </label> -->
+
+        <!-- (ngModelChange)="passwordChange($event)" -->
+        <!-- [disabled]="isInputDisabled" -->
+        <!-- (input)="checkLength($event)" -->
+
+
       </div>
     </div>
 
+    @if (reSend) {
+      <p>{{errorMessage}}</p>
+    }
 
-    @if (!isInputDisabled) {
-      <div class="repeat__timer">
-        <p class="error__message">{{errorMessage}}</p>
-        <p class="time__counter">Отправить повторно через: {{ timeInterval }} сек.</p>
-
-      </div>
+    @if (timeIntervalShow) {
+      <p class="time__counter">Отправить повторно через: {{ timeInterval }} сек.</p>
     }
 
 
+    @if (codeFalse) {
+      <p class="error__message">Введен неверный код</p>
+    }
+
     @if (tryAgainButton) {
-      <p class="error__message mt-1">Было более 5 попыток. Попробуйте снова</p>
+      <p class="error__message">Было более 5 попыток. Попробуйте снова</p>
       <button
-      class="modal__code__button mt-2"
+      class="modal__code__button"
       (click)="onTryAgainClick()"
       [disabled]="!isInputDisabled"
     >
-      Попробуйте снова
-    </button>
+      Отправить СМС   </button>
     }
 
     @if (timeIsOver) {
@@ -69,14 +82,14 @@
       (click)="onTryAgainClick()"
       [disabled]="!isInputDisabled"
     >
-      Попробуйте снова
+      Отправить СМС
     </button>
     }
 
     @if (isAuth) {
       <button class="btn btn-primary button__isAuth mt-3" type="button" disabled>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-        Loading...
+        Проверяем данные...
       </button>
     }
 
