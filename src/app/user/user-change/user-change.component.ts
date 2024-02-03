@@ -56,6 +56,8 @@ export class UserChangeComponent implements OnInit {
   isLastNameEmpty=false
   isFirsNameEmpty = false
   isEmailCorrect= false
+  isEmailEmpty = false
+  isPhoneEmty = false
 
 
   haveChange= false
@@ -253,16 +255,26 @@ export class UserChangeComponent implements OnInit {
         this.isFormValid = false
       }
     }
+
+    if(inputText === '') {
+      this.isEmailCorrect=false
+      this.isEmailEmpty = true
+    } else {
+      this.isEmailEmpty = false
+    }
   }
+
 
   isPhoneValid(): boolean {
     const editorUserPhoneString = this.editedUser.phone.toString();
     return editorUserPhoneString.length < 11
   }
 
+
   onInputPhoneChange(event: any) {
     const inputValue = event.target.value;
     const originalUserString = this.originalUser.phone.toString();
+    // this.isPhoneValid2()
 
     // Если ввод пуст, снова устанавливаем маску
     if (!inputValue) {
@@ -274,16 +286,28 @@ export class UserChangeComponent implements OnInit {
     if (!inputValue.startsWith('+7')) {
       this.editedUser.phone = +7 + inputValue.substring(2);
     }
+
+
   }
 
   onInputPhoneBefore(event: any) {
+
     if(event === this.originalUser.phone) {
      this.isFormValid=false
     } else {
       this.isFormValid=true
     }
 
+    if(event.length === 0) {
+      this.isPhoneEmty = true
+    } else {
+      this.isPhoneEmty = false
+    }
   }
+
+
+
+
 }
 
 

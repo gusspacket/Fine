@@ -12,6 +12,7 @@
       @if (isFirsNameEmpty) {
         <p class="error__message">Поле не может быть пустым</p>
        }
+
     </td>
   </tr>
   <tr class="table">
@@ -44,6 +45,9 @@
       @if (isEmailCorrect) {
         <p class="error__message">Введите корректный email</p>
        }
+       @if (isEmailEmpty) {
+        <p class="error__message">Поле email не может быть пустым</p>
+       }
     </td>
   </tr>
   <tr class="table">
@@ -57,9 +61,18 @@
         (ngModelChange)="onInputPhoneBefore($event)"
         [ngClass]="{'input__invalid': isPhoneValid(), 'input': !isPhoneValid()}"
       />
+
+     @if (!isPhoneEmty) {
       @if (isPhoneValid()) {
         <p class="error__message">Введите корректный телефон</p>
        }
+     }
+
+       @if (isPhoneEmty) {
+        <p class="error__message">Поле телефон не может быть пустым</p>
+       }
+
+
     </td>
 
   </tr>
