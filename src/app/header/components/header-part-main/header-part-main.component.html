@@ -7,7 +7,7 @@
   <div class="header__main">
     <!-- LOGO -->
     <a
-      class="col-md-2 col-xxl-1  main__logo"
+      class="col-xl-2  main__logo"
       routerLink="/"
       *ngIf="settings"
     >
@@ -20,7 +20,14 @@
 
     <!-- INPUT -->
 
-    <div class="col-md-6 col-xxl-9 mx-2 header__bottom__input">
+    <div class="col-xxl-8">
+      <div class="input-group ">
+        <input type="text" class="form-control" placeholder="Например MacBook Pro M1" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button type="button" class="header__button">Найти</button>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-6 col-xxl-9 mx-2 header__bottom__input">
       <div class="input-container">
         <input
           [(ngModel)]="searchTerm"
@@ -44,7 +51,7 @@
         search
       </span>
     </button>
-    </div>
+    </div> -->
 
     <!-- BUTTONS -->
     <div class="col-md-4 col-xxl-2 controls">
@@ -82,8 +89,9 @@
 
 
 
-      <div class="iconFavorite">
-        <span class="material-symbols-outlined" style="font-size: 30px;">
+      <div class="iconFavorite"  [routerLink]="['/header']">
+        <span
+          class="material-symbols-outlined" style="font-size: 30px;">
           favorite_border
         </span>
         <div class="icon__text">Избранное</div>

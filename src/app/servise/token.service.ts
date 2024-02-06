@@ -37,6 +37,7 @@ export class TokenService {
 
   //  Метод для отправки данных с использованием токена в заголовке
   postUserDataWithToken(){
+
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders({
       Authorization: `token ${token}`

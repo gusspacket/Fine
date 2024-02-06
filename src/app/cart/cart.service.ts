@@ -11,6 +11,7 @@ import { Product } from '../models/product.model';
 export class CartService {
 
   private cartUrl = 'http://localhost:3000/cart';
+
   cart: Cart[];
   productToAdd: number
 
@@ -23,7 +24,9 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-
+  getSessionIdFromServer() {
+    return this.http.get('http://89.108.114.139/api/cart/')
+  }
 
   add(product:any):Observable<any> {
     return this.http.post('http://localhost:3000/cart', product)

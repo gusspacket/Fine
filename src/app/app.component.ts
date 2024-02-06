@@ -4,6 +4,7 @@ import { SettingsService } from './servise/settings.service';
 import { TokenService } from './servise/token.service';
 import { AuthService } from './servise/auth.service';
 import { catchError, of } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     private cartService:CartService,
     private settingsService: SettingsService,
     private authService: AuthService
+
   ) {}
 
   ngOnInit(): void {

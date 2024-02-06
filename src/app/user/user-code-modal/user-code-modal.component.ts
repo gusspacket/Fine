@@ -43,7 +43,7 @@ export class UserCodeModalComponent implements OnInit {
   isUserAlreadyExist=false
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { user: User },
+    @Inject(MAT_DIALOG_DATA) public data: { user: User, changed: User },
     private userService: UserService,
     public dialogRef: MatDialogRef<UserCodeModalComponent>,
     private authService: AuthService,
@@ -56,12 +56,24 @@ export class UserCodeModalComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.originalUserData = this.data.user
-    this.userService.user$.subscribe((user:User) => {
-    this.userPhone = user.phone
-    this.changeUser = user
+    console.log(this.data.changed.phone);
+    this.userPhone = this.data.changed.phone
+    this.changeUser = this.data.changed.phone
 
-   })
+
+
+
+
+    // this.changeUser = this.changed.phone;
+    // this.userPhone = this.changed
+
+    this.originalUserData = this.data.user
+  //   this.userService.user$.subscribe((user:User) => {
+  //   this.userPhone = user.phone
+  //   this.changeUser = user
+
+
+  //  })
    this.wrongCodeAttempts = 0
   }
 
@@ -109,11 +121,8 @@ export class UserCodeModalComponent implements OnInit {
 
   letsAuth() {
 
-    const changeInfo:any = {
-      email: this.changeUser.email,
-      first_name: this.changeUser.first_name,
-      last_name: this.changeUser.last_name
-    }
+    const changeInfo = {... this.data.changed}
+    delete changeInfo.phone
 
     const username = this.userPhone
     const changePhoneData: UserChangePhone = {
@@ -159,15 +168,15 @@ export class UserCodeModalComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        if(!this.isUserAlreadyExist) {
-        if(response && response.status === 'ok') {
+
+        if(response) {
           this.userService.changeUserInfo(changeInfo).subscribe()
           this.userService.isEditingSubject.next(false)
           this.closeModal();
           this.router.navigate(['/user'])
 
         }
-      }
+
 
       })
 

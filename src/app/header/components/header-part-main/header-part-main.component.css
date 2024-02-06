@@ -1,6 +1,7 @@
 * {
-  font-family: 'Jost', sans-serif;
+  font-family: var(--font-inter);
   font-weight: 400;
+
 }
 
 
@@ -14,12 +15,14 @@
 }
 
 .main__logo {
-  margin-right: 2px;
   cursor: pointer;
+  width: 150px;
+  height: 46px;
 }
 
 
 .main__logo img {
+
   object-fit:contain;
   object-position: center;
   width: 100%;
@@ -51,12 +54,20 @@
 }
 
 input {
-  height: 50px;
+  /* height: 50px;
   width: 100%;
   border: 0.1px solid #c0c0c0;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 16px;
+  padding: 16px; */
+  height: 40px;
+  width: 565px;
+}
+
+.header__button {
+  background-color: var(--button-color1);
+  width: 100px;
+  height: 40px;
 }
 
 

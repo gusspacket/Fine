@@ -4,6 +4,8 @@ import { Cart } from '../models/cart.model';
 import { ProductService } from '../servise/product.service';
 import { Subject, Subscription } from 'rxjs';
 import { Product } from '../models/product.model';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -21,24 +23,102 @@ export class CartComponent implements OnInit {
 
 
 
-  constructor(private cartService: CartService, private productService: ProductService) {
+
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+    private cookie: CookieService,
+    private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+
+
+
+
+
+
+
     this.loadCart();
 
     this.cartService.itemCount$.subscribe(itemCount => {
       this.itemCount = itemCount;
       console.log("itemCount", itemCount);
-
     });
 
 
 
 
 
+
+
+
+
   }
+
+  setCookie() {
+
+    this.cookie.set("userId", "admiuser")
+  }
+
+  getCookie() {
+    console.log(this.cookie.get("userId"));
+
+  }
+
+  getSessionId() {
+
+    // const headers = new HttpHeaders({
+    //   'Set-Cookie': `token=${token}`
+    // });
+
+
+    this.http.get('http://89.108.114.139/api/cart/',{ withCredentials: true})
+    .subscribe(response => {
+
+     console.log(response);
+
+    });
+
+    // this.http.get('http://89.108.114.139/api/cart/', { observe: 'response' })
+    // .subscribe(response => {
+    //   const cookies = response.headers.getAll('Set-Cookie');
+    //   console.log(cookies);
+    // })
+
+
+
+
+    //  this.http.get('http://89.108.114.139/api/cart/')
+    // .subscribe(response => {
+    //   // const setCookieHeader = response.headers.get('Set-Cookie');
+    //   console.log(response)
+    // })
+
+
+    // this.http.get('http://89.108.114.139/api/cart/', {observe: 'response' })
+    // .subscribe(response => {
+    //   // const setCookieHeader = response.headers.get('Set-Cookie');
+    //   console.log(response)
+    // })
+
+
+    // this.http.get('http://89.108.114.139/api/cart/', {observe: 'response' })
+    // .subscribe(response => {
+    //   const sessionId = response.headers.get('Set-Cookie');
+    //   if (sessionId) {
+    //     console.log('Session ID:', sessionId);
+    //   } else {
+    //     console.log('Session ID not found in response headers.');
+    //   }
+    // });
+
+  }
+
+
+
+
 
 
   loadCart() {

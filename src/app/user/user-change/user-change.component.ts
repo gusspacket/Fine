@@ -11,6 +11,7 @@ import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialo
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { LettersOnlyDirective } from './lettetrs-only-user.directive';
+import { EMPTY, catchError, of } from 'rxjs';
 
 
 @Component({
@@ -56,8 +57,10 @@ export class UserChangeComponent implements OnInit {
   isLastNameEmpty=false
   isFirsNameEmpty = false
   isEmailCorrect= false
-  isEmailEmpty = false
   isPhoneEmty = false
+  changeUser
+  isEmailAlreadyUse = false
+  anotherUserEmail:any
 
 
   haveChange= false
@@ -98,10 +101,6 @@ export class UserChangeComponent implements OnInit {
 
 
 
-  onSubmit() {
-    console.log("SUBMITED", this.form);
-
-  }
 
 
   cancelEditing(): void {
@@ -123,6 +122,8 @@ export class UserChangeComponent implements OnInit {
           console.log(`Телефон изменен: ${this.userIsChange[key]} -> ${this.editedUser[key]}`);
           this.haveChange = true
         }
+
+
       } else {
         this.haveChange = false;
       }
@@ -133,23 +134,73 @@ export class UserChangeComponent implements OnInit {
 
 
 
-
   changeUserInfo() {
     const changedFields = this.getChangedFields();
-    console.log(changedFields);
+    this.changeUser = this.getChangedFields()
 
-      if(changedFields.phone) {
+    if(changedFields.phone) {
         this.openDialog('200ms', '100ms')
-      }
-      // this.userService.changeUserInfo(changedFields).subscribe()
-      // this.userService.isEditingSubject.next(false)
-     else {
-      this.userService.changeUserInfo(changedFields).subscribe()
-      this.userService.isEditingSubject.next(false)
-
     }
 
+    // else {
+    //   this.userService.changeUserInfo(changedFields).subscribe()
+    //   this.userService.isEditingSubject.next(false)
+    //    }
+
+    else {
+      this.userService.changeUserInfo(changedFields)
+      .pipe(
+        catchError((error: any) => {
+          if (error.status === 400) {
+            console.log("400");
+            this.isEmailAlreadyUse = true;
+            this.anotherUserEmail = changedFields.email
+            this.isFormValid=false
+          } else {
+            console.log('Другая ошибка');
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((response: any) => {
+        console.log("Response from changeUserInfo:", response);
+        // Здесь вы можете добавить вашу логику изменения, которая должна выполниться после успешного запроса
+      });
+
+
+        }
+
+
   }
+
+
+
+
+
+
+
+
+
+
+    // if(changedFields.email === '') {
+    //   delete changedFields.email
+    //   this.userService.changeUserInfo(changedFields).subscribe()
+    //   this.userService.isEditingSubject.next(false)
+
+    // }
+
+    //   if(changedFields.phone) {
+    //     this.openDialog('200ms', '100ms')
+    //   }
+
+
+    //  else {
+    //   this.userService.changeUserInfo(changedFields).subscribe()
+    //   this.userService.isEditingSubject.next(false)
+
+    // }
+
+
 
   openDialog(enterAnimationDuration, exitAnimationDuration): void {
     this.dialog.open(UserCodeModalComponent, {
@@ -157,7 +208,7 @@ export class UserChangeComponent implements OnInit {
       height:'auto',
       enterAnimationDuration,
       exitAnimationDuration,
-      data: { user: this.originalUser }
+      data: { user: this.originalUser, changed: this.changeUser}
     });
   }
 
@@ -256,13 +307,32 @@ export class UserChangeComponent implements OnInit {
       }
     }
 
-    if(inputText === '') {
+    if(inputText.length === 0) {
+      this.isFormValid= true
       this.isEmailCorrect=false
-      this.isEmailEmpty = true
-    } else {
-      this.isEmailEmpty = false
     }
+
+    if(inputText.length === 0 && inputText === this.originalUser.email) {
+     this.isFormValid=false
+
+    }
+
+    if (inputText === '' && this.originalUser.email !== '') {
+      this.isFormValid = false;
+      this.isEmailCorrect = true
+    }
+
+    if(inputText === this.anotherUserEmail) {
+      this.isEmailAlreadyUse = true
+      this.isFormValid=false
+    } else {
+        this.isEmailAlreadyUse = false
+    }
+
+
   }
+
+
 
 
   isPhoneValid(): boolean {
@@ -274,6 +344,8 @@ export class UserChangeComponent implements OnInit {
   onInputPhoneChange(event: any) {
     const inputValue = event.target.value;
     const originalUserString = this.originalUser.phone.toString();
+
+    const phoneString = this.editedUser.phone.toString();
     // this.isPhoneValid2()
 
     // Если ввод пуст, снова устанавливаем маску
@@ -283,9 +355,15 @@ export class UserChangeComponent implements OnInit {
     }
 
     // Если ввод начинается не с "+7", добавляем "+7" в начало
-    if (!inputValue.startsWith('+7')) {
-      this.editedUser.phone = +7 + inputValue.substring(2);
+    if (!inputValue.startsWith('+7') && !inputValue.startsWith('+79')) {
+      this.editedUser.phone = +79 + inputValue.substring(1);
     }
+
+    if (phoneString.startsWith('7') && !phoneString.startsWith('79')) {
+      this.editedUser.phone = +('79' + phoneString.substring(1));
+    }
+
+
 
 
   }

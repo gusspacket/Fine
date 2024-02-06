@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { CartPricePipe } from './pipes/total-price-cart.pipe';
 import { FooterModule } from '../footer/footer.module';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -26,6 +27,7 @@ import { ApplicationPipesModule } from '../pipes/products-price/application-pipe
   ],
   exports: [
 
-  ]
+  ],
+  providers:[CookieService]
 })
 export class CartModule { }

@@ -42,12 +42,16 @@
         'input__invalid': isEmailCorrect,
         'input': !isEmailCorrect}"
       />
+
+
       @if (isEmailCorrect) {
         <p class="error__message">Введите корректный email</p>
        }
-       @if (isEmailEmpty) {
-        <p class="error__message">Поле email не может быть пустым</p>
+
+       @if (isEmailAlreadyUse) {
+        <p class="error__message">Пользователь с таким email уже существует</p>
        }
+
     </td>
   </tr>
   <tr class="table">
