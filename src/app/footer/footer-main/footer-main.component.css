@@ -1,16 +1,25 @@
 
 * {
-  font-family: 'Jost', sans-serif;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
 
-.footer__main {
-  background-color: #f7f7f7
+.container {
+  background-color: #fff;
+  width: 1180px;
+  height: 350px;
+  border-radius: 6px;
+  /* border: 1px solid #dee2e7; */
+  background-color: #fff;
+  margin-top: 20px;
+
+
 }
+
+
 
 .footer__logo {
-  width: 260px;
-  height: 130px;
+  width: 200px;
+  height: 100px;
   /* border: 1px solid red; */
 }
 
@@ -23,23 +32,23 @@
 .footer__phone__link {
   text-decoration: none;
   color: black;
-  font-family: 'Jost', sans-serif;
-  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
   font-weight: 520;
 
 }
 
 
 .footer__phone__name {
-  font-family: 'Jost', sans-serif;
-  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
   font-weight: 320;
   /* border: 1px solid green; */
 }
 
 .footer__social {
-  font-family: 'Jost', sans-serif;
-  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
   font-weight: 500;
 
 }
@@ -53,4 +62,16 @@
   width: 25px;
   height: 25px;
   margin-right: 10px;
+}
+
+
+p {
+  font-size: 15px;
+  color: #8b96a5;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500;
 }

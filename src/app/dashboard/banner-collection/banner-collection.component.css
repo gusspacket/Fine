@@ -1,0 +1,83 @@
+.banner {
+  position: relative;
+  border: none;
+
+}
+
+.banner__slide {
+  border: none !important;
+}
+
+.slickNext {
+  display: none;
+  color: red;
+}
+
+
+.banner__body{
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  border: none
+}
+
+.banner__img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.material-icons {
+  color: white;
+  font-size: 30px;
+  font-weight: 300;
+  opacity: 80%;
+
+}
+
+
+.banner__buttons__left  {
+  position: absolute;
+  top: 160px;
+  left: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+}
+
+.banner__buttons__right  {
+  position: absolute;
+  top: 160px;
+  right:10px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
+}
+
+
+
+
+
+@media (max-width: 1400px) {
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,3 +5,22 @@
  border-bottom: 3px solid #f7f7f7;
 }
 
+.container-fluid {
+  border-bottom: 3px solid #f7f7f7;
+}
+
+
+
+
+@media (max-width: 1200px)  {
+  .container-fluid {
+    border-bottom: none
+  }
+
+}
+
+
+
+
+
+

@@ -1,6 +1,32 @@
-.row  {
-  width: auto;
+* {
+  font-family: 'Inter', sans-serif;
 }
+
+
+
+
+.container {
+  background-color: #fff;
+  width: 1180px;
+  height: 200px;
+  /* border-radius: 6px; */
+  /* border: 1px solid #dee2e7; */
+  background-color: transparent;
+  margin-top: 20px;
+  padding: 0;
+
+}
+
+
+
+
+.brand__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1c1c;
+  margin-top: 20px;
+}
+
 .brands__popular {
   display: flex;
   border: 1px solid red

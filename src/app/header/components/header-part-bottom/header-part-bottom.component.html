@@ -1,57 +1,43 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
 <div class="container">
-<div class="row my-2">
-  <div class="col header__bottom">
-
-    <ng-container
-        class="header__bottom__category"
-        *ngFor="let category of categories; let i = index"
-      >
-      <!-- Превратить каждую категорию в кнопку -->
-      <a
-        type="button"
-        class="collections__items"
-        [routerLink]="['/products', category.slug]"
-        *ngIf="i < visibleCategoriesCount"
-      >
-        {{ category.name }}
-      </a>
-
-    </ng-container>
-
-
-    <!-- Дополнительные категории в выпадающем списке -->
-    <div
-      *ngIf="categories.length > visibleCategoriesCount "
-      class="dropdown"
-    >
-      <div
-        class="btn dropdown-toggle dropdownMenuHeader collections__items"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Еще
-      </div>
-      <div
-        class="dropdown-menu dropdown-menu-left"
-        aria-labelledby="dropdownMenuButton">
-        <!-- Превратить каждую дополнительную категорию в кнопку -->
-
-        <a
-          *ngFor="let category of categories.slice(visibleCategoriesCount)"
-          class="dropdown-item"
-          [routerLink]="['/products', category.slug]"
-          [queryParams]="{category: category.slug}"
-
-        >
-          {{ category.name }}
-        </a>
-      </div>
+  <div class="row">
+    <div class="col-xl-12 mt-2 mb-2 p-0">
+      <ul class="categories-list">
+        <li *ngFor="let category of categories; let i = index">
+          <a
+            type="button"
+            class="collections__items d-none d-xl-block"
+            [routerLink]="['/products', category.slug]"
+            *ngIf="i < visibleCategoriesCount"
+          >
+            {{ category.name }}
+          </a>
+        </li>
+        <li *ngIf="categories.length > visibleCategoriesCount" class="dropdown">
+          <div
+            class="btn dropdown-toggle dropdownMenuHeader collections__items__dropdown d-none d-xl-block"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Еще
+          </div>
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+            <a
+              *ngFor="let category of categories.slice(visibleCategoriesCount)"
+              class="dropdown-item"
+              [routerLink]="['/products', category.slug]"
+              [queryParams]="{category: category.slug}"
+            >
+              {{ category.name }}
+            </a>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
 </div>
 

@@ -1,1 +1,13 @@
 
+
+.container-fluid {
+  background-color: #f8f9fa;
+  padding: 0;
+}
+
+.app__section__main {
+  padding-top: 20px;
+}
+
+
+

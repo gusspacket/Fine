@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Categories } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/servise/category.service';
 
@@ -11,25 +10,34 @@ import { CategoryService } from 'src/app/servise/category.service';
 export class HeaderPartBottomComponent implements OnInit {
 
   categories: Categories[] = [];
+  // categories: any
   visibleCategoriesCount: number;
   isDropdownOpen = false;
 
-  constructor(
-    private categoryService: CategoryService
-    ) {}
 
+  constructor(private categoryService: CategoryService) {}
 
 
 
 
   ngOnInit() {
-   this.categoryService.getAllCategories().subscribe(categories => {
-    this.categories = categories
 
-   })
+    this.categoryService.categories$.subscribe(categories => {
+      this.categories = categories
+    })
+
+
+
+
+
+
 
    this.visibleCategoriesCount = 10
-  }
+}
+
+
+
+
 
 
 

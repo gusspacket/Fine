@@ -1,0 +1,44 @@
+<div class="container d-none d-xl-block">
+  <div class="row">
+
+    <div class="rec__main__cat col-xl-4">
+      <div class="rec_cat"> <span>Телефоны и планшеты</span></div>
+      @if (catPhone) {
+        <img class="rec__main__img" src="{{catPhone.img_url}}" alt="">
+      }
+
+      <a class="rec__button" [routerLink]="['/products', recCategory]">Смотреть</a>
+    </div>
+
+    <div class="col-xl-8 ps-0">
+    <ul class="rec__phone__items">
+      <ng-container *ngFor="let phone of phoneRec | slice:0:4">
+        <li class="item">
+          <div class="title"><span>{{phone.title}}</span></div>
+          <div class="price"><span>от {{phone.price}}</span></div>
+          <div class="item__img">
+            <img class="item-img" src="{{phone.img_url}}" alt="">
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+
+    <ul class="rec__phone__items">
+      <ng-container *ngFor="let phone of phoneRec | slice:5:9">
+        <li class="item">
+          <div class="title">{{phone.title}}</div>
+          <div class="price"><span>от {{phone.price}}</span></div>
+          <div class="item__img">
+            <img class="item-img" src="{{phone.img_url}}" alt="">
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+
+      </div>
+    </div>
+
+
+  </div>
+
+

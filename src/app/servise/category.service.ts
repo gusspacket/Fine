@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categories } from '../models/category.model';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService  {
+
+
+  public categoriesSubject: BehaviorSubject<Categories[]> = new BehaviorSubject<Categories[]>([]);
+  public categories$: Observable<Categories[]> = this.categoriesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 

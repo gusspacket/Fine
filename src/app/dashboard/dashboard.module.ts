@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterModule } from '../footer/footer.module';
 import { ProductReviewModule } from './product-review/product-review.module';
 import { BannerModule } from './banner/banner.module';
+import { SectionMainComponent } from './section-main/section-main.component';
+import { RecomendationPhonePageComponent } from './recomendation-phone-page/recomendation-phone-page.component';
+import { RecomendationLaptopPageComponent } from './recomendation-laptop-page/recomendation-laptop-page.component';
 
 
 
@@ -22,7 +25,10 @@ import { BannerModule } from './banner/banner.module';
     HeaderModule,
     FooterModule,
     ProductReviewModule,
-    BannerModule
+    BannerModule,
+    SectionMainComponent,
+    RecomendationPhonePageComponent,
+    RecomendationLaptopPageComponent
   ],
   exports: [
     DashboardComponent

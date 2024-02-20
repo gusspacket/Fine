@@ -23,9 +23,14 @@ export class BannerComponent implements OnInit {
   constructor(private bannerService: BannerService) {}
 
   ngOnInit() {
-    this.bannerService.getAllBanners().subscribe(banners => {
+    // this.bannerService.getAllBanners().subscribe(banners => {
+    //   this.banners = banners
+    // })
+
+    this.bannerService.getAllCollectionBanners().subscribe(banners => {
       this.banners = banners
     })
+
   }
 
 }

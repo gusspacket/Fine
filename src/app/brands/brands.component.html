@@ -1,19 +1,23 @@
-<div class="row">
-  <h1 class="mt-4">Популярные бренды</h1>
+<div class="container d-none d-xl-block">
+  <div class="row">
+    <p class="brand__title">Популярные бренды</p>
 
-  <div class="d-flex">
-    <div *ngFor="let brand of brands">
+    <div class="d-flex">
+      <div *ngFor="let brand of brands | slice:0:7">
 
-        <img
-        class="img-fluid img-thumbnail"
-        [src]="brand.img_url"
-      >
+          <img
+          class="img-fluid img-thumbnail"
+          [src]="brand.img_url"
+        >
 
 
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
+
+
 
 
 

@@ -8,14 +8,15 @@
 :root {
   --font-inter: 'Inter', sans-serif;
   --button-color1: rgba(18, 127, 255, 1);
-  --button-color2: rgba(0, 103, 255, 1);
+  --main-color:#0d6efd;
+  --main-color-gray:#8B96A5;
+
 }
 
 
 
 
-html, body { height: 100%;}
-body { margin: 0; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%;}
+body { margin: 0; font-family: var(--font-inter); }
+

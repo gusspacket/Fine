@@ -1,0 +1,20 @@
+<div class="banner">
+  <ngx-slick-carousel class="carousel card banner__slide" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let banner of banners" class="slide card banner__body">
+      <img class="banner__img" src="{{banner.img_url}}" alt="Product Image">
+    </div>
+  </ngx-slick-carousel>
+
+
+  <button (click)="slickModal.slickPrev()" class="banner__buttons__left">
+    <span class="material-icons">
+      arrow_back_ios
+      </span>
+  </button>
+
+  <button  class="banner__buttons__right">
+    <span class="material-icons" (click)="slickModal.slickNext()">
+      arrow_forward_ios
+      </span>
+  </button>
+</div>

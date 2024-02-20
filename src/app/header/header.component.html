@@ -1,10 +1,17 @@
 <!-- <app-header-part-top [settings]="settings"></app-header-part-top> -->
-<div class="container">
-  <app-header-part-main [settings]="settings">
-  </app-header-part-main>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<div class="container-fluid">
+  @if (categoriesAll) {
+    <app-header-part-main [settings]="settings" [categoriesAll]="categoriesAll"></app-header-part-main>
+  }
+
 </div>
-<div class="header__line"></div>
-<div class="container">
-  <app-header-part-bottom></app-header-part-bottom>
+<!-- <div class="header__line"></div> -->
+<div class="container-fluid">
+  @if (categoriesAll) {
+    <app-header-part-bottom ></app-header-part-bottom>
+  }
+
 </div>
-<div class="header__line"></div>
+<!-- <div class="header__line"></div> -->
+

@@ -3,14 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import { CartComponent } from '../cart/cart.component';
-import { SearchingComponent } from '../searching/searching.component';
-import { ProductComponent } from '../product/product.component';
+import { CartComponent } from '../cart/cart.component';import { ProductComponent } from '../product/product.component';
 import { OrderComponent } from '../order/order.component';
 import { UserComponent } from '../user/user.component';
 import { ProductsComponent } from '../products/products.component';
 import { AuthGuard } from '../guards/auth-guard.guard';
-import { HeaderNewComponent } from '../header-new/header-new.component';
 
 
 const routes: Routes = [
@@ -26,7 +23,7 @@ const routes: Routes = [
 
   ]},
 
-  { path: 'header', component:HeaderNewComponent, pathMatch: 'full' }
+
 
 
 

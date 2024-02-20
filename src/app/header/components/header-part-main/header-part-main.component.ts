@@ -21,6 +21,7 @@ export class HeaderPartMainComponent implements OnInit {
 
   @Input()
   settings: Settings;
+  @Input() categoriesAll: any;
 
 
   searchTerm = '';
@@ -73,7 +74,7 @@ export class HeaderPartMainComponent implements OnInit {
           this.openDialog('300ms', '100ms'); // Можете выполнить другие действия в случае ошибки.
         }
     );
-}
+  }
 
 
   letsSearch(searchTerm: string): void {

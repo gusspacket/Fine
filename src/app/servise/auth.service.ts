@@ -53,8 +53,6 @@ export class AuthService {
 
   setLoggedInStatus(isLoggedIn: boolean): void {
     this.isLoggedInSubject.next(isLoggedIn);
-    console.log(this.isLoggedIn$);
-
   }
 
   checkBrowserTokenWithServer() {

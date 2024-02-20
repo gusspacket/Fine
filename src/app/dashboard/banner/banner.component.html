@@ -1,65 +1,37 @@
-<div class="row banner mt-3">
-  <ngx-slick-carousel
-    class="carousel card banner__slide"
-    #slickModal="slick-carousel"
-    [config]="slideConfig"
-  >
-    <div
-      ngxSlickItem
-      *ngFor="let banner of banners"
-      class="slide card banner__body col-10"
-      style="width: 13rem;"
+<div class="container">
+  <div class="row banner mt-3">
+    <ngx-slick-carousel
+      class="carousel card banner__slide"
+      #slickModal="slick-carousel"
+      [config]="slideConfig"
     >
-      <img class="banner__img" src="{{banner.img_url}}" alt="Product Image">
-    </div>
-  </ngx-slick-carousel>
+      <div
+        ngxSlickItem
+        *ngFor="let banner of banners"
+        class="slide card banner__body col-10"
+        style="width: 13rem;"
+      >
+        <img class="banner__img" src="{{banner.img_url}}" alt="Product Image">
+      </div>
+    </ngx-slick-carousel>
 
-
-    <button
-      (click)="slickModal.slickPrev()"
-      class="banner__buttons__left"
-    >
-      <span class="material-icons">
-        arrow_back
-      </span>
-    </button>
 
       <button
-        (click)="slickModal.slickNext()"
-        class="banner__buttons__right"
+        (click)="slickModal.slickPrev()"
+        class="banner__buttons__left"
       >
         <span class="material-icons">
-          arrow_forward
+          arrow_back
         </span>
       </button>
 
-
-
-
-
-
- </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <button
+          (click)="slickModal.slickNext()"
+          class="banner__buttons__right"
+        >
+          <span class="material-icons">
+            arrow_forward
+          </span>
+        </button>
+   </div>
+</div>
