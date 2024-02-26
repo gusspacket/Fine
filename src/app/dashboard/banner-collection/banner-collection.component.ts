@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Banners } from 'src/app/models/banner.model';
-import { BannerService } from 'src/app/servise/banner.service';
 
 @Component({
   selector: 'app-banner-collection',
@@ -13,7 +12,8 @@ import { BannerService } from 'src/app/servise/banner.service';
 })
 export class BannerCollectionComponent implements OnInit {
 
-  banners: Banners[] = [];
+
+  @Input() banners:Banners[] = [];
 
   slideConfig = {
     slidesToShow: 1,
@@ -24,12 +24,10 @@ export class BannerCollectionComponent implements OnInit {
     autoplaySpeed: 4000
   };
 
-  constructor(private bannerService:BannerService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.bannerService.getAllCollectionBanners().subscribe(banners => {
-      this.banners = banners
-    })
+
   }
 
 }

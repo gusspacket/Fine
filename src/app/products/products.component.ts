@@ -91,6 +91,7 @@ export class ProductsComponent implements OnInit {
 
 
 ngOnInit() {
+  window.scrollTo(0, 0);
   this.route.queryParams.subscribe(params => {
     this.searchTerm = params['term']
     if(this.searchTerm) {

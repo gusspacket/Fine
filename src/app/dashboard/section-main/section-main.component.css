@@ -215,3 +215,15 @@ li {
   }
 
 }
+
+
+@media (max-width: 576px) {
+
+  .section__main__mobile {
+    padding: 0;
+    height: 180px;
+  }
+
+
+
+}

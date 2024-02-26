@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-.header__line {
-  background-color: #f7f7f7;
- border-bottom: 3px solid #f7f7f7;
-}
+
 
 .container-fluid {
   border-bottom: 3px solid #f7f7f7;
+  padding: 0;
+
 }
 
 
@@ -14,7 +13,8 @@
 
 @media (max-width: 1200px)  {
   .container-fluid {
-    border-bottom: none
+    border-bottom: none;
+    padding: 0;
   }
 
 }

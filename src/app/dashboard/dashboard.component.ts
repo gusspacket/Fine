@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../servise/category.service';
-import { Categories } from '../models/category.model';
+import { User } from '../models/user.model';
+import { TokenService } from '../servise/token.service';
+import { UserService } from '../servise/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +11,19 @@ import { Categories } from '../models/category.model';
 export class DashboardComponent implements OnInit {
 
 
+  user:User
+  user$
 
-  constructor( ) {
+  constructor( private tokenService: TokenService,private userService: UserService) {
 
   }
   ngOnInit(): void {
+    this.userService.user$.subscribe((user$) => {
+      if(user$) {
+       this.user = user$
+      }
+    })
+
 
   }
 

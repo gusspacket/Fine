@@ -29,6 +29,8 @@ export class BannerComponent implements OnInit {
 
     this.bannerService.getAllCollectionBanners().subscribe(banners => {
       this.banners = banners
+      console.log(this.banners);
+
     })
 
   }

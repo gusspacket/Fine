@@ -12,6 +12,7 @@ import { TokenService } from 'src/app/servise/token.service';
 import { User } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthComponent } from 'src/app/auth/auth.component';
+import { UserService } from 'src/app/servise/user.service';
 
 @Component({
   selector: 'app-section-main',
@@ -28,6 +29,7 @@ export class SectionMainComponent implements OnInit {
   isLogging:boolean = false
   user:User
   categories:any
+  banners
 
 
 
@@ -37,7 +39,8 @@ export class SectionMainComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private userService: UserService
     ) {
 
   }
@@ -45,12 +48,15 @@ export class SectionMainComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+
     this.categoryService.categories$.subscribe((categories) => {
       this.categories = categories
     })
 
     this.coolectionsService.getAllCollections().subscribe((collection) => {
       this.coolection = collection[0]
+      this.banners = collection
     })
 
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
@@ -58,14 +64,13 @@ export class SectionMainComponent implements OnInit {
     })
 
 
-    // this.categoryService.getAllCategories().subscribe(categories => {
-    //   this.categories = categories
-    // })
 
     this.visibleCategoriesCount = 9
 
-    this.tokenService.postUserDataWithToken().subscribe((userData: User) => {
-      this.user = userData
+    this.userService.user$.subscribe((user$) => {
+      if(user$) {
+       this.user = user$
+      }
     })
 
   }

@@ -3,11 +3,89 @@
 .container-fluid {
   background-color: #f8f9fa;
   padding: 0;
+  /* overflow: hidden; */
+  scrollbar-width: none !important;
+  overflow-y: hidden !important;
+
 }
 
 .app__section__main {
   padding-top: 20px;
 }
 
+.app__section__recom__random__title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 133%;
+  letter-spacing: -0.01em;
+  color: #1c1c1c;
+  margin: 0;
+}
+
+.container {
+  width: 1180px;
+  padding: 0;
+  margin-bottom: 24px;
+  margin-top: 20px;
+}
 
 
+
+@media (max-width: 1200px) {
+
+  .container {
+    width: 100%;
+    padding: 0;
+    margin-left: 12px;
+    margin-bottom: 24px;
+
+  }
+  .container-fluid {
+    background-color: white;
+    padding: 0;
+  }
+
+  .app__section__main {
+    padding-top: 0px;
+  }
+
+
+  .app__section__recom__phone {
+    overflow-x: scroll !important;
+    /* white-space: nowrap; */
+    scrollbar-width: none !important;
+  }
+
+  .app__section__recom__laptop {
+    overflow-x: scroll !important;
+    /* white-space: nowrap; */
+    scrollbar-width: none !important;
+  }
+
+  .app__section__recom__random {
+    overflow-x: scroll !important;
+    scrollbar-width: none !important;
+
+  }
+
+
+
+
+
+}
+
+@media (max-width: 880px)  {
+
+  .container {
+    margin: 0;
+    margin-left: 12px;
+    padding: 0;
+  }
+
+  .app__section__recom__random__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1c1c1c;
+    margin-bottom: 10px;
+  }
+}

@@ -9,6 +9,8 @@ import { Product } from 'src/app/models/product.model';
 import { Settings } from 'src/app/models/settings.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/servise/auth.service';
+import { TokenService } from 'src/app/servise/token.service';
+import { UserService } from 'src/app/servise/user.service';
 
 @Component({
   selector: 'app-header-part-main',
@@ -44,13 +46,26 @@ export class HeaderPartMainComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private authService: AuthService,
+    private userService: UserService,
+    private tokenService: TokenService
   ){}
 
 
   ngOnInit() {
+
+
+
+
+
     // this.openDialog('200ms', '100ms')
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLogging = isLoggedIn;})
+
+      this.userService.user$.subscribe((user$) => {
+        if(user$) {
+         this.user = user$
+        }
+      })
 
     // this.cartService.updateItemCartCount()
 
@@ -97,6 +112,14 @@ export class HeaderPartMainComponent implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
+
+  logOut() {
+    this.authService.deleteTokenFromServer()
+    this.tokenService.clearAuthToken()
+    this.authService.setLoggedInStatus(false)
+    this.router.navigate(['/']);
+    this.authService.isLoggedInSubject.next(false);
   }
 
 

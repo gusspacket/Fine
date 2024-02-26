@@ -11,9 +11,10 @@ export class UserService {
   public isEditingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isEditings$: Observable<boolean> = this.isEditingSubject.asObservable();
 
-  private userSubject = new BehaviorSubject<any>(null);
+  public userSubject = new BehaviorSubject<any>(null);
   user$: Observable<any> = this.userSubject.asObservable();
 
+  // может что то поменяться, потому что я делаю запрос теперь в начале и кладу туда начальный user
 
 
 

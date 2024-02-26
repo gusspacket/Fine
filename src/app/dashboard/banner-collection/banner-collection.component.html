@@ -1,7 +1,15 @@
 <div class="banner">
   <ngx-slick-carousel class="carousel card banner__slide" #slickModal="slick-carousel" [config]="slideConfig">
     <div ngxSlickItem *ngFor="let banner of banners" class="slide card banner__body">
+      <div class="banner__text_box">
+        <p class="banner__name">{{banner.name}}</p>
+        <p class="banner__name__desc">{{banner.description}}</p>
+        <button class="banner__button">Смотреть</button>
+      </div>
+
+
       <img class="banner__img" src="{{banner.img_url}}" alt="Product Image">
+
     </div>
   </ngx-slick-carousel>
 

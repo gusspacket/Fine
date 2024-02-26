@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { ApplicationPipesModule } from 'src/app/pipes/products-price/application-pipes.module';
 import { CategoryService } from 'src/app/servise/category.service';
 import { ProductService } from 'src/app/servise/product.service';
 
 @Component({
   selector: 'app-recomendation-phone-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ApplicationPipesModule],
   templateUrl: './recomendation-phone-page.component.html',
   styleUrl: './recomendation-phone-page.component.css'
 })

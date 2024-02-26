@@ -8,7 +8,8 @@ import { SerchProductsPipe } from './products-search.pipe';
 @NgModule({
   declarations: [
     ProductsPriceFormatPipe,
-    SerchProductsPipe
+    SerchProductsPipe,
+
   ],
   imports: [
     CommonModule

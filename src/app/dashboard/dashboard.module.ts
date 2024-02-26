@@ -1,3 +1,4 @@
+import { ProductsPriceFormatPipe } from './../pipes/products-price/products-price.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
@@ -10,6 +11,7 @@ import { BannerModule } from './banner/banner.module';
 import { SectionMainComponent } from './section-main/section-main.component';
 import { RecomendationPhonePageComponent } from './recomendation-phone-page/recomendation-phone-page.component';
 import { RecomendationLaptopPageComponent } from './recomendation-laptop-page/recomendation-laptop-page.component';
+import { RecomendationRandomMobilePageComponent } from './recomendation-random-mobile-page/recomendation-random-mobile-page.component';
 
 
 
@@ -28,7 +30,10 @@ import { RecomendationLaptopPageComponent } from './recomendation-laptop-page/re
     BannerModule,
     SectionMainComponent,
     RecomendationPhonePageComponent,
-    RecomendationLaptopPageComponent
+    RecomendationLaptopPageComponent,
+    RecomendationRandomMobilePageComponent
+
+
   ],
   exports: [
     DashboardComponent

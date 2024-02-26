@@ -3,7 +3,7 @@
   <div class="section__block">
     <div class="row">
 
-      <div class="d-none d-xl-block col-xl-2 sections__category">
+      <div class=" col-xl-2 sections__category">
         <ul>
           <li *ngFor="let category of categories; let i = index">
             <a class="category__link" *ngIf="i < visibleCategoriesCount"
@@ -14,11 +14,10 @@
           </li>
         </ul>
       </div>
-
-
+<!-- d-none d-xl-block  -->
       <div class="d-none d-xl-block col-xl-7">
         <div class="section__img">
-          <app-banner-collection></app-banner-collection>
+          <app-banner-collection [banners]="banners"></app-banner-collection>
         </div>
       </div>
 
@@ -46,7 +45,7 @@
                       <span class="user__title">{{ user.first_name.length > 14 ? (user.first_name | slice:0:13) + '...' : user.first_name }}</span>
                     </div>
                   } @else {
-                    <div class="user__info">
+                    <div class="user__info ">
                     <span class="user__title__reg">Войти </span>
                     <span class="user__title__reg">в профиль</span>
                     </div>
@@ -79,6 +78,15 @@
     </div>
   </div>
 </div>
+
+
+<div class="container-fluid d-xl-none section__main__mobile">
+  <app-banner-collection [banners]="banners"></app-banner-collection>
+
+
+</div>
+
+
 
 
 

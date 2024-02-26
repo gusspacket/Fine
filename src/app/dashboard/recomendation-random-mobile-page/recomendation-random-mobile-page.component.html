@@ -1,0 +1,37 @@
+<div class="container">
+  <!-- <h1 class="random__title">Рекоммендации</h1> -->
+
+  <ul class="random">
+    <ng-container *ngFor="let item of randomItems | slice:0:5">
+       <a class="link" [routerLink]="['/product', item.slug]">
+        <li class="random__item">
+          <div class="random__item__img">
+            <img src="{{item.img_url}}" alt="recom-img" class="random__img">
+          </div>
+          <div class="random__text">
+            <p class="random__price">{{item.price | productsPriceFormatPipe}} ₽</p>
+            <p class="random__name">{{item.title}}</p>
+          </div>
+
+        </li>
+       </a>
+    </ng-container>
+  </ul>
+
+  <ul class="random">
+    <ng-container *ngFor="let item of randomItems | slice:6:11">
+      <a class="link" [routerLink]="['/product', item.slug]">
+        <li class="random__item">
+          <div class="random__item__img">
+            <img src="{{item.img_url}}" alt="recom-img" class="random__img">
+          </div>
+          <div class="random__text">
+            <p class="random__price">{{item.price | productsPriceFormatPipe}} ₽</p>
+            <p class="random__name">{{item.title}}</p>
+          </div>
+        </li>
+      </a>
+    </ng-container>
+  </ul>
+
+</div>

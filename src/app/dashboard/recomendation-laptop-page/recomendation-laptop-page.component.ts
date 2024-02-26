@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { ApplicationPipesModule } from 'src/app/pipes/products-price/application-pipes.module';
 import { CategoryService } from 'src/app/servise/category.service';
 import { ProductService } from 'src/app/servise/product.service';
 
 @Component({
   selector: 'app-recomendation-laptop-page',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, ApplicationPipesModule],
   templateUrl: './recomendation-laptop-page.component.html',
   styleUrl: './recomendation-laptop-page.component.css'
 })
