@@ -1,0 +1,115 @@
+
+<div class="container-xl ">
+  <div class="recommendation__section">
+
+    <div class="rec__main__cat">
+      @if (catPhone) {
+        <div class="rec_cat"> <span>{{catPhone.name}}</span></div>
+        <img class="rec__main__img" src="{{catPhone.img_url}}" alt="">
+      }
+
+      <a class="rec__button" [routerLink]="['/products', recCategory]">Смотреть</a>
+    </div>
+
+
+
+
+    <div class="rec__phones">
+      <ul class="rec__phone__items">
+        @if (phoneRec) {
+          <ng-container *ngFor="let phone of phoneRec | slice:0:4">
+            <a class="link" [routerLink]="['/product', phone.slug]">
+              <li class="item">
+                @if (phone.title.length > 35) {
+                  <div class="title"><span>{{phone.title | slice:0:35}}...</span></div>
+                } @else {
+                  <div class="title"><span>{{phone.title}}</span></div>
+                }
+                <div class="price"><span>{{phone.price | productsPriceFormatPipe}} ₽</span></div>
+                <div class="item__img">
+                  <img class="item-img" src="{{phone.img_url}}" alt="phone.img_url">
+                </div>
+              </li>
+            </a>
+          </ng-container>
+        }
+
+
+      </ul>
+
+      <ul class="rec__phone__items">
+        <ng-container *ngFor="let phone of phoneRec | slice:5:9">
+          <a class="link" [routerLink]="['/product', phone.slug]">
+            <li class="item">
+              @if (phone.title.length > 35) {
+                <div class="title"><span>{{phone.title | slice:0:35}}...</span></div>
+              } @else {
+                <div class="title"><span>{{phone.title}}</span></div>
+              }
+              <div class="price"><span>{{phone.price | productsPriceFormatPipe}} ₽</span></div>
+              <div class="item__img">
+                <img class="item-img" src="{{phone.img_url}}" alt="">
+              </div>
+            </li>
+          </a>
+
+        </ng-container>
+      </ul>
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
+<div class="container">
+
+  <!-- <h1 class="mobile__title">Телефоны и планшеты</h1> -->
+
+  <ul class="rec__mobile__phone">
+    <ng-container *ngFor="let phone of phoneRec | slice:0:6">
+      <a class="link" [routerLink]="['/product', phone.slug]">
+        <div class="rec">
+        <li class="mobile__item">
+          <div class="mobile__img">
+            <img  src="{{phone.img_url}}" alt="recImg">
+          </div>
+
+          <div class="mobile__text">
+            <p class="mobile__name">{{phone.title }}</p>
+            <p class="mobile__price">{{phone.price | productsPriceFormatPipe}} ₽</p>
+          </div>
+
+        </li>
+        </div>
+      </a>
+    </ng-container>
+  </ul>
+
+  <ul class="rec__mobile__phone rec2">
+    <ng-container *ngFor="let phone of phoneRec |slice:6:12">
+      <a class="link" [routerLink]="['/product', phone.slug]">
+        <div class="rec">
+        <li class="mobile__item">
+          <div class="mobile__img">
+            <img  src="{{phone.img_url}}" alt="recImg">
+          </div>
+
+          <div class="mobile__text">
+            <p class="mobile__name">{{phone.title}}</p>
+            <p class="mobile__price">{{phone.price | productsPriceFormatPipe}} ₽</p>
+          </div>
+
+        </li>
+        </div>
+      </a>
+    </ng-container>
+  </ul>
+</div>
+
+
+
+

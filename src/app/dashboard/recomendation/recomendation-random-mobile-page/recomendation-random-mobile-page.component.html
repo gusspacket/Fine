@@ -10,7 +10,17 @@
           </div>
           <div class="random__text">
             <p class="random__price">{{item.price | productsPriceFormatPipe}} ₽</p>
-            <p class="random__name">{{item.title}}</p>
+
+            <div class="random__name__block">
+              <p class="random__name">{{item.title}}</p>
+              <!-- @if (item.title.length > 37) {
+                <p class="random__name">{{item.title | slice:0:37}}... </p>
+              } @else {
+                <p class="random__name">{{item.title}}</p>
+              } -->
+            </div>
+
+
           </div>
 
         </li>
@@ -27,7 +37,9 @@
           </div>
           <div class="random__text">
             <p class="random__price">{{item.price | productsPriceFormatPipe}} ₽</p>
-            <p class="random__name">{{item.title}}</p>
+            <div class="random__name__block">
+              <p class="random__name">{{item.title}}</p>
+            </div>
           </div>
         </li>
       </a>
@@ -35,3 +47,11 @@
   </ul>
 
 </div>
+
+
+
+
+
+
+
+

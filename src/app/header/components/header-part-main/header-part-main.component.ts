@@ -1,9 +1,7 @@
-import { AuthCodeComponent } from './../../../auth/auth-code/auth-code.component';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {  Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { AuthModalComponent } from 'src/app/auth-modal/auth-modal.component';
 import { AuthComponent } from 'src/app/auth/auth.component';
 import { Product } from 'src/app/models/product.model';
 import { Settings } from 'src/app/models/settings.model';
@@ -11,6 +9,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/servise/auth.service';
 import { TokenService } from 'src/app/servise/token.service';
 import { UserService } from 'src/app/servise/user.service';
+import { Collapse } from 'bootstrap'
 
 @Component({
   selector: 'app-header-part-main',
@@ -124,7 +123,11 @@ export class HeaderPartMainComponent implements OnInit {
 
 
 
-
+  collapseAccordion() {
+    const accordion = document.getElementById('flush-collapseOne');
+    const accordionInstance = new Collapse(accordion); // создаем экземпляр аккордеона
+    accordionInstance.hide(); // сворачиваем аккордеон
+  }
 
 
 

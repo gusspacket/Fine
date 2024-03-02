@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { RecommendationItems } from 'src/app/models/recommendation-items.model';
 import { ApplicationPipesModule } from 'src/app/pipes/products-price/application-pipes.module';
 import { CategoryService } from 'src/app/servise/category.service';
 import { ProductService } from 'src/app/servise/product.service';
+import { RandomProductsService } from 'src/app/servise/random-products.service.';
 
 @Component({
   selector: 'app-recomendation-phone-page',
@@ -17,24 +19,28 @@ export class RecomendationPhonePageComponent implements OnInit{
 
 
  catPhone:any
- phoneRec: Product[]
+ phoneRec: RecommendationItems[]
  recCategory:string = 'smarfony'
+ countRandomPhone:number = 12;
 
-  constructor(private productService: ProductService,
-    private categoryService: CategoryService) {
-
-  }
+  constructor
+    (
+      private categoryService: CategoryService,
+      private randomProductsServiceService: RandomProductsService
+    )
+    {}
 
 
   ngOnInit(): void {
-    this.productService.getAllPhones2().subscribe((phone) => {
-      this.phoneRec = phone
+    this.randomProductsServiceService.getRandomPhones(this.countRandomPhone)
+    .subscribe((phones)=> {
+      this.phoneRec = phones
     })
 
     this.categoryService.categories$.subscribe((cat) => {
       this.catPhone = cat[0]
-    })
 
+    })
   }
 
 

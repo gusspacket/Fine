@@ -17,6 +17,6 @@
 
 
 
-html, body { height: 100%;}
+html, body { height: 100%; scrollbar-width: none !important;}
 body { margin: 0; font-family: var(--font-inter);}
 

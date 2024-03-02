@@ -1,12 +1,6 @@
-
-
 .container-fluid {
   background-color: #f8f9fa;
   padding: 0;
-  /* overflow: hidden; */
-  scrollbar-width: none !important;
-  overflow-y: hidden !important;
-
 }
 
 .app__section__main {
@@ -27,7 +21,22 @@
   padding: 0;
   margin-bottom: 24px;
   margin-top: 20px;
+
 }
+
+.app__section__recom__laptop,
+.app__section__recom__phone,
+.app__section__recom__random {
+  max-width: 100%;
+}
+
+
+.app__section__recom__laptop::-webkit-scrollbar,
+.app__section__recom__random::-webkit-scrollbar,
+.app__section__recom__phone::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 
@@ -52,17 +61,22 @@
 
   .app__section__recom__phone {
     overflow-x: scroll !important;
-    /* white-space: nowrap; */
     scrollbar-width: none !important;
   }
 
   .app__section__recom__laptop {
-    overflow-x: scroll !important;
-    /* white-space: nowrap; */
+    max-width: 100%;
+    overflow-x: auto !important;
     scrollbar-width: none !important;
   }
 
   .app__section__recom__random {
+    overflow-x: scroll !important;
+    scrollbar-width: none !important;
+
+  }
+
+  .app__section__recom__random__rec {
     overflow-x: scroll !important;
     scrollbar-width: none !important;
 
@@ -74,18 +88,28 @@
 
 }
 
-@media (max-width: 880px)  {
+@media (min-width: 881px) {
+  .app__section__recom__random__title__laptop,
+  .app__section__recom__random__title__phone {
+    display: none;
+  }
+}
 
+@media (max-width: 880px)  {
   .container {
     margin: 0;
     margin-left: 12px;
     padding: 0;
+    max-width: 100%;
   }
 
-  .app__section__recom__random__title {
+  .app__section__recom__random__title,
+  .app__section__recom__random__title__laptop,
+  .app__section__recom__random__title__phone {
     font-size: 18px;
     font-weight: 600;
     color: #1c1c1c;
     margin-bottom: 10px;
+    margin-top: 20px;
   }
 }

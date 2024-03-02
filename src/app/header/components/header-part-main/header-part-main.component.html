@@ -66,22 +66,11 @@
 
 
 
-
-
-
-
-
-
-
-<div class="container-fluid mt-3 mb-3  d-xl-none" >
-
+<div class="container-fluid mt-3 d-xl-none" >
       <nav class="navbar">
-
-
-
           <div class="d-flex justify-content-left">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" data-bs-dismiss="offcanvas">
+              <span class="navbar-toggler-icon" data-bs-dismiss="offcanvas"></span>
             </button>
             <a class="main__logo ms-2" routerLink="/" *ngIf="settings">
               <img src="{{settings.logo}}" alt="MainLogo" class="main__img">
@@ -107,7 +96,7 @@
 
 
 
-          <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
               <div class="mobile__user__head">
 
@@ -140,8 +129,35 @@
                 <a routerLink="/">Главная</a>
               </div>
 
-              <div class="dropdown">
 
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Все категории
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse " aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    <a
+                      *ngFor="let category of categoriesAll; let $index = index"
+                      [routerLink]="['/products', category.slug]"
+                      class="dropdown-item"
+                      data-bs-dismiss="offcanvas"
+                      (click)="collapseAccordion()"
+                    >
+                      {{ category.name }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+              <!-- <div class="dropdown">
                 <div
                   class="btn dropdown-toggle dropdownMenuHeader collections__items__dropdown"
                   id="dropdownMenuButton"
@@ -165,7 +181,7 @@
                   </a>
                 }
                 </div>
-              </div>
+              </div> -->
 
               <div class="dropdown__home" data-bs-dismiss="offcanvas">
                 <a  href="#">Избранные</a>
@@ -205,11 +221,11 @@
 
 </div>
 
-<!--
-  <div class="input__mobile w-100 d-xl-none">
+
+  <div class="input__mobile d-xl-none">
     <input [(ngModel)]="searchTerm" (keydown.enter)="letsSearch(searchTerm)" type="text"
     placeholder="Например MacBook Pro M1">
-  </div> -->
+  </div>
 
 
 

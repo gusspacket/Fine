@@ -1,6 +1,9 @@
+
 * {
   font-family: 'Inter', sans-serif;
 }
+
+
 a {
   text-decoration: none;
 }
@@ -10,7 +13,20 @@ a {
   height: 696px;
   background-color: transparent;
   padding: 0;
+
 }
+
+
+.random__name__block {
+  height: 50px;
+  width: 220px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+}
+
 
 
 .random__title {
@@ -20,6 +36,8 @@ a {
   letter-spacing: -0.01em;
   color: #1c1c1c;
   margin-bottom: 24px;
+
+
 }
 
 ul {
@@ -88,12 +106,17 @@ ul {
   word-break: break-word;
 }
 
+@media (min-width: 1201px) and (max-width: 1400px)  {
+  .random__item {
+    margin-right: 10px;
+    }
 
+}
 
  @media (min-width: 881px) and (max-width: 1200px) {
   .container {
     width: 100%;
-   margin-left: 12px;
+    margin-left: 12px;
 
   }
 }
@@ -101,8 +124,11 @@ ul {
 @media (max-width: 880px)  {
   .container {
     width: 100%;
+    height: auto;
     padding: 12px;
     margin: 0;
+
+    scrollbar-width: none !important;
   }
 
 
@@ -151,6 +177,16 @@ ul {
 
   }
 
+  .random__name__block {
+    height: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+  }
+
+
   .random__name {
     overflow-wrap: break-word;
     font-size: 13px;
@@ -161,5 +197,10 @@ ul {
 
 
 }
+
+
+
+
+/*  */
 
 

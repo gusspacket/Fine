@@ -1,20 +1,16 @@
 <div class="container d-none d-xl-block">
-  <div class="row">
     <p class="brand__title">Популярные бренды</p>
-
-    <div class="d-flex">
-      <div *ngFor="let brand of brands | slice:0:7">
+    <div class="brands__block">
+      <div *ngFor="let brand of brands | slice:0:7" class="brands__icons">
 
           <img
-          class="img-fluid img-thumbnail"
+          class="brand__img"
           [src]="brand.img_url"
         >
-
-
       </div>
     </div>
 
-  </div>
+
 </div>
 
 

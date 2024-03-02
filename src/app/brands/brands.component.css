@@ -9,29 +9,45 @@
   background-color: #fff;
   width: 1180px;
   height: 200px;
-  /* border-radius: 6px; */
-  /* border: 1px solid #dee2e7; */
   background-color: transparent;
-  /* margin-top: 20px; */
   padding: 0;
-
+  margin-top: 10px;
 }
 
 
 
 
 .brand__title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
+  line-height: 133%;
+  letter-spacing: -0.01em;
   color: #1c1c1c;
-  margin-top: 20px;
+
 }
 
-.brands__popular {
+
+
+
+.brands__block  {
+  width: 100%;
   display: flex;
-  border: 1px solid red
+}
+
+.brands__icons {
+  margin-right: 10px;
+  border-radius: 6px;
 
 }
+
+.brand__img  {
+  width: 160px;
+  height: auto;
+  border: 1px solid #dee2e7;
+  border-radius: 6px;
+}
+
+
 
 
 
