@@ -31,9 +31,6 @@ import { RecomendationRandomMobilePageComponent } from './recomendation/recomend
     RecomendationPhonePageComponent,
     RecomendationLaptopPageComponent,
     RecomendationRandomMobilePageComponent
-
-
-
   ],
   exports: [
     DashboardComponent

@@ -19,20 +19,13 @@ export class RecomendationRandomMobilePageComponent implements OnInit {
   randomItems: RecommendationItems[];
   countRandomProducts:number = 12;
 
-  constructor(private productService: ProductService,
-    private randomProductsServiceService: RandomProductsService) {}
+  constructor(private randomProductsServiceService: RandomProductsService) {}
 
 
   ngOnInit(): void {
-    // this.productService.getAllPhones2().subscribe((items) => {
-    //   this.randomItems = items
-    // })
-
     this.randomProductsServiceService.getRandomProducts(this.countRandomProducts)
     .subscribe((items)=> {
       this.randomItems = items
     })
-
-
   }
 }

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
 import { SearchService } from '../servise/search.service';
+import { RecomendationRandomMobilePageComponent } from '../dashboard/recomendation/recomendation-random-mobile-page/recomendation-random-mobile-page.component';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,9 @@ import { SearchService } from '../servise/search.service';
     FormsModule,
     CommonModule,
     RouterModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    RecomendationRandomMobilePageComponent
+
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'

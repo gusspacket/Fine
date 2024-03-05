@@ -1,6 +1,4 @@
 <div class="container">
-  <!-- <h1 class="random__title">Рекоммендации</h1> -->
-
   <ul class="random">
     <ng-container *ngFor="let item of randomItems | slice:0:5">
        <a class="link" [routerLink]="['/product', item.slug]">
@@ -13,16 +11,8 @@
 
             <div class="random__name__block">
               <p class="random__name">{{item.title}}</p>
-              <!-- @if (item.title.length > 37) {
-                <p class="random__name">{{item.title | slice:0:37}}... </p>
-              } @else {
-                <p class="random__name">{{item.title}}</p>
-              } -->
             </div>
-
-
           </div>
-
         </li>
        </a>
     </ng-container>
@@ -45,7 +35,6 @@
       </a>
     </ng-container>
   </ul>
-
 </div>
 
 

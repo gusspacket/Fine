@@ -34,7 +34,6 @@
           </ng-container>
         }
 
-
       </ul>
 
       <ul class="rec__phone__items">
@@ -55,20 +54,13 @@
 
         </ng-container>
       </ul>
-
     </div>
-
-
-
   </div>
 </div>
 
 
 
 <div class="container">
-
-  <!-- <h1 class="mobile__title">Телефоны и планшеты</h1> -->
-
   <ul class="rec__mobile__phone">
     <ng-container *ngFor="let phone of phoneRec | slice:0:6">
       <a class="link" [routerLink]="['/product', phone.slug]">
@@ -82,7 +74,6 @@
             <p class="mobile__name">{{phone.title }}</p>
             <p class="mobile__price">{{phone.price | productsPriceFormatPipe}} ₽</p>
           </div>
-
         </li>
         </div>
       </a>
@@ -102,7 +93,6 @@
             <p class="mobile__name">{{phone.title}}</p>
             <p class="mobile__price">{{phone.price | productsPriceFormatPipe}} ₽</p>
           </div>
-
         </li>
         </div>
       </a>
