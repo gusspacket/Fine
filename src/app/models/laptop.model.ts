@@ -6,6 +6,7 @@ export interface Laptops {
   description: string;
   brand: string;
   slug:string;
+  rate: number;
   category:number;
   sku: Sku;
   skus:Sku[];

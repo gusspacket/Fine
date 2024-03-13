@@ -9,12 +9,11 @@
             <a class="category__link" *ngIf="i < visibleCategoriesCount"
               [routerLink]="['/products', category.slug]"
             >
-              {{ category.name }}
+              {{ category.name |slice:0:21 }}
             </a>
           </li>
         </ul>
       </div>
-<!-- d-none d-xl-block  -->
       <div class="d-none d-xl-block col-xl-7">
         <div class="section__img">
           <app-banner-collection [banners]="banners"></app-banner-collection>

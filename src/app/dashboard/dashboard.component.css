@@ -1,6 +1,8 @@
 .container-fluid {
   background-color: #f8f9fa;
   padding: 0;
+  /* width: 100%;
+  overflow: hidden; */
 }
 
 .app__section__main {
@@ -27,7 +29,7 @@
 .app__section__recom__laptop,
 .app__section__recom__phone,
 .app__section__recom__random {
-  max-width: 100%;
+  width: 100%;
 }
 
 

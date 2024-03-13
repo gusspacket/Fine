@@ -156,6 +156,7 @@ input {
 .container-fluid {
   padding: 0;
   margin: 0;
+  height: 100%;
 
 }
 
@@ -191,6 +192,8 @@ input {
   height: 100px;
   background-color: #eff2f4;
 }
+
+
 
 .mobile__user__head {
   display: flex;

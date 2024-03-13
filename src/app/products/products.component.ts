@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
 import { SearchService } from '../servise/search.service';
 import { RecomendationRandomMobilePageComponent } from '../dashboard/recomendation/recomendation-random-mobile-page/recomendation-random-mobile-page.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,8 @@ import { RecomendationRandomMobilePageComponent } from '../dashboard/recomendati
     CommonModule,
     RouterModule,
     ApplicationPipesModule,
-    RecomendationRandomMobilePageComponent
+    RecomendationRandomMobilePageComponent,
+    StarRatingModule
 
   ],
   templateUrl: './products.component.html',
@@ -62,6 +64,10 @@ export class ProductsComponent implements OnInit {
   originalProducts = []
   brands = []
   noResultsFound = false
+  rating:number = 3;
+  searchProductsLength = 0
+  itemsSearch = false;
+  pluralizeProduct: string;
 
 
   // FILTER
@@ -74,9 +80,7 @@ export class ProductsComponent implements OnInit {
 
 
 
-  // PAGINATOR
-  pageSlice: Product[]
-  lengthProducts: number
+
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -114,6 +118,9 @@ ngOnInit() {
 
 }
 
+setRating(value:number) {
+  this.rating = 1
+}
 
 loadProducts() {
   this.productService.getProductsByCategory(this.category).subscribe((products) => {
@@ -124,12 +131,12 @@ loadProducts() {
     this.itemsProductsBrands()
     this.minPrice = this.getMinPrice();
     this.maxPrice = this.getMaxPrice();
-    this.lengthProducts = this.products.length;
   })
 
 }
 
 loadProductsSearch() {
+  this.itemsSearch = false
   this.searchService.getAllProducts(this.searchTerm).subscribe(
     (products) => {
       if (products.length === 0) {
@@ -137,6 +144,9 @@ loadProductsSearch() {
         this.categoryName = "Поиск"
       } else {
         this.products = products;
+        this.searchProductsLength = products.length
+        this.productsOrProduct(this.searchProductsLength)
+        this.itemsSearch = true
         this.categoryName = "Поиск"
         this.noResultsFound = false;
       }
@@ -145,13 +155,34 @@ loadProductsSearch() {
 }
 
 
-
+productsOrProduct(count:number) {
+  if(count === 1) {
+    this.pluralizeProduct = `Найден ${count} товар`
+  }  else if(count >= 2 && count <= 4) {
+    this.pluralizeProduct = `Найдено ${count} товара`
+  } else {
+    this.pluralizeProduct = `Найдено ${count} товаров`
+  }
+}
 
 // FILTER
 
-searchColor() {
 
+
+
+
+
+
+
+getColor(rate: number, threshold: number): string {
+  if (rate >= threshold) {
+    return '#FF9017';
+  } else {
+    return '#D5CDC5';
+  }
 }
+
+
 
 
 

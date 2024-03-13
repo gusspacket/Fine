@@ -30,6 +30,11 @@
 
 .dropdown-toggle {
   cursor: pointer;
+  border: none;
+}
+
+.dropdown-toggle:hover {
+  color: var(--main-color);
 }
 
 .collections__items__dropdown {
@@ -42,7 +47,8 @@
 }
 
 
-.collections__items {
+.collections__items,
+.dropdown-item {
   font-family: 'Inter', sans-serif;
   background-color: white;
   color: #1c1c1c;
@@ -53,17 +59,24 @@
 
 }
 
+
+
+
+
 .collections__items:hover {
   color: var(--main-color);
 }
 
 .collections__item:hover {
   color: var(--main-color);
+
 }
+
+
 
 .dropdown-item:hover {
   color: var(--main-color);
-  background-color: none;
+  background-color: white;
 }
 
 @media (min-width: 1200px) and (max-width: 1400px) {

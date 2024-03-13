@@ -208,6 +208,9 @@ li {
 }
 
 
+
+
+
 @media (max-width: 1400px) {
   .section__img  {
     height: 360px;
@@ -216,13 +219,20 @@ li {
 
 }
 
+@media (max-width: 1200px) {
+  .section__img {
+  padding: 0 15px !important;
+  }
+
+}
+
 
 @media (max-width: 576px) {
 
-  .section__main__mobile {
-    padding: 0;
+  /* .section__main__mobile {
+    padding: 0 !important;
     height: 180px;
-  }
+  } */
 
 
 

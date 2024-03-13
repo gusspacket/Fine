@@ -25,15 +25,8 @@ export class HeaderPartBottomComponent implements OnInit {
     this.categoryService.categories$.subscribe(categories => {
       this.categories = categories
     })
-
-
-
-
-
-
-
    this.visibleCategoriesCount = 10
-}
+  }
 
 
 

@@ -146,7 +146,7 @@
                       data-bs-dismiss="offcanvas"
                       (click)="collapseAccordion()"
                     >
-                      {{ category.name }}
+                      {{ category.name |slice:0:21 }}
                     </a>
                   </div>
                 </div>
@@ -155,45 +155,12 @@
             </div>
 
 
-
-
-              <!-- <div class="dropdown">
-                <div
-                  class="btn dropdown-toggle dropdownMenuHeader collections__items__dropdown"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                 Все категории
-                </div>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                @for (category of categoriesAll; track $index) {
-                  <a
-                  [routerLink]="['/products', category.slug]"
-                    class="dropdown-item"
-                    data-bs-dismiss="offcanvas"
-                  >
-                    {{ category.name }}
-                  </a>
-                }
-                </div>
-              </div> -->
-
               <div class="dropdown__home" data-bs-dismiss="offcanvas">
                 <a  href="#">Избранные</a>
               </div>
-
-
-
               <div class="dropdown__home" data-bs-dismiss="offcanvas">
                 <a  routerLink="/cart">Корзина</a>
               </div>
-
-
               <div class="dropdown__line"> </div>
               <div class="dropdown__home mt-2" data-bs-dismiss="offcanvas">
                 <span class="material-icons ms-2">

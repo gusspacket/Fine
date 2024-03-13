@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {  Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -46,14 +46,14 @@ export class HeaderPartMainComponent implements OnInit {
     public dialog: MatDialog,
     private authService: AuthService,
     private userService: UserService,
-    private tokenService: TokenService
+    private tokenService: TokenService,private elementRef: ElementRef
   ){}
 
 
   ngOnInit() {
 
 
-
+    // this.elementRef.nativeElement.querySelector('.offcanvas-backdrop').classList.remove('show');
 
 
     // this.openDialog('200ms', '100ms')
@@ -97,7 +97,7 @@ export class HeaderPartMainComponent implements OnInit {
           queryParams: { term: searchTerm },
         });
 
-      this.searchTerm = '';
+      // this.searchTerm = '';
     }
 
 
@@ -128,6 +128,7 @@ export class HeaderPartMainComponent implements OnInit {
     const accordionInstance = new Collapse(accordion); // создаем экземпляр аккордеона
     accordionInstance.hide(); // сворачиваем аккордеон
   }
+
 
 
 

@@ -4,6 +4,7 @@ export interface Product  {
   category: Category;
   title: string;
   slug: string;
+  rate: number;
   brand: Brand;
   sku: string;
   description: string;
