@@ -284,11 +284,18 @@ input {
   padding: 0;
   height: 48px;
   padding-left: 12px;
+  padding-right: 12px;
 }
 
 .accordion-button:hover {
   background-color: #e5f1ff;
+  width: 100%;
+  border-radius: 6px !important;
+  border:none;
+
 }
+
+
 
 .accordion-button:focus {
   box-shadow: none;

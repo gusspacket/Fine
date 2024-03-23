@@ -1,4 +1,4 @@
-import { catchError, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/servise/product.service';
@@ -7,6 +7,7 @@ import { Cart } from '../models/cart.model';
 import { Product } from '../models/product.model';
 import { Cart2 } from '../models/cart2.model';
 import { ProductTabsComponent } from './product-tabs/product-tabs.component';
+import { CategoryService } from '../servise/category.service';
 
 @Component({
   selector: 'app-product',
@@ -37,14 +38,17 @@ export class ProductComponent implements OnInit {
 
 
 
+
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {
 
   }
+
 
 
   ngOnInit() {
@@ -59,6 +63,7 @@ export class ProductComponent implements OnInit {
 
 
   }
+
 
   loadProduct() {
       this.productService.getProductBySlug(this.slug)
@@ -77,6 +82,9 @@ export class ProductComponent implements OnInit {
         (products: Product) => {
           this.product = products;
           this.categoryName = this.product.category.name
+          this.categorySlug = this.product.category.slug
+          this.categoryService.categoryNameSubject.next( this.categorySlug)
+          window.scrollTo(0, 0);
         });
 
 
@@ -86,6 +94,14 @@ export class ProductComponent implements OnInit {
   // делаем характеристики активными
   activateCharacteristics() {
     this.productTabsComponent.productShowCharacteristics()
+  }
+
+  getColor(rate: number, threshold: number): string {
+    if (rate >= threshold) {
+      return '#FF9017';
+    } else {
+      return '#D5CDC5';
+    }
   }
 
 

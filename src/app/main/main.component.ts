@@ -18,11 +18,11 @@ export class MainComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-     this.tokenService.postUserDataWithToken().subscribe((userData: User) => {
-        this.user = userData
-        this.userService.userSubject.next(userData)
+    //  this.tokenService.postUserDataWithToken().subscribe((userData: User) => {
+    //     this.user = userData
+    //     this.userService.userSubject.next(userData)
 
-      })
+    //   })
 
 
   }

@@ -1,24 +1,37 @@
+<div class="container">
+  <p class="user">Личный кабинет</p>
 
-<div class="container mt-5">
+
   <div class="row">
-    <div class="user__nav col-2">
-      <app-user-nav></app-user-nav>
+    <div class="col-3 nav">
+      <div class="user__nav">
+          <app-user-nav></app-user-nav>
+      </div>
     </div>
 
-    <div class="user__info col-10">
-      <p class="user__title">Контактные данные</p>
-      @if (!isEditing) {
-        <p class="user__edit" (click)="startEdit()">Редактировать</p>
-        <app-user-info ></app-user-info>
-        <!-- <app-user-change></app-user-change> -->
-        <!-- <app-user-form></app-user-form> -->
-      } @else {
-        <app-user-change></app-user-change>
-      }
+    <div class="col-9 info">
+      <div class="user__info">
+        <p class="user__title">Контактные данные</p>
+        <div class="user__components">
+        @if (!isEditing) {
+          <p class="user__edit" (click)="startEdit()">Редактировать</p>
+
+            <app-user-info ></app-user-info>
+
+
+        } @else {
+          <app-user-change></app-user-change>
+        }
+      </div>
+    </div>
     </div>
 
   </div>
 </div>
+
+
+
+
 
 
 

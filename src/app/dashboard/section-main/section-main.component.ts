@@ -47,9 +47,6 @@ export class SectionMainComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-
-
     this.categoryService.categories$.subscribe((categories) => {
       this.categories = categories
     })
@@ -86,7 +83,7 @@ export class SectionMainComponent implements OnInit {
             }
         },
         error => {
-          this.openDialog('300ms', '100ms'); // Можете выполнить другие действия в случае ошибки.
+          this.openDialog('300ms', '100ms');
         }
     );
   }
@@ -95,6 +92,7 @@ export class SectionMainComponent implements OnInit {
     this.dialog.open(AuthComponent, {
       width: '320px',
       height:'320px',
+      panelClass: 'custom-dialog-container',
       enterAnimationDuration,
       exitAnimationDuration,
     });

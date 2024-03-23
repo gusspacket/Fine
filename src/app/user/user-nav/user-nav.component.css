@@ -1,13 +1,26 @@
 * {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Inter', sans-serif;
+
+}
+
+.user__sidebar {
+  margin-left: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: #505050;
 }
 
 .modal__code__button {
   width: 150px;
   height: 45px;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   cursor: pointer;

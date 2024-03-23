@@ -51,11 +51,7 @@ export class HeaderPartMainComponent implements OnInit {
 
 
   ngOnInit() {
-
-
     // this.elementRef.nativeElement.querySelector('.offcanvas-backdrop').classList.remove('show');
-
-
     // this.openDialog('200ms', '100ms')
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLogging = isLoggedIn;})

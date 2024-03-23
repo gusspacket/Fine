@@ -13,6 +13,7 @@ export class RandomProductsService {
   randomProducts: RecommendationItems[]
 
   private randomProductsUrl = 'http://89.108.114.139/api/products/recommended?category=all&count='
+  private randomProductsByCategoryUrl = 'http://89.108.114.139/api/products/recommended';
   private randomLaptopUrl = 'http://89.108.114.139/api/products/recommended?category=noutbuki&count='
   private randomPhonesUrl = 'http://89.108.114.139/api/products/recommended?category=smarfony&count='
 
@@ -29,4 +30,9 @@ export class RandomProductsService {
   getRandomPhones(count:number):any {
     return this.http.get<RecommendationItems[]>(`${this.randomPhonesUrl}${count}`)
   }
+
+  getRandomProdutsByCategory(category:string, count:number):any {
+    return this.http.get<RecommendationItems[]>(`${this.randomProductsByCategoryUrl}?category=${category}&count=${count}`)
+  }
+
 }

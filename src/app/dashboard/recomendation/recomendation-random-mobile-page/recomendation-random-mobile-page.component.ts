@@ -28,4 +28,5 @@ export class RecomendationRandomMobilePageComponent implements OnInit {
       this.randomItems = items
     })
   }
+
 }

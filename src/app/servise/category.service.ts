@@ -12,6 +12,9 @@ export class CategoryService  {
   public categoriesSubject: BehaviorSubject<Categories[]> = new BehaviorSubject<Categories[]>([]);
   public categories$: Observable<Categories[]> = this.categoriesSubject.asObservable();
 
+  public categoryNameSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public categoryName$: Observable<any> = this.categoryNameSubject.asObservable();
+
   constructor(private http: HttpClient) {}
 
   category: Categories[] = [];

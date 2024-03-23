@@ -6,6 +6,7 @@ import { HeaderModule } from 'src/app/header/header.module';
 import { FooterModule } from 'src/app/footer/footer.module';
 import { ApplicationPipesModule } from '../pipes/products-price/application-pipes.module';
 import { ProductTabsComponent } from './product-tabs/product-tabs.component';
+import { RecomendationRandomMobilePageComponent } from '../dashboard/recomendation/recomendation-random-mobile-page/recomendation-random-mobile-page.component';
 
 
 
@@ -13,10 +14,7 @@ import { ProductTabsComponent } from './product-tabs/product-tabs.component';
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductTabsComponent,
-
-
-
+    ProductTabsComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +22,8 @@ import { ProductTabsComponent } from './product-tabs/product-tabs.component';
     RouterLink,
     HeaderModule,
     FooterModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    RecomendationRandomMobilePageComponent
   ]
 })
 export class ProductModule { }

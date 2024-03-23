@@ -1,137 +1,126 @@
-<div class="container" >
-  <div *ngIf="product">
-    <div class="navigate mt-3">
-      <a class="navigate__dashboard" routerLink="">Главная &nbsp;</a>/
-      <a class="navigate__choice" [routerLink]="['/products', product.category.slug]">
-        &nbsp; {{categoryName}}
-      </a>
+
+<div class="container">
+  <div class="row">
+    <div class="navigate">
+      <a class="navigate__link col-3" routerLink=""><span>Главная &nbsp;</span></a>
+      <span class="navigate__sl col-1">></span>
+      <a class="navigate__choice col-2" [routerLink]="['/products', categorySlug]">&nbsp; {{categoryName}}</a>
     </div>
+  </div>
 
 
-    <div class="row mt-4" >
-      <div class="product__title">
-        <span>{{product.title}}</span>
+  @if (product) {
+    <div class="card">
+      <div class="row">
 
-      </div>
-
-      <div class="productArea mt-3">
-        <div class="productRatingList">
-          <p class="material-icons">
-            star
-          </p>
-          <p class="material-icons">
-            star
-          </p>
-          <p class="material-icons">
-            star
-          </p>
-          <p class="material-icons">
-            star
-          </p>
-          <p class="material-icons">
-            star
-          </p>
-          <p class="productReviewsCount">(0)</p>
-        </div>
-
-        <div class="productFavorite">
-          <p class="material-icons">
-            favorite
-          </p>
-          <p>В избранное</p>
-        </div>
-      </div>
-      <hr>
-
-
-
-      <div class="col-4 mt-4 product_phone_img">
-        <img [src]="product.img_url" alt="product_phone">
-      </div>
-
-
-
-      <div class="col-5 mt-4 option__selector">
-        <p class="characteristics__title">Характеристики</p>
-
-        <div
-          class="product__characteristics"
-          *ngFor="let characteristic of product.characteristics; let i = index"
-        >
-          <ng-container *ngIf="i < 6">
-            <p class="product__characteristics__name">{{ characteristic.name }}: &nbsp;</p>
-            <p class="product__characteristics__value">{{ characteristic.value }}</p>
-          </ng-container>
-        </div>
-
-
-        <div class="product__properties__control">
-          <p class="product__all__characteristics"
-            (click)="scrollTo(tabs)"
-            (click)="activateCharacteristics()"
-          >Все характеристики</p>
-        </div>
-
-        <div class="product__properties__description">
-          <p class="description__title">Описание</p>
-          <p [ngStyle]="{
-            'max-height': showFullDescription ?
-            'none' : '45px',
-            'overflow': 'hidden',
-            'opacity': showFullDescription ?
-            '1' : '0.6'
-          }">
-            {{ product.description }}
-          </p>
-
-          <!-- Кнопка "Показать полностью" -->
-          <p class="dscription__button" (click)="toggleDescription()">
-            {{ showFullDescription ? 'Свернуть' : 'Показать полностью' }}
-          </p>
-        </div>
-
-      </div>
-
-      <div class="col-3 mt-4 product_phone_price">
-        <div class="product_price">
-          <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
-        </div>
-        <ng-container *ngIf="!productAddedToCart">
-          <div class="cart__button" (click)="addToCart(selectedProduct)">
-            <span class="cart__button__item">В корзину</span>
-            <span class="material-symbols-outlined cart__button__icon">
-              shopping_cart
-            </span>
+        <div class="col-xxl-4">
+          <div class="product__img">
+            <img [src]="product.img_url" alt="product_phone">
           </div>
-        </ng-container>
+        </div>
+
+        <div class="col-xxl-5">
+          <div class="card__body">
+
+            <div class="product__stock">
+              @if (product.stock >= 1) {
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M8.79508 15.875L4.62508 11.705L3.20508 13.115L8.79508 18.705L20.7951 6.70504L19.3851 5.29504L8.79508 15.875Z"
+                    fill="#00B517" />
+                </svg>
+                <span class="in__stock">В наличии</span>
+              } @else {
+                <div class="product__no__stock">
+                  <span class="in__stock">Нет в наличии</span>
+                </div>
+              }
+            </div>
+
+            <div class="product__title">
+              <span>{{product.title}}</span>
+            </div>
+
+            @if (product.rate === 0) {
+              <div class="raiting__zero">
+                <svg class="emty__star" width="80" height="15" viewBox="0 0 80 15" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8 12.0553L12.944 15L11.632 9.45L16 5.71579L10.248 5.23421L8 0L5.752 5.23421L0 5.71579L4.368 9.45L3.056 15L8 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 0.6) }" />
+                </svg>
+                <span class="num">нет отзывов</span>
+              </div>
+            }
+            @else {
+              <div class="raiting">
+                <svg width="80" height="15" viewBox="0 0 80 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="starss" fill-rule="evenodd" clip-rule="evenodd"
+                    d="M72 12.0553L76.944 15L75.632 9.45L80 5.71579L74.248 5.23421L72 0L69.752 5.23421L64 5.71579L68.368 9.45L67.056 15L72 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 4.6) }" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M56 12.0553L60.944 15L59.632 9.45L64 5.71579L58.248 5.23421L56 0L53.752 5.23421L48 5.71579L52.368 9.45L51.056 15L56 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 3.6) }" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M40 12.0553L44.944 15L43.632 9.45L48 5.71579L42.248 5.23421L40 0L37.752 5.23421L32 5.71579L36.368 9.45L35.056 15L40 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 2.6) }" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M24 12.0553L28.944 15L27.632 9.45L32 5.71579L26.248 5.23421L24 0L21.752 5.23421L16 5.71579L20.368 9.45L19.056 15L24 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 1.6) }" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8 12.0553L12.944 15L11.632 9.45L16 5.71579L10.248 5.23421L8 0L5.752 5.23421L0 5.71579L4.368 9.45L3.056 15L8 12.0553Z"
+                    [ngStyle]="{ fill: getColor(product.rate, 0.6) }" />
+                </svg>
+                <span class="num">{{product.rate}}</span>
+              </div>
+            }
+
+            <div class="characteristics">
+              @for (characteristic of product.characteristics; track $index) {
+                @if ($index <= 6) {
+                  <div class="row">
+                    <div class="col-xxl-6">
+                      <p class="characteristics__name">{{ characteristic.name }}:</p>
+                    </div>
+                    <div class="col-xxl-6">
+                      <p class="characteristics__value">{{ characteristic.value }}</p>
+                    </div>
+                  </div>
+                }
+              } @empty {
+              }
+
+              <button class="all__characteristics__button" (click)="scrollTo(tabs)" (click)="activateCharacteristics()">
+                Все характеристики
+              </button>
+            </div>
 
 
-        <ng-container *ngIf="productAddedToCart">
-          <div class="cart__button_added">
-            <div class="counter__delete" (click)="minusQuantity(productInCart)">
-              <p class="material-icons">
-                remove
-              </p>
-            </div>
-            <div class="cart__counter" *ngIf="productInCart" routerLink="/cart">
-              <span class="cart__counter__number">в корзине {{productInCart.quantity}} шт.</span>
-              <span class="cart__link">Перейти</span>
-            </div>
-            <div class="counter__add" (click)="plusQuantity(productInCart)">
-              <p class="material-icons">
-                add
-              </p>
-            </div>
+
           </div>
-        </ng-container>
+        </div>
+
+        <div class="col-xxl-3">
+          <div class="product_phone_price">
+            <div class="product_price">
+              <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
+            </div>
+            <button class="cart__button">Добавить в корзину</button>
+            <button class="favorite__button">Добавить в избранное</button>
+          </div>
+        </div>
+
       </div>
-
     </div>
-
-
-
-
-    <div class="table__component row" #tabs>
-      <app-product-tabs [product]="product"></app-product-tabs>
-    </div>
+  }
 </div>
+
+<div class="table__component row" #tabs>
+  <app-product-tabs [product]="product"></app-product-tabs>
+</div>
+
+<div class="container">
+  <p class="recomend__products">Рекомендуемые товары</p>
+</div>
+<app-recomendation-random-mobile-page></app-recomendation-random-mobile-page>
+

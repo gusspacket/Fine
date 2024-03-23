@@ -6,6 +6,8 @@ import { Subject, Subscription } from 'rxjs';
 import { Product } from '../models/product.model';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { RandomProductsService } from '../servise/random-products.service.';
+import { RecommendationItems } from '../models/recommendation-items.model';
 
 @Component({
   selector: 'app-cart',
@@ -20,21 +22,25 @@ export class CartComponent implements OnInit {
   itemCountSubscription: Subscription
   itemCount:number
 
+  cartItems: RecommendationItems[];
 
-
-
+  countRandomProducts:number = 3;
 
   constructor(
     private cartService: CartService,
     private productService: ProductService,
     private cookie: CookieService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private randomProductsServiceService: RandomProductsService) {
 
   }
 
   ngOnInit(): void {
 
-
+    this.randomProductsServiceService.getRandomProducts(this.countRandomProducts)
+    .subscribe((items)=> {
+      this.cartItems = items
+    })
 
 
 

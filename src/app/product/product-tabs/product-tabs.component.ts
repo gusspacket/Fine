@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/servise/product.service';
+import { RouterLink, RouterModule } from '@angular/router';
+import { CategoryService } from 'src/app/servise/category.service';
+import { RandomProductsService } from 'src/app/servise/random-products.service.';
 
 @Component({
   selector: 'app-product-tabs',
@@ -9,27 +13,46 @@ import { Product } from 'src/app/models/product.model';
 export class ProductTabsComponent implements OnInit {
 
 
-  @Input()
-  product: Product
+  constructor(private productService: ProductService, private categoryService: CategoryService,
+    private ramdomProductsService: RandomProductsService) {
+
+  }
+
+  @Input() product: Product
+  @Input() categoryName: string
 
   @Input() activateCharacteristics: Function;
 
-  showDescription:boolean = false;
-  showCharacteristics:boolean = true;
+  showDescription:boolean = true;
+  showCharacteristics:boolean = false;
   showFeedback:boolean = false;
-  isDescriptionActive:boolean = false;
-  isCharacteristicsActive:boolean = true;
+  isDescriptionActive:boolean = true;
+  isCharacteristicsActive:boolean = false;
   isDFeedbackActive:boolean = false;
   showAllCharacteristics:boolean = false
-
-  delimiter: string = Array(300).fill('&#183;').join('');
-
-
+  category: any;
+  productsSameCategory:any
+  countItems = 3
 
 
   ngOnInit(){
 
-  }
+    this.categoryService.categoryName$.subscribe((res) => {
+      this.category = res
+
+      this.ramdomProductsService.getRandomProdutsByCategory(this.category, this.countItems).subscribe((products) => {
+        this.productsSameCategory = products
+      })
+    })
+
+
+
+
+
+}
+
+
+
 
 
   productShowDescription() {

@@ -1,19 +1,21 @@
 * {
-  font-family: 'Jost', sans-serif;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
 
 
 table, td, tr {
-  font-size: 19px;
   font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: -0.01em;
+  color: #505050;
 }
 
 input {
   width: 100%;
   height: 25px;
   border: none;
-  border-bottom: 1px solid #76BC21;
+  border-bottom: 1px solid var(--main-color);
 
 }
 
@@ -42,7 +44,7 @@ cursor: pointer;
   width: 100px;
   height: 30px;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   cursor: block;
@@ -56,7 +58,7 @@ cursor: pointer;
   width: 100px;
   height: 30px;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   cursor: pointer;

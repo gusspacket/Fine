@@ -16,7 +16,7 @@
 }
 
 .modal__close:hover {
-  color: #76BC21;
+  color:var(--main-color);
 }
 
 
@@ -26,7 +26,7 @@
   height: 60px;
   margin: auto;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   cursor: pointer;
@@ -43,7 +43,7 @@
   height: 60px;
   margin: auto;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   opacity: 60%;
@@ -123,7 +123,7 @@ input, .label .text {
 .password__correct {
   height: 50px;
   width: 100%;
-  border: 0.1px solid #76BC21;
+  border: 0.1px solid var(--main-color);
   border-radius: 4px;
   box-sizing: border-box;
   padding: 16px;
@@ -131,7 +131,7 @@ input, .label .text {
 
 input:focus {
   outline: none;
-  border: 2px solid #76BC21;
+  border: 2px solid var(--main-color);
 }
 
 
@@ -174,7 +174,7 @@ input:focus + .label .text {
 }
 
 .modal__arrow:hover {
-  color: #76BC21;
+  color: var(--main-color);
 }
 
 

@@ -1,5 +1,5 @@
 * {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 
@@ -18,7 +18,7 @@
 }
 
 .modal__close:hover {
-  color: #76BC21;
+  color: var(--main-color);
 }
 
 
@@ -28,7 +28,7 @@
   height: 60px;
   margin: auto;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   cursor: pointer;
@@ -41,7 +41,7 @@
   height: 60px;
   margin: auto;
   border: none;
-  background-color: #76BC21;
+  background-color: var(--main-color);
   border-radius: 5%;
   color: white;
   opacity: 60%;
@@ -108,7 +108,7 @@ input, .label .text {
 
 input:focus {
   outline: none;
-  border: 2px solid #76BC21;
+  border: 2px solid var(--main-color);
 }
 
 

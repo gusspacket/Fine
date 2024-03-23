@@ -1,22 +1,70 @@
-
+<!--
 <button type="button" class="btn btn-primary" (click)="setCookie()">SET Cookie</button>
 
 <button type="button" class="btn btn-warning" (click)="getCookie()">GET Cookie</button>
 
 
-<button type="button" class="btn btn-info" (click)="getSessionId()">GET RESPONSE FROM SERVER</button>
+<button type="button" class="btn btn-info" (click)="getSessionId()">GET RESPONSE FROM SERVER</button> -->
+
+
+<div class="container">
+  <p class="cart__title">Корзина</p>
+
+  <div class="row">
+    <div class="col-9">
+      <div class="cart__body">
+
+          @for (item of cartItems; track $index) {
+            <div class="cart__info__body">
+            <div class="row g-0">
+              <div class="col-2">
+                <div class="cart__img">
+                  <img [src]="item.img_url" alt="product_phone">
+                </div>
+              </div>
+
+              <div class="col-7">
+                <div class="cart__info">
+                  <div class="cart__items__title">
+                    <p> {{item.title}}</p>
+                  </div>
+
+                  <div class="cart__buttons">
+                    <button class="delete"> Удалить</button>
+                    <button class="favorite">В избранное</button>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="cart__price">
+                  <p>{{item.price}} ₽</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+              }
+
+
+
+      </div>
 
 
 
 
 
+    </div>
+
+    <div class="col-2">
+      <div class="cart__order">
+        222
+      </div>
+    </div>
 
 
-
-
-
-
-
+  </div>
 
 
 <!-- <div class="container">
