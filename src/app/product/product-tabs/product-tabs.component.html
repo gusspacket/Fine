@@ -1,11 +1,11 @@
 
 <div class="container">
-  <div class="row">
-    <div class="col-xxl-9">
+  <div class="row gx-lg-3 gx-xl-3 gx-xxl-3">
+    <div class="col-12 col-lg-12 col-xl-9 col-xxl-9">
       <div class="tabs__body">
         <div class="tabs__head">
           <div class="row g-0">
-            <div class="col-xxl-2">
+            <div class="col-4 col-xl-2 col-xxl-2">
             <div
               class="description__button"
               (click)="productShowDescription()"
@@ -15,7 +15,7 @@
             </div>
 
             </div>
-            <div class="col-xxl-3">
+            <div class="col-5  col-xl-3 col-xxl-3">
               <div
                 class="characteristics__button"
                 (click)="productShowCharacteristics()"
@@ -25,7 +25,7 @@
 
               </div>
             </div>
-            <div class="col-xxl-2">
+            <div class="col-3 col-xl-2 col-xxl-2">
               <div
                 class="feedback__button"
                 (click)="productShowFeedback()"
@@ -47,10 +47,10 @@
             <div class="prod__char__table">
               @for (characteristic of product.characteristics; track $index) {
               <div class="row g-0">
-                <div class="col-4">
+                <div class="col-6 col-xl-5 col-xxl-4">
                   <p class="product__characteristics__name">{{ characteristic.name }}</p>
                 </div>
-                <div class="col-8">
+                <div class="col-6 col-xl-7 col-xxl-8">
                   <p class="product__characteristics__value">{{ characteristic.value }}</p>
 
                 </div>
@@ -66,7 +66,8 @@
         </div>
       </div>
     </div>
-    <div class="col-xxl-3">
+    <!-- col-12 col-md-3 col-lg-3 col-xl-3 col-xxl-3 -->
+    <div class="d-block d-sm-none d-md-none d-lg-none d-xl-block col-xl-3 col-xxl-3">
       <div class="same__products">
         <div class="row">
           <div class="col-12">
@@ -81,7 +82,7 @@
           <div class="same__products__cart">
             @for (item of productsSameCategory; track $index) {
                 <div class="row">
-                  <a class="link" [routerLink]="['/product', item.slug]">
+                  <a [routerLink]="['/product', item.slug]">
                   <div class="same__product__body">
                     <div class="col-4">
                       <div class="same__product__img">

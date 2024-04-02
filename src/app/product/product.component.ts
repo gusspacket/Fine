@@ -30,13 +30,12 @@ export class ProductComponent implements OnInit {
   productAddedToCart: boolean = false;
   productToAdd: Cart
   selectedProduct: Product
-
   showFullDescription:boolean = false
-
   categoryName: string;
   categorySlug:string;
+  showDescription:boolean = true;
 
-
+  private sub: any;
 
 
   constructor(
@@ -50,6 +49,10 @@ export class ProductComponent implements OnInit {
   }
 
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
+
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -59,14 +62,11 @@ export class ProductComponent implements OnInit {
       this.id = +params['id'];
       this.loadProduct();
     });
-
-
-
   }
 
 
   loadProduct() {
-      this.productService.getProductBySlug(this.slug)
+     this.sub =  this.productService.getProductBySlug(this.slug)
       .pipe(
         catchError((error: any) => {
           if (error.error && error.error.code === 404) {
@@ -85,15 +85,18 @@ export class ProductComponent implements OnInit {
           this.categorySlug = this.product.category.slug
           this.categoryService.categoryNameSubject.next( this.categorySlug)
           window.scrollTo(0, 0);
+          this.activateDescription()
         });
-
-
 
   }
 
   // делаем характеристики активными
   activateCharacteristics() {
     this.productTabsComponent.productShowCharacteristics()
+  }
+
+  activateDescription() {
+    this.productTabsComponent.productShowDescription()
   }
 
   getColor(rate: number, threshold: number): string {

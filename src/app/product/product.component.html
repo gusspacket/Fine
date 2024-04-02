@@ -13,14 +13,15 @@
     <div class="card">
       <div class="row">
 
-        <div class="col-xxl-4">
+        <div class="col-xl-4 col-xxl-4">
           <div class="product__img">
             <img [src]="product.img_url" alt="product_phone">
           </div>
         </div>
 
-        <div class="col-xxl-5">
+        <div class="col-xl-5 col-xxl-5">
           <div class="card__body">
+
 
             <div class="product__stock">
               @if (product.stock >= 1) {
@@ -75,14 +76,28 @@
               </div>
             }
 
-            <div class="characteristics">
+            <div class="small__price__cart d-block d-xl-none">
+              <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
+              <div class="small__buttons">
+                <button class="cart__button__small">Добавить в корзину</button>
+                <div class="favorite__button__small">
+                  <svg class="fa" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.5 0.825012C12.76 0.825012 11.09 1.63501 10 2.91501C8.91 1.63501 7.24 0.825012 5.5 0.825012C2.42 0.825012 0 3.24501 0 6.32501C0 10.105 3.4 13.185 8.55 17.865L10 19.175L11.45 17.855C16.6 13.185 20 10.105 20 6.32501C20 3.24501 17.58 0.825012 14.5 0.825012ZM10.1 16.375L10 16.475L9.9 16.375C5.14 12.065 2 9.21501 2 6.32501C2 4.32501 3.5 2.82501 5.5 2.82501C7.04 2.82501 8.54 3.81501 9.07 5.18501H10.94C11.46 3.81501 12.96 2.82501 14.5 2.82501C16.5 2.82501 18 4.32501 18 6.32501C18 9.21501 14.86 12.065 10.1 16.375Z" fill="#0D6EFD" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="characteristics d-none d-xs-none d-sm-none d-md-none d-lg-none d-xl-block">
               @for (characteristic of product.characteristics; track $index) {
                 @if ($index <= 6) {
-                  <div class="row">
-                    <div class="col-xxl-6">
+                  <div class="row g-0">
+                    <div class="col-6 col-xxl-6">
                       <p class="characteristics__name">{{ characteristic.name }}:</p>
                     </div>
-                    <div class="col-xxl-6">
+                    <div class="col-6 col-xxl-6">
                       <p class="characteristics__value">{{ characteristic.value }}</p>
                     </div>
                   </div>
@@ -90,7 +105,7 @@
               } @empty {
               }
 
-              <button class="all__characteristics__button" (click)="scrollTo(tabs)" (click)="activateCharacteristics()">
+              <button class="all__characteristics__button d-none d-xs-none d-sm-none d-md-none d-lg-none d-xl-block"  (click)="scrollTo(tabs)" (click)="activateCharacteristics()">
                 Все характеристики
               </button>
             </div>
@@ -100,7 +115,7 @@
           </div>
         </div>
 
-        <div class="col-xxl-3">
+        <div class="d-none d-xs-none d-sm-none d-md-none d-lg-none d-xl-block col-xl-3 col-xxl-3">
           <div class="product_phone_price">
             <div class="product_price">
               <p class="product_price_cur">{{product.price | productsPriceFormatPipe}} ₽</p>
@@ -113,14 +128,25 @@
       </div>
     </div>
   }
+
+
+
+  <div class="table__component" #tabs>
+    <app-product-tabs [product]="product"></app-product-tabs>
+  </div>
 </div>
 
-<div class="table__component row" #tabs>
-  <app-product-tabs [product]="product"></app-product-tabs>
-</div>
+
+
+
 
 <div class="container">
   <p class="recomend__products">Рекомендуемые товары</p>
+
 </div>
-<app-recomendation-random-mobile-page></app-recomendation-random-mobile-page>
+
+<div class="rec__block">
+  <app-recomendation-random-mobile-page></app-recomendation-random-mobile-page>
+</div>
+
 

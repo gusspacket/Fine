@@ -21,10 +21,14 @@ export class ProductTabsComponent implements OnInit {
   @Input() product: Product
   @Input() categoryName: string
 
-  @Input() activateCharacteristics: Function;
+  // @Input() activateCharacteristics: Function;
 
   showDescription:boolean = true;
-  showCharacteristics:boolean = false;
+   showCharacteristics:boolean = false;
+  // showDescription:boolean = false;
+  // showCharacteristics:boolean = true;
+
+
   showFeedback:boolean = false;
   isDescriptionActive:boolean = true;
   isCharacteristicsActive:boolean = false;
@@ -35,8 +39,9 @@ export class ProductTabsComponent implements OnInit {
   countItems = 3
 
 
-  ngOnInit(){
 
+
+  ngOnInit(){
     this.categoryService.categoryName$.subscribe((res) => {
       this.category = res
 
@@ -44,10 +49,6 @@ export class ProductTabsComponent implements OnInit {
         this.productsSameCategory = products
       })
     })
-
-
-
-
 
 }
 
